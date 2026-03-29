@@ -35,7 +35,7 @@ export default function Hero() {
         >
           {/* Link video campaign sang trọng */}
           <source 
-            src="C:/FASSION/public/banner.mp4" 
+            src="videos/banner.mp4" 
             type="video/mp4" 
           />
         </video>
