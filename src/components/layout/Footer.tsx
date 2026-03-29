@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Instagram, Facebook, Pinterest, Youtube } from "lucide-react";
+// Đã loại bỏ Pinterest và thêm Share2 để thay thế
+import { Instagram, Facebook, Youtube, Share2 } from "lucide-react"; 
 import Link from "next/link";
 
 const footerLinks = {
@@ -12,7 +13,7 @@ const footerLinks = {
 
 const socialIcons = [
   { Icon: Instagram, href: "#" },
-  { Icon: Pinterest, href: "#" },
+  { Icon: Share2, href: "#" }, // Đã thay đổi từ Pinterest sang Share2
   { Icon: Facebook, href: "#" },
   { Icon: Youtube, href: "#" },
 ];
