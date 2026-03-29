@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 
 export default function Hero() {
@@ -12,35 +11,41 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  // Giữ nguyên logic Parallax tuyệt vời của bạn
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   return (
     <section
       ref={containerRef}
-      className="relative h-screen min-h-[700px] w-full overflow-hidden flex items-end"
+      className="relative h-screen min-h-[700px] w-full overflow-hidden flex items-end bg-black"
     >
-      {/* Parallax Background Image */}
+      {/* Parallax Background Video */}
       <motion.div
         style={{ y, scale }}
         className="absolute inset-0 will-change-transform"
       >
-        <Image
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=90"
-          alt="Maison Lahav Couture"
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="h-full w-full object-cover object-center opacity-60"
+        >
+          {/* Link video campaign sang trọng */}
+          <source 
+            src="C:/FASSION/public/banner.mp4" 
+            type="video/mp4" 
+          />
+        </video>
       </motion.div>
 
-      {/* Multi-layer gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#7A4F55]/40 via-transparent to-transparent" />
+      {/* Multi-layer gradient overlay - Nâng cấp để video sâu hơn */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
 
-      {/* Content */}
+      {/* Content Area */}
       <motion.div
         style={{ opacity }}
         className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-20 md:pb-28"
@@ -55,11 +60,11 @@ export default function Hero() {
           >
             <div className="h-px w-12 bg-rose-primary" />
             <span className="font-inter text-[0.65rem] tracking-[0.35em] text-rose-primary uppercase">
-              Couture Collection 2025
+              Couture Collection 2026
             </span>
           </motion.div>
 
-          {/* Headline */}
+          {/* Headline - Animated Mask */}
           <div className="overflow-hidden mb-4">
             <motion.h1
               initial={{ y: "100%" }}
@@ -86,7 +91,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.1 }}
-            className="flex flex-col sm:flex-row items-start sm:items-end gap-8"
+            className="flex flex-col sm:flex-row items-start sm:items-end gap-10"
           >
             <p className="font-cormorant text-lg md:text-xl text-white/60 italic leading-relaxed max-w-sm">
               Handcrafted for women who define their own legacy — one stitch at a time.
@@ -94,17 +99,16 @@ export default function Hero() {
             <div className="flex items-center gap-6">
               <motion.a
                 href="#collections"
-                whileHover={{ scale: 1.02, backgroundColor: "rgba(216, 167, 177, 1)" }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.3 }}
-                className="btn-luxury bg-rose-primary/90 text-white px-10 py-4 text-[0.65rem] tracking-[0.25em] inline-block"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn-luxury bg-white text-black px-10 py-4 text-[0.65rem] tracking-[0.25em] inline-block shadow-2xl"
               >
                 Explore Collection
               </motion.a>
               <motion.a
                 href="#bridal"
                 whileHover={{ x: 4 }}
-                className="btn-luxury text-white/70 hover:text-white text-[0.65rem] tracking-[0.2em]"
+                className="btn-luxury text-white/80 hover:text-white text-[0.65rem] tracking-[0.2em] border-b border-white/20 pb-1"
               >
                 Bridal Lookbook →
               </motion.a>
@@ -129,12 +133,12 @@ export default function Hero() {
         <div className="h-16 w-px bg-gradient-to-b from-white/20 to-transparent" />
       </motion.div>
 
-      {/* Bottom stats bar */}
+      {/* Stats bar - Glassmorphism */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.5 }}
-        className="absolute bottom-0 right-0 glass border-t border-l border-white/10 px-10 py-6 hidden lg:flex gap-12"
+        className="absolute bottom-0 right-0 glass-dark border-t border-l border-white/10 px-10 py-6 hidden lg:flex gap-12"
       >
         {[
           { value: "1985", label: "Est." },
