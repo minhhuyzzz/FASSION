@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Cormorant_Garamond, Inter } from "next/font/google";
 import "@/styles/globals.css";
+import Navbar from "@/components/layout/Navbar"; // Kiểm tra lại đường dẫn này
+import Footer from "@/components/layout/Footer"; // Kiểm tra lại đường dẫn này
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -36,7 +38,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${cormorant.variable} ${inter.variable}`}>
-      <body className="grain">{children}</body>
+      <body className="grain bg-black text-white">
+        {/* Navbar sẽ xuất hiện ở đầu tất cả các trang */}
+        <Navbar />
+
+        {/* Nội dung trang (ví dụ trang Login) sẽ nằm ở đây */}
+        {children}
+
+        {/* Footer sẽ xuất hiện ở cuối tất cả các trang */}
+        <Footer />
+      </body>
     </html>
   );
 }

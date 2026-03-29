@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-// Đã loại bỏ Pinterest và thêm Share2 để thay thế
 import { Instagram, Facebook, Youtube, Share2 } from "lucide-react"; 
 import Link from "next/link";
 
@@ -13,7 +12,7 @@ const footerLinks = {
 
 const socialIcons = [
   { Icon: Instagram, href: "#" },
-  { Icon: Share2, href: "#" }, // Đã thay đổi từ Pinterest sang Share2
+  { Icon: Share2, href: "#" }, 
   { Icon: Facebook, href: "#" },
   { Icon: Youtube, href: "#" },
 ];
@@ -73,7 +72,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
           <p className="font-inter text-xs text-white/25 tracking-wider">
-            © 2025 MAISON LAHAV. All rights reserved.
+            © 2026 FASSION CUTE. All rights reserved.
           </p>
           <div className="flex items-center gap-8">
             {["Privacy", "Terms", "Cookies"].map((item) => (

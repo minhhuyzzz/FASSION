@@ -1,7 +1,7 @@
 "use client";
 
 const items = [
-  "Couture 2025",
+  "Couture 2026",
   "✦",
   "Bridal Collection",
   "✦",
@@ -13,7 +13,7 @@ const items = [
   "✦",
   "Artisanal Excellence",
   "✦",
-  "Couture 2025",
+  "Couture 2026",
   "✦",
   "Bridal Collection",
   "✦",

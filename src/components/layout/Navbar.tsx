@@ -118,18 +118,23 @@ export default function Navbar() {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center gap-6">
-          <Link href="#" className="hidden xl:block border border-white/40 px-6 py-2.5 text-[0.6rem] tracking-[0.2em] text-white uppercase hover:bg-white hover:text-black transition-all font-inter">
-            Book an Appointment
-          </Link>
-          <div className="flex items-center gap-4 text-white">
-            <Search size={18} strokeWidth={1.2} className="cursor-pointer hover:opacity-50 transition" />
-            <User size={18} strokeWidth={1.2} className="hidden md:block cursor-pointer hover:opacity-50 transition" />
+        <div className="flex items-center gap-4 text-white">
+         <Search size={18} strokeWidth={1.2} className="cursor-pointer hover:opacity-50 transition" />
+  
+          {/* Gắn link vào icon User để dẫn tới trang Login */}
+          <Link href="/login">
+           <User 
+             size={18} 
+             strokeWidth={1.2} 
+            className="hidden md:block cursor-pointer hover:opacity-50 transition" 
+    />
+            </Link>
+
             <ShoppingBag size={18} strokeWidth={1.2} className="cursor-pointer hover:opacity-50 transition" />
-            <button className="lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+  
+          <button className="lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+         {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+         </button>
         </div>
       </nav>
 
