@@ -4,93 +4,94 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Gem, Leaf, Ruler, Award } from "lucide-react";
 
-const benefits = [
+// DỮ LIỆU ĐÃ ĐƯỢC CHUẨN HÓA UNICODE
+const benefitsRaw = [
   {
     Icon: Gem,
-    title: "Uncompromising Craft",
+    title: "Thủ Công Tuyệt Mỹ",
     description:
-      "Each garment passes through 40+ hours of hand-finishing by our Paris atelier artisans.",
+      "Mỗi tuyệt tác trải qua hơn 40 giờ hoàn thiện đính kết thủ công bởi các nghệ nhân tại xưởng may Paris.",
   },
   {
     Icon: Ruler,
-    title: "Bespoke Fit",
+    title: "Thiết Kế Độc Bản",
     description:
-      "Personalized measurements and custom alterations ensure your silhouette is perfected.",
+      "Các số đo được tinh chỉnh cá nhân hóa, tôn vinh và ôm trọn đường nét cơ thể của riêng bạn.",
   },
   {
     Icon: Leaf,
-    title: "Conscious Luxury",
+    title: "Xa Xỉ Bền Vững",
     description:
-      "Ethically sourced silks, upcycled lace, and zero-waste ateliers form our foundation.",
+      "Nguồn lụa đạo đức và chất liệu ren upcycle tạo nên nền tảng cho sự phát triển thời trang bền vững.",
   },
   {
     Icon: Award,
-    title: "Heritage Excellence",
+    title: "Di Sản Xuất Chúng",
     description:
-      "40 years of Haute Couture tradition, worn by royalty, icons, and visionaries.",
+      "Hơn 40 năm gìn giữ truyền thống Haute Couture, được vinh danh bởi giới tinh hoa và biểu tượng.",
   },
 ];
 
+// Hàm này giúp dính các dấu tiếng Việt lại với nhau (NFC)
+const benefits = benefitsRaw.map(item => ({
+  ...item,
+  title: item.title.normalize("NFC"),
+  description: item.description.normalize("NFC")
+}));
+
 export default function Benefits() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    /* Đã sửa từ bg-rose-blush/50 thành bg-rose-blush để lấy lại màu hồng gốc */
-    <section className="py-28 md:py-36 bg-rose-blush">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-        {/* Header */}
-        <div className="text-center mb-20">
+    <section className="py-20 md:py-24 bg-[#F5F2EF]">
+      <div className="max-w-[1520px] mx-auto px-6 md:px-12">
+        
+        {/* HEADER */}
+        <div className="text-center mb-16">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            className="font-inter text-[0.65rem] tracking-[0.3em] text-rose-accent uppercase mb-4"
+            className="font-inter text-[0.6rem] tracking-[0.4em] text-[#A4717A] uppercase mb-4 flex items-center justify-center gap-4"
           >
-            The Maison Promise
+            <span className="w-6 h-px bg-[#A4717A]/40" />
+            {/* Ép dấu cho cả tiêu đề phụ */}
+            {"Lời Hứa Của Maison".normalize("NFC")}
+            <span className="w-6 h-px bg-[#A4717A]/40" />
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1 }}
-            className="font-playfair text-4xl md:text-5xl text-noir"
+            className="font-playfair text-4xl md:text-5xl text-gray-900 tracking-tight"
           >
-            Why Choose <span className="italic text-rose-accent">Lahav</span>
+            {"Dấu Ấn ".normalize("NFC")}<span className="italic text-[#A4717A]">SERANA</span>
           </motion.h2>
         </div>
 
-        {/* Grid */}
-        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* GRID */}
+        <div ref={ref} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {benefits.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -6 }}
-              className="group bg-white p-10 shadow-luxury hover:shadow-xl transition-all duration-500 relative overflow-hidden"
+              transition={{ duration: 0.8, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="group bg-white border border-black/5 hover:border-[#A4717A]/30 p-10 lg:p-12 transition-all duration-500 relative flex flex-col items-center text-center"
             >
-              {/* Background accent */}
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              {/* Icon */}
-              <div className="relative w-12 h-12 mb-8 flex items-center justify-center">
-                <div className="absolute inset-0 bg-rose-primary/10 rounded-full group-hover:scale-110 transition-transform duration-500" />
-                <item.Icon
-                  size={20}
-                  strokeWidth={1.5}
-                  className="text-rose-accent relative z-10"
-                />
+              <div className="relative mb-8 text-[#A4717A] opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+                <item.Icon size={28} strokeWidth={1} />
               </div>
 
-              <h3 className="font-playfair text-xl text-noir mb-4 group-hover:text-rose-accent transition-colors duration-300">
+              <h3 className="font-playfair text-xl text-gray-900 mb-4 group-hover:text-[#A4717A] transition-colors duration-300">
                 {item.title}
               </h3>
-              <p className="font-inter text-sm text-noir/50 leading-relaxed">
+              
+              <p className="font-cormorant text-lg text-gray-900/60 leading-relaxed italic">
                 {item.description}
               </p>
 
-              {/* Bottom accent line */}
-              <div className="absolute bottom-0 left-0 h-0.5 bg-rose-primary w-0 group-hover:w-full transition-all duration-500" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#A4717A] w-0 group-hover:w-1/2 transition-all duration-700 ease-out opacity-50" />
             </motion.div>
           ))}
         </div>

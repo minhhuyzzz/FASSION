@@ -2,172 +2,197 @@
 
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
-import FadeIn from "@/components/ui/FadeIn";
-import { Heart } from "lucide-react";
+import { useRef, useState } from "react";
+import Link from "next/link";
+import { ArrowRight, Heart } from "lucide-react";
 
 const products = [
   {
     id: 1,
-    name: "Celestine Gown",
-    category: "Couture",
-    price: "€8,400",
-    image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&q=85",
-    tag: "New",
+    name: "Đầm Thiên Nga Aria",
+    category: "Haute Couture",
+    price: "215.000.000đ",
+    image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=900&q=90",
+    material: "Lụa organza thêu tay",
+    tag: "Tuyệt Tác",
   },
   {
     id: 2,
-    name: "Evelyne Silk Drape",
-    category: "Bridal",
-    price: "€12,200",
-    image: "https://images.unsplash.com/photo-1594938298603-c8148c4a6bf2?w=800&q=85",
-    tag: "Bestseller",
+    name: "Áo Cưới Evelyne",
+    category: "Bridal Capsule",
+    price: "310.000.000đ",
+    image: "https://images.unsplash.com/photo-1594938298603-c8148c4a6bf2?w=900&q=90",
+    material: "Satin duchess & ren Pháp",
+    tag: "Bán Chạy",
   },
   {
     id: 3,
-    name: "Valentina Lace",
-    category: "Couture",
-    price: "€9,700",
-    image: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&q=85",
+    name: "Valentina Grace",
+    category: "Haute Couture",
+    price: "245.000.000đ",
+    image: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=900&q=90",
+    material: "Ren Chantilly đính đá",
     tag: null,
   },
   {
     id: 4,
-    name: "Iris Atelier",
-    category: "Resort",
-    price: "€6,100",
-    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&q=85",
-    tag: "Limited",
+    name: "Iris Atelier Gown",
+    category: "Limited Edition",
+    price: "155.000.000đ",
+    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=90",
+    material: "Crepe lụa đính pha lê",
+    tag: "Giới Hạn",
   },
 ];
 
+const ROSE_ACCENT = "#A4717A";
+
 export default function FeaturedCollection() {
-  const headingRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(headingRef, { once: true });
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(titleRef, { once: true, margin: "-80px" });
 
   return (
-    <section id="collections" className="py-28 md:py-36 bg-ivory">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12">
-        {/* Header */}
-        <div ref={headingRef} className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+    <section ref={sectionRef} className="relative bg-[#F5F2EF] overflow-hidden py-24 md:py-36">
+      <div className="relative z-10 max-w-[1520px] mx-auto px-6 md:px-12">
+        
+        {/* HEADER */}
+        <div ref={titleRef} className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
-            <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="font-inter text-[0.65rem] tracking-[0.3em] text-rose-accent uppercase mb-4 line-decorator"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 1 }}
+              className="flex items-center gap-6 mb-6"
             >
-              Featured Selection
-            </motion.p>
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: "100%" }}
-                animate={inView ? { y: 0 } : {}}
-                transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="font-playfair text-4xl md:text-5xl lg:text-6xl text-noir leading-tight"
-              >
-                The Couture Edit
-              </motion.h2>
-            </div>
+              <span className="font-inter text-[0.6rem] tracking-[0.4em] uppercase text-[#A4717A]">
+                Bộ Sưu Tập
+              </span>
+              <div className="w-12 h-px bg-[#A4717A]/40" />
+            </motion.div>
+
+            <motion.h2
+              initial={{ y: 30, opacity: 0 }}
+              animate={inView ? { y: 0, opacity: 1 } : {}}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="font-playfair font-normal leading-tight tracking-tight text-5xl md:text-7xl text-gray-900"
+            >
+              Tinh Hoa <span className="italic" style={{ color: ROSE_ACCENT }}>Nghệ Nhân</span>
+            </motion.h2>
           </div>
-          <motion.a
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-            href="#"
-            className="btn-luxury text-rose-accent text-[0.65rem] self-start md:self-auto"
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            View All Collections →
-          </motion.a>
+            <Link
+              href="/collections"
+              className="group inline-flex items-center gap-4 border-b border-gray-900/20 pb-2 hover:border-[#A4717A] transition-colors duration-500"
+            >
+              <span className="font-inter text-[0.65rem] uppercase tracking-[0.2em] text-gray-900/60 group-hover:text-[#A4717A] transition-colors">
+                Xem Toàn Bộ Tuyệt Tác
+              </span>
+              <ArrowRight size={14} className="text-gray-900/40 group-hover:text-[#A4717A] group-hover:translate-x-1.5 transition-all" />
+            </Link>
+          </motion.div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-          {products.map((product, i) => (
-            <ProductCard key={product.id} product={product} index={i} />
-          ))}
+        {/* LƯỚI TẠP CHÍ: Cân bằng, gọn gàng, không bị lỗi vỡ khung */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
+          
+          {/* Cột 1: Ảnh dọc lớn bên trái */}
+          <div className="md:col-span-5">
+            <ProductCard product={products[0]} index={0} aspect="aspect-[3/4.4]" inView={inView} />
+          </div>
+
+          {/* Cột 2: Cụm ảnh bên phải */}
+          <div className="md:col-span-7 flex flex-col gap-4 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 md:gap-6">
+              <div className="sm:col-span-7">
+                <ProductCard product={products[1]} index={1} aspect="aspect-[4/3.2]" inView={inView} />
+              </div>
+              <div className="sm:col-span-5">
+                <ProductCard product={products[2]} index={2} aspect="aspect-[4/3.2]" inView={inView} />
+              </div>
+            </div>
+            {/* Ảnh ngang rộng bên dưới */}
+            <ProductCard product={products[3]} index={3} aspect="aspect-[16/6.5]" wide inView={inView} />
+          </div>
         </div>
+
       </div>
     </section>
   );
 }
 
-function ProductCard({
-  product,
-  index,
-}: {
-  product: (typeof products)[0];
-  index: number;
-}) {
+// COMPONENT CARD SẢN PHẨM
+function ProductCard({ product, index, aspect, wide = false, inView }: any) {
+  const [wished, setWished] = useState(false);
+
   return (
-    <FadeIn delay={index * 0.12} direction="up">
-      <motion.div
-        whileHover="hover"
-        className="group relative cursor-pointer"
-      >
-        {/* Image Container */}
-        <div className="img-zoom relative aspect-[3/4] overflow-hidden bg-rose-blush mb-5">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative h-full w-full"
+    >
+      <div className={`relative ${aspect} overflow-hidden bg-gray-200 h-full w-full`}>
+        {/* Ảnh */}
+        <div className="absolute inset-0">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover object-top group-hover:scale-105 transition-transform duration-1000 ease-[0.25,0.46,0.45,0.94]"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
-
-          {/* Tag */}
-          {product.tag && (
-            <div className="absolute top-4 left-4 z-10">
-              <span className="font-inter text-[0.55rem] tracking-[0.2em] uppercase bg-white/90 text-rose-accent px-3 py-1">
-                {product.tag}
-              </span>
-            </div>
-          )}
-
-          {/* Hover Overlay */}
-          <motion.div
-            variants={{
-              hover: { opacity: 1 },
-            }}
-            initial={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-gradient-to-t from-noir/70 via-transparent to-transparent flex items-end p-6"
-          >
-            <motion.button
-              variants={{ hover: { y: 0, opacity: 1 } }}
-              initial={{ y: 20, opacity: 0 }}
-              transition={{ duration: 0.4, delay: 0.05 }}
-              className="w-full py-3 bg-white text-noir font-inter text-[0.6rem] tracking-[0.25em] uppercase hover:bg-rose-primary hover:text-white transition-colors duration-300"
-            >
-              Add to Wishlist
-            </motion.button>
-          </motion.div>
-
-          {/* Wishlist icon */}
-          <motion.button
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            className="absolute top-4 right-4 z-10 text-white/70 hover:text-rose-primary transition-colors"
-          >
-            <Heart size={16} strokeWidth={1.5} />
-          </motion.button>
         </div>
 
-        {/* Text */}
-        <div className="px-1">
-          <p className="font-inter text-[0.6rem] tracking-[0.2em] text-rose-accent/70 uppercase mb-1">
-            {product.category}
-          </p>
-          <div className="flex items-center justify-between">
-            <h3 className="font-playfair text-lg text-noir group-hover:text-rose-accent transition-colors duration-300">
-              {product.name}
-            </h3>
-            <span className="font-cormorant text-base text-noir/60 italic">
-              {product.price}
+        {/* Lớp phủ Gradient đen dưới chân ảnh để chữ luôn đọc được */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500" />
+
+        {/* Tag trạng thái */}
+        {product.tag && (
+          <div className="absolute top-5 left-5 z-10">
+            <span className="font-inter text-[0.55rem] tracking-[0.2em] uppercase text-gray-900 bg-white/90 px-3 py-1.5 shadow-sm">
+              {product.tag}
             </span>
           </div>
+        )}
+
+        {/* Nút Yêu thích */}
+        <button
+          onClick={() => setWished(!wished)}
+          className="absolute top-5 right-5 z-10 w-8 h-8 flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white transition-colors duration-300 rounded-full"
+        >
+          <Heart size={14} className={`transition-colors ${wished ? "fill-[#A4717A] stroke-[#A4717A]" : "stroke-white"}`} />
+        </button>
+
+        {/* Thông tin sản phẩm nằm đè lên ảnh */}
+        <div className={`absolute bottom-0 left-0 right-0 z-10 p-6 ${wide ? "flex flex-col sm:flex-row sm:items-end justify-between gap-4" : ""}`}>
+          <div>
+            <p className="font-inter text-[0.55rem] tracking-[0.3em] uppercase text-white/70 mb-2">
+              {product.category}
+            </p>
+            <h3 className="font-playfair text-xl md:text-2xl text-white group-hover:text-[#A4717A] transition-colors duration-400">
+              {product.name}
+            </h3>
+            <p className="font-cormorant italic text-white/60 text-sm mt-1">
+              {product.material}
+            </p>
+          </div>
+
+          <div className={`${wide ? "text-left sm:text-right" : "mt-3"}`}>
+            <p className="font-cormorant text-lg text-white">
+              {product.price}
+            </p>
+          </div>
         </div>
-      </motion.div>
-    </FadeIn>
+
+        {/* Vạch kẻ màu Hồng mượt mà chạy dưới cùng khi hover */}
+        <div className="absolute bottom-0 left-0 h-1 bg-[#A4717A] w-0 group-hover:w-full transition-all duration-700 ease-out opacity-80" />
+      </div>
+    </motion.div>
   );
 }

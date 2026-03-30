@@ -26,7 +26,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <p className="font-playfair text-2xl text-white tracking-[0.3em] mb-6">
-              MAISON LAHAV
+              SERANA
             </p>
             <p className="font-inter text-sm leading-relaxed text-white/50 max-w-xs mb-8">
               Where art meets the body. Couture for women who define their own legacy, one stitch at a time.
@@ -72,7 +72,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
           <p className="font-inter text-xs text-white/25 tracking-wider">
-            © 2026 FASSION CUTE. All rights reserved.
+            © 2026 SERENA. All rights reserved.
           </p>
           <div className="flex items-center gap-8">
             {["Privacy", "Terms", "Cookies"].map((item) => (

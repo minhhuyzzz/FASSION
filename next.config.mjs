@@ -2,6 +2,10 @@
 const nextConfig = {
   images: {
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.postimg.cc', // Cho phép ảnh từ Postimg
+      },
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: '**.supabase.co' }, // Dự phòng cho Supabase
     ],
