@@ -4,6 +4,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: 'drive.google.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'i.postimg.cc', // Cho phép ảnh từ Postimg
       },
       { protocol: 'https', hostname: 'images.unsplash.com' },

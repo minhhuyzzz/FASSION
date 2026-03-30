@@ -93,7 +93,7 @@ export default function Navbar() {
       >
         {/* LOGO CHUẨN TỪ POSTIMG.CC */}
         {/* Tự động đảo ngược màu để logo đen hiện lên trắng trên nền đen */}
-        <Link href="/" className="flex-shrink-0 relative w-32 h-8 md:w-40 md:h-10">
+        <Link href="/" className="flex-shrink-0 relative w-32 h-20 md:w-40 md:h-30">
           <Image 
             src="https://i.postimg.cc/R0zdqBYk/SERENA2.png" 
             alt="SERANA Logo" 

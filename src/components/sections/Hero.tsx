@@ -1,158 +1,126 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Play, Pause, Square, Volume2, VolumeX } from "lucide-react";
+import Link from "next/link";
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
 
-  // Giữ nguyên logic Parallax tuyệt vời của bạn
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  // Xử lý Play/Pause
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  // Xử lý Mute/Unmute
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  // Xử lý Dừng (Stop) - Quay về đầu và dừng
+  const handleStop = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+  };
 
   return (
-    <section
-      ref={containerRef}
-      className="relative h-screen min-h-[700px] w-full overflow-hidden flex items-end bg-black"
-    >
-      {/* Parallax Background Video */}
-      <motion.div
-        style={{ y, scale }}
-        className="absolute inset-0 will-change-transform"
-      >
+    <section className="relative h-screen w-full overflow-hidden bg-black">
+      {/* Video Background */}
+      <div className="absolute inset-0">
         <video
+          ref={videoRef}
           autoPlay
           loop
-          muted
+          muted={isMuted}
           playsInline
-          className="h-full w-full object-cover object-center opacity-60"
+          className="h-full w-full object-cover"
         >
-          {/* Link video campaign sang trọng */}
-          <source 
-            src="videos/banner.mp4" 
-            type="video/mp4" 
-          />
+          <source src="videos/banner.mp4" type="video/mp4" />
         </video>
-      </motion.div>
+        {/* Overlay mờ dần ở phía dưới để chữ và nút rõ hơn */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      </div>
 
-      {/* Multi-layer gradient overlay - Nâng cấp để video sâu hơn */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
-
-      {/* Content Area */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-20 md:pb-28"
-      >
-        <div className="max-w-4xl">
-          {/* Eyebrow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex items-center gap-4 mb-8"
-          >
-            <div className="h-px w-12 bg-rose-primary" />
-            <span className="font-inter text-[0.65rem] tracking-[0.35em] text-rose-primary uppercase">
-              Couture Collection 2026
-            </span>
-          </motion.div>
-
-          {/* Headline - Animated Mask */}
-          <div className="overflow-hidden mb-4">
-            <motion.h1
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="font-playfair text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-none font-medium"
-            >
-              Where Art
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden mb-8">
-            <motion.h1
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 1.1, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
-              className="font-playfair text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-none font-medium italic"
-            >
-              Meets the Body
-            </motion.h1>
-          </div>
-
-          {/* Subtext + CTA row */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-            className="flex flex-col sm:flex-row items-start sm:items-end gap-10"
-          >
-            <p className="font-cormorant text-lg md:text-xl text-white/60 italic leading-relaxed max-w-sm">
-              Handcrafted for women who define their own legacy — one stitch at a time.
-            </p>
-            <div className="flex items-center gap-6">
-              <motion.a
-                href="#collections"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-luxury bg-white text-black px-10 py-4 text-[0.65rem] tracking-[0.25em] inline-block shadow-2xl"
-              >
-                Explore Collection
-              </motion.a>
-              <motion.a
-                href="#bridal"
-                whileHover={{ x: 4 }}
-                className="btn-luxury text-white/80 hover:text-white text-[0.65rem] tracking-[0.2em] border-b border-white/20 pb-1"
-              >
-                Bridal Lookbook →
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
-        className="absolute bottom-8 right-12 z-10 flex flex-col items-center gap-3"
-      >
+      {/* 1. Thông tin bộ sưu tập (Góc trái dưới) */}
+      <div className="absolute bottom-12 left-6 md:left-12 z-20">
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
         >
-          <ArrowDown size={16} strokeWidth={1} className="text-white/40" />
+          <p className="font-inter text-[0.7rem] tracking-[0.3em] text-white/90 uppercase mb-2">
+            FW 2026 | COUTURE ATELIER
+          </p>
+          <Link 
+            href="#collections" 
+            className="group relative inline-block"
+          >
+            <span className="font-playfair text-xl md:text-2xl text-white tracking-widest uppercase italic">
+              Khám Phá Bộ Sưu Tập
+            </span>
+            <div className="absolute -bottom-1 left-0 w-full h-px bg-white origin-left scale-x-100 group-hover:scale-x-50 transition-transform duration-500" />
+          </Link>
         </motion.div>
-        <div className="h-16 w-px bg-gradient-to-b from-white/20 to-transparent" />
-      </motion.div>
+      </div>
 
-      {/* Stats bar - Glassmorphism */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.5 }}
-        className="absolute bottom-0 right-0 glass-dark border-t border-l border-white/10 px-10 py-6 hidden lg:flex gap-12"
-      >
-        {[
-          { value: "1985", label: "Est." },
-          { value: "40+", label: "Designers" },
-          { value: "200+", label: "Brides / Year" },
-        ].map(({ value, label }) => (
-          <div key={label} className="text-center">
-            <p className="font-playfair text-2xl text-white font-medium">{value}</p>
-            <p className="font-inter text-[0.6rem] text-white/40 tracking-[0.2em] uppercase mt-1">
-              {label}
-            </p>
-          </div>
-        ))}
-      </motion.div>
+      {/* 2. Bộ điều khiển Video (Góc phải dưới - Giống ảnh mẫu) */}
+      <div className="absolute bottom-12 right-6 md:right-12 z-20 flex items-center gap-4">
+        <div className="flex items-center gap-2 bg-black/20 backdrop-blur-md p-2 rounded-full border border-white/10">
+          {/* Nút Play */}
+          <button 
+            onClick={() => { videoRef.current?.play(); setIsPlaying(true); }}
+            className={`p-2 hover:text-rose-accent transition-colors ${isPlaying ? 'text-rose-accent' : 'text-white'}`}
+          >
+            <Play size={16} fill={isPlaying ? "currentColor" : "none"} />
+          </button>
+
+          {/* Nút Stop */}
+          <button 
+            onClick={handleStop}
+            className="p-2 text-white hover:text-rose-accent transition-colors"
+          >
+            <Square size={16} fill="currentColor" />
+          </button>
+
+          {/* Nút Pause */}
+          <button 
+            onClick={togglePlay}
+            className="p-2 text-white hover:text-rose-accent transition-colors"
+          >
+            {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+          </button>
+
+          {/* Nút Mute */}
+          <button 
+            onClick={toggleMute}
+            className="p-2 text-white hover:text-rose-accent transition-colors"
+          >
+            {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+          </button>
+        </div>
+
+        {/* Nút cuộn xuống nhỏ gọn */}
+        <div className="hidden md:flex flex-col items-center gap-2">
+          <div className="w-px h-8 bg-gradient-to-t from-white/40 to-transparent" />
+          <span className="text-[0.5rem] tracking-[0.3em] text-white/40 uppercase vertical-text">Scroll</span>
+        </div>
+      </div>
     </section>
   );
 }
