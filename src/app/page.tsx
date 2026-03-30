@@ -1,5 +1,4 @@
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+
 import Hero from "@/components/sections/Hero";
 import FeaturedCollection from "@/components/sections/FeaturedCollection";
 import Editorial from "@/components/sections/Editorial";
@@ -11,7 +10,7 @@ import Newsletter from "@/components/sections/Newsletter";
 export default function Home() {
   return (
     <main className="relative overflow-x-hidden">
-      <Navbar />
+     
       <Hero />
       <Marquee />
       <FeaturedCollection />
@@ -19,7 +18,7 @@ export default function Home() {
       <Benefits />
       <Testimonials />
       <Newsletter />
-      <Footer />
+    
     </main>
   );
 }

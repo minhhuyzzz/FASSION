@@ -36,7 +36,8 @@ export default function Benefits() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="py-28 md:py-36 bg-rose-blush/50">
+    /* Đã sửa từ bg-rose-blush/50 thành bg-rose-blush để lấy lại màu hồng gốc */
+    <section className="py-28 md:py-36 bg-rose-blush">
       <div className="max-w-[1600px] mx-auto px-6 md:px-12">
         {/* Header */}
         <div className="text-center mb-20">
