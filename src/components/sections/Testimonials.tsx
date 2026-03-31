@@ -10,7 +10,7 @@ const testimonials = [
   {
     id: 1,
     quote:
-      "Khoác lên mình chiếc váy của Maison Lahav trong ngày trọng đại giống như bước vào một giấc mơ. Từng chi tiết nhỏ đều là một lời tự sự về bản sắc cá nhân tôi. Chưa bao giờ tôi thấy mình rạng rỡ và là chính mình đến thế.",
+      "Khoác lên mình chiếc váy của SERANA trong ngày trọng đại giống như bước vào một giấc mơ. Từng chi tiết nhỏ đều là một lời tự sự về bản sắc cá nhân tôi. Chưa bao giờ tôi thấy mình rạng rỡ và là chính mình đến thế.",
     author: "Khánh Linh",
     title: "Cô dâu, Hà Nội 2024",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
@@ -26,7 +26,7 @@ const testimonials = [
   {
     id: 3,
     quote:
-      "Tôi đã từng mặc qua rất nhiều nhà mốt Haute Couture danh tiếng, nhưng chỉ tại Lahav, tôi mới cảm nhận được chiếc váy thực sự sinh ra từ trí tưởng tượng của mình. Một sự xa xỉ độc bản đúng nghĩa.",
+      "Tôi đã từng mặc qua rất nhiều nhà mốt Haute Couture danh tiếng, nhưng chỉ tại SERANA, tôi mới cảm nhận được chiếc váy thực sự sinh ra từ trí tưởng tượng của mình. Một sự xa xỉ độc bản đúng nghĩa.",
     author: "Thảo Tiên",
     title: "Nhà Sưu tầm Thời trang",
     avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80",

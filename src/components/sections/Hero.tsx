@@ -68,7 +68,7 @@ export default function Hero() {
             FW 2026 | COUTURE ATELIER
           </p>
           <Link 
-            href="#collections" 
+            href="/shop" 
             className="group relative inline-block"
           >
             <span className="font-playfair text-xl md:text-2xl text-white tracking-widest uppercase italic">

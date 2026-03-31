@@ -3,8 +3,9 @@ import { Playfair_Display, Cormorant_Garamond, Inter } from "next/font/google";
 import "@/styles/globals.css";
 import Navbar from "@/components/layout/Navbar"; 
 import Footer from "@/components/layout/Footer"; 
+// 1. IMPORT CartProvider vào đây
+import { CartProvider } from "@/context/CartContext"; 
 
-// Cấu hình font với bộ tiếng Việt đầy đủ
 const playfair = Playfair_Display({
   subsets: ["latin", "vietnamese"],
   variable: "--font-playfair",
@@ -27,7 +28,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "MAISON LAHAV — Haute Couture",
+  title: "SERANA — Haute Couture", // Đã đổi tên cho đúng thương hiệu của bạn
   description: "Nơi nghệ thuật tôn vinh vóc dáng.",
 };
 
@@ -38,11 +39,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      {/* QUAN TRỌNG: Đưa tất cả font vào class của body */}
       <body className={`${playfair.variable} ${cormorant.variable} ${inter.variable} antialiased bg-[#F5F2EF] text-gray-900`}>
-        <Navbar />
-        {children}
-        <Footer />
+        {/* 2. BAO BỌC toàn bộ Navbar và children bằng CartProvider */}
+        <CartProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

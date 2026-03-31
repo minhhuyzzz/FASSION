@@ -56,7 +56,7 @@ export default function Benefits() {
           >
             <span className="w-6 h-px bg-[#A4717A]/40" />
             {/* Ép dấu cho cả tiêu đề phụ */}
-            {"Lời Hứa Của Maison".normalize("NFC")}
+            {"Lời Hứa Của Serana".normalize("NFC")}
             <span className="w-6 h-px bg-[#A4717A]/40" />
           </motion.p>
           <motion.h2

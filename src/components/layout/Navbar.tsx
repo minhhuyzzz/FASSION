@@ -6,6 +6,7 @@ import { Search, ShoppingBag, Menu, X, User, Calendar } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/context/CartContext"; // 1. Import hook giỏ hàng
 
 const navLinks = [
   {
@@ -46,12 +47,13 @@ const navLinks = [
       },
     ],
   },
-  { label: "Cửa Hàng", href: "#" },
+  { label: "Cửa Hàng", href: "/shop" },
   { label: "Sự Kiện", href: "#" },
   { label: "Thế Giới SERANA", href: "#" },
 ];
 
 export default function Navbar() {
+  const { cartCount } = useCart(); // 2. Lấy số lượng thực tế từ giỏ hàng
   const [scrolled, setScrolled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -91,8 +93,7 @@ export default function Navbar() {
           isSolid ? "bg-black border-b border-white/10" : "bg-transparent"
         )}
       >
-        {/* LOGO CHUẨN TỪ POSTIMG.CC */}
-        {/* Tự động đảo ngược màu để logo đen hiện lên trắng trên nền đen */}
+        {/* LOGO */}
         <Link href="/" className="flex-shrink-0 relative w-32 h-20 md:w-40 md:h-30">
           <Image 
             src="https://i.postimg.cc/R0zdqBYk/SERENA2.png" 
@@ -127,7 +128,7 @@ export default function Navbar() {
 
         {/* Right Section */}
         <div className="flex items-center gap-5 text-white">
-          {/* Ô ĐẶT LỊCH TƯ VẤN (BẢN DESKTOP) */}
+          {/* GIỮ NGUYÊN Ô ĐẶT LỊCH TƯ VẤN */}
           <Link 
             href="/booking" 
             className="hidden xl:flex items-center gap-2.5 border border-white/10 px-5 py-2.5 bg-rose-accent/10 hover:bg-rose-accent transition-all duration-500"
@@ -142,10 +143,31 @@ export default function Navbar() {
             <User size={18} strokeWidth={1.2} className="hidden md:block cursor-pointer hover:text-rose-accent transition" />
           </Link>
 
-          <div className="relative">
-            <ShoppingBag size={18} strokeWidth={1.2} className="cursor-pointer hover:text-rose-accent transition" />
-            <span className="absolute -top-1.5 -right-1.5 text-[0.55rem] bg-rose-accent w-3.5 h-3.5 flex items-center justify-center rounded-full text-white">0</span>
-          </div>
+          {/* GIỎ HÀNG CÓ NHẢY SỐ TỰ ĐỘNG */}
+
+<Link href="/cart" className="relative group p-1.5 border border-white/5 hover:border-rose-accent/30 rounded-full transition-all">
+  {/* Hiệu ứng nảy biểu tượng túi */}
+  <motion.div
+    key={cartCount} // Key thay đổi sẽ kích hoạt lại animation
+    animate={cartCount > 0 ? { scale: [1, 1.5, 1], rotate: [0, 10, -10, 0] } : {}}
+    transition={{ duration: 0.4 }}
+  >
+    <ShoppingBag size={18} strokeWidth={1.2} className="group-hover:text-rose-accent transition" />
+  </motion.div>
+
+  <AnimatePresence>
+    {cartCount > 0 && (
+      <motion.span 
+        initial={{ scale: 0 }}
+        animate={{ scale: 1.2 }}
+        exit={{ scale: 0 }}
+        className="absolute -top-1 -right-1 text-[0.55rem] bg-rose-accent w-4 h-4 flex items-center justify-center rounded-full text-white font-bold"
+      >
+        {cartCount}
+      </motion.span>
+    )}
+  </AnimatePresence>
+</Link>
   
           <button className="lg:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -184,7 +206,6 @@ export default function Navbar() {
                 </div>
               ))}
               
-              {/* Featured Image in Mega Menu */}
               <div className="col-span-2 relative aspect-video overflow-hidden border border-white/10">
                 <Image 
                   src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800" 
@@ -201,7 +222,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Menu (Dành cho điện thoại) */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div 
