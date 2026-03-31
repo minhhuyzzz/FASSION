@@ -58,7 +58,7 @@ export default function ShopPage() {
         
         {/* TIÊU ĐỀ TIẾNG VIỆT */}
         <header className="mb-10 text-center space-y-4">
-          <h1 className="font-playfair text-6xl md:text-7xl text-ivory italic tracking-tighter">Bộ Sưu Tập</h1>
+          <h1 className="font-playfair text-6xl md:text-7xl text-ivory italic tracking-tighter">Cửa Hàng</h1>
           <div className="h-[1px] w-20 bg-rose-accent mx-auto"></div>
         </header>
 
