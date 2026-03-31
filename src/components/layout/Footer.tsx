@@ -4,16 +4,32 @@ import { motion } from "framer-motion";
 import { Instagram, Facebook, Youtube } from "lucide-react"; 
 import Link from "next/link";
 
+// Cấu trúc dữ liệu có gắn link cụ thể cho từng trang
 const footerLinks = {
-  "Bộ Sưu Tập": ["Couture 2026", "Bridal Blanc", "Resort", "Phụ Kiện"],
-  "Xưởng Chế Tác": ["Câu Chuyện Thương Hiệu", "Nghệ Thuật Thủ Công", "Phát Triển Bền Vững", "Truyền Thông"],
-  "Dịch Vụ": ["Liên Hệ", "Đặt Lịch Tư Vấn", "Hướng Dẫn Chọn Size", "Chính Sách Đổi Trả"],
+  "Thông tin": [
+    { label: "Bộ sưu tập", href: "/shop" },
+    { label: "Chính sách bảo mật", href: "/privacy" },
+    { label: "Thông tin thanh toán", href: "/payment" },
+    { label: "Phụ Kiện", href: "/shop" },
+  ],
+  "Khám Phá": [
+    { label: "Câu Chuyện Thương Hiệu", href: "/our-story" },
+    { label: "Nghệ Thuật Thủ Công", href: "/atelier" },
+    { label: "Phát Triển Bền Vững", href: "/sustainability" },
+    { label: "Truyền Thông", href: "/press" },
+  ],
+  "Dịch Vụ": [
+    { label: "Liên Hệ", href: "/contact" },
+    { label: "Đặt Lịch Tư Vấn", href: "/booking" }, // Liên kết đến trang bạn vừa tạo
+    { label: "Hướng Dẫn Chọn Size", href: "/size-guide" },
+    { label: "Chính Sách Đổi Trả", href: "/returns" },
+  ],
 };
 
 const socialIcons = [
-  { Icon: Instagram, href: "https://www.instagram.com/" },
-  { Icon: Facebook, href: "https://www.facebook.com/" },
-  { Icon: Youtube, href: "https://www.youtube.com/" },
+  { Icon: Instagram, href: "https://www.instagram.com/serena" },
+  { Icon: Facebook, href: "https://www.facebook.com/serena" },
+  { Icon: Youtube, href: "https://www.youtube.com/serena" },
 ];
 
 export default function Footer() {
@@ -35,7 +51,7 @@ export default function Footer() {
               </h2>
             </Link>
             <p className="font-inter text-[0.7rem] leading-[2.2] text-white/50 max-w-sm uppercase tracking-[0.2em] font-light">
-              Nơi nghệ thuật giao thoa cùng cơ thể. Những tạo tác Couture dành riêng cho người phụ nữ tự định nghĩa di sản của chính mình.
+              Serena là thương hiệu thời trang thiết kế dành riêng cho những người phụ nữ hiện đại, yêu thích nét đẹp thanh lịch và sang trọng.
             </p>
             
             {/* Social Icons placement */}
@@ -45,6 +61,7 @@ export default function Footer() {
                   key={i}
                   href={href}
                   target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ y: -3, color: "#D8A7B1" }}
                   className="text-white/40 hover:text-[var(--color-rose-primary)] transition-colors duration-300"
                 >
@@ -58,18 +75,17 @@ export default function Footer() {
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-12">
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category} className="space-y-10">
-                {/* Header rõ ràng hơn, độ tương phản cao hơn */}
                 <h3 className="font-inter text-[0.7rem] tracking-[0.4em] uppercase text-white/80 border-b border-white/5 pb-4">
                   {category}
                 </h3>
                 <ul className="space-y-5">
                   {links.map((link) => (
-                    <li key={link}>
+                    <li key={link.label}>
                       <Link
-                        href="#"
+                        href={link.href}
                         className="font-inter text-[0.75rem] text-white/40 hover:text-white transition-all duration-500 block tracking-[0.15em] font-light uppercase hover:translate-x-1"
                       >
-                        {link}
+                        {link.label}
                       </Link>
                     </li>
                   ))}
@@ -86,13 +102,17 @@ export default function Footer() {
           </p>
           
           <div className="flex items-center gap-10">
-            {["Bảo mật", "Điều khoản", "Cookies"].map((item) => (
+            {[
+                { label: "Bảo mật", href: "/privacy" },
+                { label: "Điều khoản", href: "/terms" },
+                { label: "Cookies", href: "/cookies" }
+            ].map((item) => (
               <Link
-                key={item}
-                href="#"
+                key={item.label}
+                href={item.href}
                 className="font-inter text-[0.6rem] tracking-[0.3em] uppercase text-white/20 hover:text-white/50 transition-colors duration-500"
               >
-                {item}
+                {item.label}
               </Link>
             ))}
           </div>

@@ -72,7 +72,7 @@ export default function Hero() {
             className="group relative inline-block"
           >
             <span className="font-playfair text-xl md:text-2xl text-white tracking-widest uppercase italic">
-              Khám Phá Bộ Sưu Tập
+              Khám Phá 
             </span>
             <div className="absolute -bottom-1 left-0 w-full h-px bg-white origin-left scale-x-100 group-hover:scale-x-50 transition-transform duration-500" />
           </Link>
