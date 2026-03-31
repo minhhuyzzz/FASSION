@@ -33,5 +33,4 @@ export const products = [
       care: "Giặt tay với nước ấm. Không vắt xoắn. Ủi mặt trong ở nhiệt độ thấp.",
       tag: "Best Seller"
     }
-    // Bạn hãy thêm tiếp các sản phẩm khác từ CSV vào đây nhé...
   ];
