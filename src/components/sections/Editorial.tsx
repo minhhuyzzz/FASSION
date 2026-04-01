@@ -71,7 +71,7 @@ export default function Editorial() {
               </p>
               
               <motion.a
-                href="#"
+                href="/our-story"
                 className="group inline-flex items-center gap-3 border-b border-[#A4717A]/40 pb-1.5 hover:border-[#A4717A] transition-colors duration-500"
               >
                 <span className="font-inter text-[0.6rem] tracking-[0.25em] text-gray-900 uppercase group-hover:text-[#A4717A] transition-colors">
@@ -131,7 +131,7 @@ function EditorialRow2() {
           "Thời trang là bộ giáp tuyệt mỹ nhất để đương đầu với thực tại."
         </p>
         <p className="font-inter text-[0.55rem] text-[#A4717A] tracking-[0.3em] uppercase">
-          — Tuyên ngôn Maison 2026
+          — Tuyên ngôn Serena 2026
         </p>
         <div className="w-px h-8 bg-[#A4717A]/30 mt-6" />
       </motion.div>

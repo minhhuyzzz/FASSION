@@ -6,6 +6,7 @@ import Benefits from "@/components/sections/Benefits";
 import Testimonials from "@/components/sections/Testimonials";
 import Marquee from "@/components/sections/Marquee";
 import Newsletter from "@/components/sections/Newsletter";
+import MarqueeCollection from "@/components/sections/MarqueeCollection";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
      
       <Hero />
       <Marquee />
+      <MarqueeCollection />
       <FeaturedCollection />
       <Editorial />
       <Benefits />

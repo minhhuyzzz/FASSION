@@ -2,144 +2,192 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
+import Link from "next/link";
 
-export default function BrandStoryPage() {
-  const scrollReveal = {
-    initial: { opacity: 0, y: 40 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] }
-  };
+const journalData = [
+  {
+    id: 1,
+    category: "Nghệ thuật",
+    title: "Kỹ thuật xếp nếp (Draping): Linh hồn của Haute Couture",
+    excerpt: "Khám phá hành trình từ những thước vải lụa thô sơ đến những đường cong hoàn mỹ trên cơ thể người phụ nữ...",
+    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1974&auto=format&fit=crop",
+    date: "25.03.2026",
+    featured: true
+  },
+  {
+    id: 2,
+    category: "Xu hướng",
+    title: "Sắc trắng Blanc: Sự lên ngôi của tối giản thượng lưu",
+    excerpt: "Tại sao sắc trắng luôn là lựa chọn vĩnh cửu của những quý cô định hình phong cách riêng?",
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop",
+    date: "20.03.2026",
+    featured: false
+  },
+  {
+    id: 3,
+    category: "Phong cách",
+    title: "Phụ kiện Di sản: Điểm nhấn từ những điều nhỏ bé",
+    excerpt: "Cách lựa chọn trang sức và túi xách để tôn vinh bộ trang phục thiết kế của bạn.",
+    image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1935&auto=format&fit=crop",
+    date: "15.03.2026",
+    featured: false
+  },
+  {
+    id: 4,
+    category: "Sự kiện",
+    title: "SERANA tại Tuần lễ Thời trang Xuân Hè 2026",
+    excerpt: "Nhìn lại những khoảnh khắc rực rỡ nhất của bộ sưu tập 'Lửa & Lụa' trên sàn diễn quốc tế.",
+    image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1887&auto=format&fit=crop",
+    date: "10.03.2026",
+    featured: false
+  }
+];
+
+export default function JournalPage() {
+  const featuredPost = journalData.find(post => post.featured);
+  const regularPosts = journalData.filter(post => !post.featured);
 
   return (
-    <main className="min-h-screen bg-[var(--color-ivory)] grain overflow-hidden pb-32">
-      
-      {/* CHƯƠNG 1: KHỞI NGUỒN (HERO SECTION) */}
-      <section className="relative h-screen flex items-center justify-center px-6">
-        <motion.div 
-          className="text-center z-10"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2 }}
-        >
-          <span className="line-decorator uppercase tracking-[0.6em] text-[10px] text-black/40 mb-10 block">Khai sinh từ một giấc mơ</span>
-          <h1 style={{ fontFamily: 'var(--font-playfair)' }} className="text-7xl md:text-9xl italic leading-none text-black mb-12">
-            Hơi thở của <br /> Di sản
-          </h1>
-          <p className="font-inter text-[0.75rem] uppercase tracking-[0.4em] text-black/60 max-w-lg mx-auto leading-relaxed">
-            Nơi những thước lụa không chỉ là trang phục, mà là bản tuyên ngôn của tâm hồn.
-          </p>
-        </motion.div>
-        
-        {/* Background Image mờ ảo phía sau */}
-        <div className="absolute inset-0 z-0 opacity-10">
-            <img 
-                src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1974&auto=format&fit=crop" 
-                alt="Fabric Detail"
-                className="w-full h-full object-cover grayscale"
-            />
-        </div>
-      </section>
+    // GIỮ NỀN IVORY NHƯ CŨ NHƯNG THÊM TEXTURE HẠT GIẤY
+    <main className="min-h-screen bg-[#F5F2EF] relative pb-32">
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: `url('https://www.transparenttextures.com/patterns/natural-paper.png')` }} />
 
-      {/* CHƯƠNG 2: TRIẾT LÝ THIẾT KẾ (NARRATIVE) */}
-      <section className="py-32 px-6 md:px-12 max-w-[1200px] mx-auto">
-        <div className="grid lg:grid-cols-12 gap-16 items-center">
-          <motion.div className="lg:col-span-5" {...scrollReveal}>
-            <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-4xl md:text-5xl italic text-black mb-10 leading-tight">
-              Sự im lặng <br /> đầy quyền uy
-            </h2>
-            <div className="space-y-8 font-inter text-[0.9rem] leading-[2.4] text-black/70 font-light text-justify uppercase tracking-widest">
-              <p>
-                SERANA ra đời giữa lòng Sài Gòn sôi động, nhưng lại chọn cho mình một nhịp thở khác biệt. Chúng tôi tin rằng sự sang trọng thật sự không đến từ những gì ồn ào nhất, mà từ những chi tiết tĩnh lặng và hoàn hảo nhất.
-              </p>
-              <p>
-                Mỗi nhát kéo tại Atelier của chúng tôi là một sự cam kết. Cam kết với kỹ thuật Couture truyền thống và cam kết với cá tính độc bản của mỗi người phụ nữ.
-              </p>
-            </div>
-          </motion.div>
-          
-          <motion.div 
-            className="lg:col-span-7 relative pl-12"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.5 }}
-          >
-            <div className="aspect-[4/5] shadow-luxury overflow-hidden border border-black/5">
-                <img 
-                    src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=1887&auto=format&fit=crop" 
-                    alt="Atelier Workshop" 
-                    className="w-full h-full object-cover transition-transform duration-[3s] hover:scale-110"
-                />
-            </div>
-            <div className="absolute -bottom-10 -left-10 w-2/3 aspect-square bg-[var(--color-rose-blush)]/20 -z-10"></div>
-          </motion.div>
-        </div>
-      </section>
+      <div className="relative z-10">
+        {/* HEADER TRANG */}
+        <section className="pt-48 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto border-b border-black/5">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="uppercase tracking-[0.5em] text-[10px] text-[#A4717A] mb-6 block font-bold">
+                Ấn bản số 01 / 2026
+              </span>
+              <h1 className="font-playfair text-6xl md:text-8xl italic leading-none text-black">
+                SERANA <span className="text-black/10 not-italic">Journal</span>
+              </h1>
+            </motion.div>
+            
+            <motion.div 
+              className="flex items-center gap-4 border-b border-black/10 pb-2 w-full md:w-64 focus-within:border-[#A4717A] transition-all"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Search size={16} strokeWidth={1.2} className="text-black/40" />
+              <input 
+                type="text" 
+                placeholder="Tìm kiếm cảm hứng..." 
+                className="bg-transparent outline-none text-[0.7rem] uppercase tracking-widest w-full placeholder:text-black/20 text-black italic font-light"
+              />
+            </motion.div>
+          </div>
+        </section>
 
-      {/* CHƯƠNG 3: NGHỆ THUẬT THỦ CÔNG (FULL WIDTH) */}
-      <section className="py-40 bg-black text-white relative">
-        <div className="absolute inset-0 opacity-20 grain pointer-events-none"></div>
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-12 relative z-10">
-          <motion.div {...scrollReveal}>
-            <Quote size={40} strokeWidth={1} className="mx-auto text-[var(--color-rose-accent)] mb-8 opacity-50" />
-            <p style={{ fontFamily: 'var(--font-playfair)' }} className="text-3xl md:text-5xl italic leading-relaxed">
-              "Chúng tôi không chạy theo xu hướng. Chúng tôi tạo ra những mảnh ghép của thời gian, nơi quá khứ và tương lai giao thoa trên từng thớ vải lụa."
-            </p>
-            <div className="h-[1px] w-24 bg-white/20 mx-auto mt-12 mb-6"></div>
-            <span className="text-[10px] uppercase tracking-[0.5em] text-white/40">Người sáng lập SERANA</span>
-          </motion.div>
-        </div>
-      </section>
+        {/* BÀI VIẾT NỔI BẬT */}
+        {featuredPost && (
+          <section className="py-20 px-6 md:px-12 max-w-[1400px] mx-auto">
+            <Link href={`/blog/${featuredPost.id}`} className="group block relative">
+              <div className="grid lg:grid-cols-12 gap-12 items-center">
+                <div className="lg:col-span-7 overflow-hidden aspect-[16/9] bg-gray-100 shadow-[20px_20px_60px_#d9d6d3,-20px_-20px_60px_#ffffff]">
+                  <motion.img 
+                    src={featuredPost.image} 
+                    alt={featuredPost.title}
+                    className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                  />
+                </div>
+                <div className="lg:col-span-5 space-y-8">
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-[#A4717A] font-bold italic">Bìa chính — {featuredPost.category}</span>
+                  <h2 className="font-playfair text-4xl md:text-5xl italic leading-tight text-black group-hover:text-[#A4717A] transition-colors">
+                    {featuredPost.title}
+                  </h2>
+                  <p className="font-inter text-[0.85rem] leading-relaxed text-black/60 font-light italic">
+                    {featuredPost.excerpt}
+                  </p>
+                  <div className="flex items-center gap-4 pt-4">
+                    <span className="text-[10px] uppercase tracking-widest text-black/30">{featuredPost.date}</span>
+                    <div className="h-[1px] w-12 bg-black/10"></div>
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-bold group-hover:translate-x-2 transition-transform duration-500 flex items-center gap-2">
+                      Đọc câu chuyện <ArrowRight size={14} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </section>
+        )}
 
-      {/* CHƯƠNG 4: SERANA WOMAN (IMAGE GRID) */}
-      <section className="py-40 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <div className="flex flex-col items-center mb-24">
-            <span className="line-decorator uppercase tracking-[0.5em] text-[10px] text-black/40 mb-6 block">Nàng là ai?</span>
-            <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-5xl italic text-black text-center">Người phụ nữ SERANA</h2>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div className="space-y-6" {...scrollReveal}>
-            <div className="aspect-[2/3] overflow-hidden shadow-luxury">
-                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1887&auto=format&fit=crop" className="w-full h-full object-cover" alt="Elegance" />
-            </div>
-            <h4 className="text-[11px] uppercase tracking-[0.3em] font-bold">Thanh lịch tự thân</h4>
-            <p className="text-xs text-black/50 leading-relaxed font-light uppercase tracking-wider">Vẻ đẹp không cần cố gắng, toát ra từ cốt cách và sự tự tin ngầm định.</p>
-          </motion.div>
+        {/* BÀI VIẾT LƯỚI */}
+        <section className="py-12 px-6 md:px-12 max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 gap-y-24">
+            {regularPosts.map((post, index) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <Link href={`/blog/${post.id}`} className="group space-y-8 block">
+                  <div className="aspect-[4/5] overflow-hidden bg-white shadow-[10px_10px_30px_#e0dedb]">
+                    <img 
+                      src={post.image} 
+                      alt={post.title} 
+                      className="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-110 group-hover:sepia-[0.3]"
+                    />
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center text-[9px] uppercase tracking-[0.3em] text-[#A4717A] font-bold">
+                      <span>{post.category}</span>
+                      <span className="text-black/20">{post.date}</span>
+                    </div>
+                    <h3 className="font-playfair text-2xl italic leading-snug text-black group-hover:text-[#A4717A] transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-[0.75rem] leading-relaxed text-black/50 font-light line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center gap-2 pt-2 text-[9px] uppercase tracking-[0.3em] font-bold border-t border-black/5 mt-4 pt-4">
+                      <span>Khám phá</span>
+                      <ArrowRight size={12} className="group-hover:translate-x-2 transition-transform duration-300 text-[#A4717A]" />
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
-          <motion.div className="space-y-6 md:pt-24" {...scrollReveal} transition={{ delay: 0.2 }}>
-            <div className="aspect-[2/3] overflow-hidden shadow-luxury">
-                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop" className="w-full h-full object-cover" alt="Sophistication" />
-            </div>
-            <h4 className="text-[11px] uppercase tracking-[0.3em] font-bold">Tư duy hiện đại</h4>
-            <p className="text-xs text-black/50 leading-relaxed font-light uppercase tracking-wider">Người làm chủ vận mệnh và định nghĩa lại những chuẩn mực cũ kỹ.</p>
-          </motion.div>
-
-          <motion.div className="space-y-6" {...scrollReveal} transition={{ delay: 0.4 }}>
-            <div className="aspect-[2/3] overflow-hidden shadow-luxury">
-                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1888&auto=format&fit=crop" className="w-full h-full object-cover" alt="Strength" />
-            </div>
-            <h4 className="text-[11px] uppercase tracking-[0.3em] font-bold">Di sản cá nhân</h4>
-            <p className="text-xs text-black/50 leading-relaxed font-light uppercase tracking-wider">Mỗi bộ trang phục là một phần trong câu chuyện cuộc đời nàng.</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FOOTER CTA */}
-      <section className="py-20 text-center">
-        <motion.div {...scrollReveal}>
-            <p className="font-inter text-[0.7rem] uppercase tracking-[0.5em] text-black/40 mb-10 italic">Cùng SERANA viết tiếp chương mới</p>
-            <div className="flex justify-center gap-12">
-                <Link href="/shop" className="text-[10px] uppercase tracking-widest border-b border-black pb-1 hover:text-[var(--color-rose-accent)] transition-all">Khám phá BST</Link>
-                <Link href="/booking" className="text-[10px] uppercase tracking-widest border-b border-black pb-1 hover:text-[var(--color-rose-accent)] transition-all">Kết nối riêng tư</Link>
-            </div>
-        </motion.div>
-      </section>
-
+        {/* ĐĂNG KÝ BẢN TIN (Light Version) */}
+        <section className="mt-20 px-6 md:px-12 max-w-[1400px] mx-auto">
+          <div className="bg-[#1a1a1a] py-24 px-8 text-center space-y-10 relative overflow-hidden rounded-sm">
+            {/* Background cho box CTA vẫn giữ màu đen để tạo sự tương phản mạnh ở cuối trang */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none" 
+                 style={{ backgroundImage: `url('https://www.transparenttextures.com/patterns/stardust.png')` }} />
+            <motion.div 
+              className="relative z-10"
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+            >
+              <h2 className="font-playfair text-4xl italic text-white mb-6">Theo dấu những câu chuyện mới nhất</h2>
+              <p className="text-[0.7rem] uppercase tracking-[0.4em] text-white/40 mb-10">Đăng ký để không bỏ lỡ cảm hứng từ SERANA Atelier</p>
+              <form className="max-w-md mx-auto flex border-b border-white/20 pb-2 focus-within:border-[#A4717A] transition-all">
+                  <input 
+                    type="email" 
+                    placeholder="ĐỊA CHỈ EMAIL QUÝ CÔ..." 
+                    className="bg-transparent w-full outline-none text-xs font-light tracking-widest text-white italic placeholder:text-white/10 uppercase"
+                  />
+                  <button type="submit" className="text-white hover:text-[#A4717A] transition-colors">
+                    <ArrowRight size={18} />
+                  </button>
+              </form>
+            </motion.div>
+          </div>
+        </section>
+      </div>
     </main>
   );
 }
-
-// Cần thêm import Link từ Next.js ở đầu file
-import Link from "next/link";

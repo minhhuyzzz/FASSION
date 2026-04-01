@@ -3,9 +3,9 @@ import { Playfair_Display, Cormorant_Garamond, Inter } from "next/font/google";
 import "@/styles/globals.css";
 import Navbar from "@/components/layout/Navbar"; 
 import Footer from "@/components/layout/Footer"; 
-// 1. IMPORT CartProvider vào đây
 import { CartProvider } from "@/context/CartContext"; 
 
+// Cấu hình font chữ chuyên nghiệp cho thương hiệu Haute Couture
 const playfair = Playfair_Display({
   subsets: ["latin", "vietnamese"],
   variable: "--font-playfair",
@@ -28,23 +28,35 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SERANA — Haute Couture", // Đã đổi tên cho đúng thương hiệu của bạn
-  description: "Nơi nghệ thuật tôn vinh vóc dáng.",
+  title: "SERANA — Haute Couture",
+  description: "Nơi nghệ thuật tôn vinh vóc dáng và bản sắc riêng biệt.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi">
-      <body className={`${playfair.variable} ${cormorant.variable} ${inter.variable} antialiased bg-[#F5F2EF] text-gray-900`}>
-        {/* 2. BAO BỌC toàn bộ Navbar và children bằng CartProvider */}
+    <html lang="vi" className="scroll-smooth">
+      <body 
+        className={`
+          ${playfair.variable} 
+          ${cormorant.variable} 
+          ${inter.variable} 
+          antialiased 
+          bg-[#FDFAF8] 
+          text-[#1F1F1F] 
+          grain
+        `}
+      >
+        {/* Chỉ giữ lại CartProvider để quản lý giỏ hàng toàn trang */}
         <CartProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <div className="relative z-10 flex flex-col min-h-screen">
+            <Navbar />
+            
+            <main className="flex-grow">
+              {children}
+            </main>
+
+            <Footer />
+          </div>
         </CartProvider>
       </body>
     </html>

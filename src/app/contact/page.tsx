@@ -1,12 +1,12 @@
 "use client";
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Phone, MapPin, Send, CheckCircle2, Clock } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import { 
+  Mail, Phone, MapPin, Send, 
+  CheckCircle2, Clock, ArrowRight, 
+  Instagram, Facebook, Globe 
+} from "lucide-react";
 import { supabase } from "@/lib/supabase";
-import Link from "next/link"; // Đã thêm import để sửa lỗi đỏ
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,13 +14,22 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    const formData = new FormData(e.currentTarget);
+    const phone = formData.get("phone")?.toString() || "";
+
+    // RÀNG BUỘC LOGIC: Kiểm tra độ dài chuỗi phải đúng 10 ký tự
+    if (phone.length !== 10) {
+      alert("Số điện thoại phải bao gồm đúng 10 chữ số.");
+      return;
+    }
+
     setIsSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
-      phone: formData.get("phone"),
+      phone: phone,
       message: formData.get("message"),
     };
 
@@ -37,161 +46,207 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[var(--color-ivory)] grain relative">
-      <Navbar />
+    <main className="min-h-screen bg-[#F5F2EF] relative pb-32 overflow-hidden font-inter">
+      {/* LỚP PHỦ TEXTURE GIẤY TỰ NHIÊN */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none" 
+           style={{ backgroundImage: `url('https://www.transparenttextures.com/patterns/natural-paper.png')` }} />
 
-      {/* Tiêu đề trang - Tăng độ đậm để dễ nhìn */}
-      <section className="pt-44 pb-16 px-6 md:px-12 text-center max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <span className="line-decorator uppercase tracking-[0.5em] text-[10px] text-black/60 mb-6 block font-medium">Liên hệ</span>
-          <h1 style={{ fontFamily: 'var(--font-playfair)' }} className="text-6xl md:text-7xl italic leading-tight mb-8 text-black">
-            Tâm tình cùng <br /> SERANA
-          </h1>
-          <p className="font-inter text-[0.85rem] leading-relaxed text-black/70 uppercase tracking-widest italic font-medium">
-            Mọi thắc mắc của quý cô đều sẽ được chúng tôi lắng nghe và phản hồi một cách tinh tế nhất.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Thông tin & Form */}
-      <section className="pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <div className="grid lg:grid-cols-12 gap-16">
-          
-          {/* CỘT TRÁI: THÔNG TIN CHI TIẾT (Tăng độ tương phản) */}
-          <motion.div 
-            className="lg:col-span-5 space-y-12"
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="space-y-10">
-              <div className="flex items-start gap-6 group">
-                <div className="p-3 bg-white border border-black/10 shadow-sm group-hover:border-[var(--color-rose-accent)] transition-all">
-                  <MapPin size={20} strokeWidth={1.5} className="text-black" />
-                </div>
-                <div>
-                  <h3 className="text-[10px] uppercase tracking-[0.3em] text-black font-bold mb-2">Không gian trưng bày</h3>
-                  <p className="text-sm font-medium text-black/80">Số 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP. Hồ Chí Minh</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6 group">
-                <div className="p-3 bg-white border border-black/10 shadow-sm group-hover:border-[var(--color-rose-accent)] transition-all">
-                  <Clock size={20} strokeWidth={1.5} className="text-black" />
-                </div>
-                <div>
-                  <h3 className="text-[10px] uppercase tracking-[0.3em] text-black font-bold mb-2">Thời gian mở cửa</h3>
-                  <p className="text-sm font-medium text-black/80">Thứ Hai – Chủ Nhật: 09:00 – 21:00</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6 group">
-                <div className="p-3 bg-white border border-black/10 shadow-sm group-hover:border-[var(--color-rose-accent)] transition-all">
-                  <Phone size={20} strokeWidth={1.5} className="text-black" />
-                </div>
-                <div>
-                  <h3 className="text-[10px] uppercase tracking-[0.3em] text-black font-bold mb-2">Đường dây đặc quyền</h3>
-                  <p className="text-sm font-medium text-black/80">+84 905 123 456</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Mục bổ sung FAQ */}
-            <div className="p-8 bg-white border border-black/5 shadow-luxury">
-                <h4 style={{ fontFamily: 'var(--font-playfair)' }} className="text-2xl italic mb-4 text-black">Câu hỏi thường gặp?</h4>
-                <p className="text-xs text-black/60 leading-relaxed font-medium mb-6">
-                  Quý khách có thể xem nhanh các chính sách về đổi trả, chọn kích cỡ hoặc quy trình thiết kế độc bản.
-                </p>
-                <Link href="/faq" className="text-[10px] uppercase tracking-widest border-b border-black pb-1 hover:text-[var(--color-rose-accent)] hover:border-[var(--color-rose-accent)] transition-all font-bold text-black">
-                  Xem chi tiết
-                </Link>
-            </div>
-          </motion.div>
-
-          {/* CỘT PHẢI: FORM GỬI LỜI NHẮN */}
-          <motion.div 
-            className="lg:col-span-7 bg-white p-10 md:p-16 shadow-luxury border border-black/5"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <AnimatePresence mode="wait">
-              {!isSuccess ? (
-                <form key="contact-form" onSubmit={handleSubmit} className="space-y-12">
-                  <div className="grid md:grid-cols-2 gap-10">
-                    <div className="relative border-b border-black/20 py-4 focus-within:border-[var(--color-rose-accent)] transition-all">
-                        <label className="text-[10px] uppercase tracking-[0.3em] text-black font-bold mb-2 block">Quý danh</label>
-                        <input name="name" type="text" required className="w-full bg-transparent outline-none font-medium italic text-sm text-black placeholder:text-black/20" placeholder="Tên của bạn..." />
-                    </div>
-                    <div className="relative border-b border-black/20 py-4 focus-within:border-[var(--color-rose-accent)] transition-all">
-                        <label className="text-[10px] uppercase tracking-[0.3em] text-black font-bold mb-2 block">Số điện thoại</label>
-                        <input name="phone" type="tel" required className="w-full bg-transparent outline-none font-medium italic text-sm text-black placeholder:text-black/20" placeholder="0905..." />
-                    </div>
-                  </div>
-
-                  <div className="relative border-b border-black/20 py-4 focus-within:border-[var(--color-rose-accent)] transition-all">
-                    <label className="text-[10px] uppercase tracking-[0.4em] text-black font-bold mb-2 block">Địa chỉ Email</label>
-                    <input name="email" type="email" required className="w-full bg-transparent outline-none font-medium italic text-sm text-black placeholder:text-black/20" placeholder="email@example.com" />
-                  </div>
-
-                  <div className="relative border-b border-black/20 py-4 focus-within:border-[var(--color-rose-accent)] transition-all">
-                    <label className="text-[10px] uppercase tracking-[0.4em] text-black font-bold mb-2 block">Lời nhắn của Quý cô</label>
-                    <textarea name="message" rows={4} required className="w-full bg-transparent outline-none font-medium italic text-sm resize-none text-black placeholder:text-black/20" placeholder="Hãy chia sẻ mong muốn của bạn..." />
-                  </div>
-
-                  <button 
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="btn-luxury w-full py-6 bg-black text-white hover:bg-[var(--color-rose-accent)] transition-all duration-700 flex items-center justify-center gap-4 disabled:bg-gray-400"
-                  >
-                    <span className="text-[0.75rem] tracking-[0.4em] font-bold">
-                      {isSubmitting ? "Đang gửi đi..." : "Gửi lời nhắn"}
-                    </span>
-                    <Send size={14} strokeWidth={1.5} />
-                  </button>
-                </form>
-              ) : (
-                <motion.div 
-                  key="success-message"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-20 space-y-6 text-black"
-                >
-                  <CheckCircle2 size={48} className="mx-auto text-[var(--color-rose-accent)] stroke-[1.5px]" />
-                  <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-4xl italic font-bold">Gửi lời nhắn thành công</h2>
-                  <p className="text-[0.8rem] uppercase tracking-widest text-black/60 max-w-xs mx-auto">Chúng tôi đã nhận được tâm ý của bạn và sẽ sớm phản hồi.</p>
-                  <button onClick={() => setIsSuccess(false)} className="text-[0.65rem] border-b border-black uppercase tracking-[0.3em] pb-1 hover:text-[var(--color-rose-accent)] mt-8 font-bold">Quay lại</button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* PHẦN BẢN ĐỒ CÓ TIÊU ĐỀ */}
-      <section className="pb-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <header className="mb-12 text-center">
-            <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-4xl italic text-black mb-4 underline decoration-black/10 underline-offset-8">Bản đồ</h2>
-            <p className="text-[10px] uppercase tracking-[0.4em] text-black/40">Tìm đường đến Atelier của chúng tôi</p>
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12">
+        
+        {/* SECTION 1: TIÊU ĐỀ EDITORIAL */}
+        <header className="pt-48 pb-24 border-b border-black/5">
+          <div className="grid lg:grid-cols-2 gap-12 items-end">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1 }}
+            >
+              <span className="text-[#A4717A] text-[0.6rem] tracking-[0.6em] uppercase mb-8 block font-bold">
+                Private Consultation
+              </span>
+              <h1 className="font-playfair text-6xl md:text-8xl italic leading-[0.9] tracking-tighter text-black">
+                Tâm tình cùng <br /> 
+                <span className="text-[#A4717A] not-italic drop-shadow-sm">SERANA</span>
+              </h1>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              className="lg:max-w-md pb-4"
+            >
+              <p className="text-[0.8rem] leading-relaxed text-black/50 uppercase tracking-[0.2em] italic font-medium">
+                "Mọi thắc mắc của quý cô đều sẽ được chúng tôi lắng nghe và phản hồi một cách tinh tế nhất."
+              </p>
+            </motion.div>
+          </div>
         </header>
-        <div className="w-full h-[550px] shadow-luxury border border-black/5 rounded-sm overflow-hidden">
-            <iframe
-            title="Vị trí SERANA Gò Vấp"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.858165487774!2d106.68427047583864!3d10.822210558350576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528e543632905%3A0x6fb2461044439c29!2zMTIgTmd1eeG7hW4gVsSDbiBC4bqjbywgUGjGsOG7nW5nIDQsIEfDsiBW4bqlcCwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1711891234567!5m2!1svi!2s"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen={true}
-            loading="lazy"
-            ></iframe>
-        </div>
-      </section>
 
-      <Footer />
+        {/* SECTION 2: THÔNG TIN & FORM */}
+        <section className="py-24">
+          <div className="grid lg:grid-cols-12 gap-20">
+            
+            {/* CỘT TRÁI: THÔNG TIN LIÊN HỆ */}
+            <motion.div 
+              className="lg:col-span-5 space-y-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="space-y-12">
+                <div className="group flex gap-8">
+                  <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center shrink-0 group-hover:border-[#A4717A] transition-colors duration-500 bg-white shadow-sm">
+                    <MapPin size={18} className="text-[#A4717A]" />
+                  </div>
+                  <div>
+                    <h3 className="text-[0.6rem] uppercase tracking-[0.4em] text-black/40 mb-3 font-bold">Không gian Atelier</h3>
+                    <p className="text-sm font-medium text-black/80 leading-relaxed italic">
+                      Số 12 Nguyễn Văn Bảo, Phường 4, <br />
+                      Quận Gò Vấp, TP. Hồ Chí Minh
+                    </p>
+                  </div>
+                </div>
+
+                <div className="group flex gap-8">
+                  <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center shrink-0 group-hover:border-[#A4717A] transition-colors duration-500 bg-white shadow-sm">
+                    <Clock size={18} className="text-[#A4717A]" />
+                  </div>
+                  <div>
+                    <h3 className="text-[0.6rem] uppercase tracking-[0.4em] text-black/40 mb-3 font-bold">Thời gian mở cửa</h3>
+                    <p className="text-sm font-medium text-black/80 leading-relaxed">Thứ Hai – Chủ Nhật <br /> 09:00 – 21:00</p>
+                  </div>
+                </div>
+
+                <div className="group flex gap-8">
+                  <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center shrink-0 group-hover:border-[#A4717A] transition-colors duration-500 bg-white shadow-sm">
+                    <Phone size={18} className="text-[#A4717A]" />
+                  </div>
+                  <div>
+                    <h3 className="text-[0.6rem] uppercase tracking-[0.4em] text-black/40 mb-3 font-bold">Đường dây đặc quyền</h3>
+                    <p className="text-xl font-playfair italic text-black">+ 0777868762</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mạng xã hội */}
+              <div className="pt-12 border-t border-black/5 space-y-6">
+                <h4 className="text-[0.6rem] uppercase tracking-[0.4em] text-black/20 font-bold">Theo dõi câu chuyện</h4>
+                <div className="flex gap-8">
+                  {[Globe].map((Icon, i) => (
+                    <a key={i} href="#" className="text-black/30 hover:text-[#A4717A] transition-colors">
+                      <Icon size={20} strokeWidth={1.5} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CỘT PHẢI: LUXURY FORM */}
+            <motion.div 
+              className="lg:col-span-7 bg-white p-10 md:p-20 shadow-[20px_20px_60px_#d9d6d3,-20px_-20px_60px_#ffffff] rounded-sm relative"
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <AnimatePresence mode="wait">
+                {!isSuccess ? (
+                  <form key="contact-form" onSubmit={handleSubmit} className="space-y-12">
+                    <div className="grid md:grid-cols-2 gap-12">
+                      <div className="relative group">
+                        <label className="text-[0.55rem] uppercase tracking-[0.4em] text-black/40 mb-2 block font-bold group-focus-within:text-[#A4717A] transition-colors">Quý danh</label>
+                        <input name="name" type="text" required className="w-full bg-transparent border-b border-black/10 py-3 outline-none focus:border-[#A4717A] transition-all text-sm italic font-medium text-black" placeholder="Tên của quý cô..." />
+                      </div>
+                      <div className="relative group">
+                        <label className="text-[0.55rem] uppercase tracking-[0.4em] text-black/40 mb-2 block font-bold group-focus-within:text-[#A4717A] transition-colors">Số điện thoại</label>
+                        {/* THÊM RÀNG BUỘC: 
+                            - type="tel": Mở bàn phím số trên mobile.
+                            - maxLength={10}: Chặn nhập quá 10 ký tự.
+                            - pattern: Yêu cầu trình duyệt kiểm tra đúng 10 chữ số.
+                            - onInput: Ngăn chặn nhập các ký tự không phải là số ngay lập tức.
+                        */}
+                        <input 
+                          name="phone" 
+                          type="tel" 
+                          required 
+                          maxLength={10}
+                          pattern="[0-9]{10}"
+                          onInput={(e) => {
+                            e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
+                          }}
+                          className="w-full bg-transparent border-b border-black/10 py-3 outline-none focus:border-[#A4717A] transition-all text-sm font-medium text-black" 
+                          placeholder="09xx..." 
+                        />
+                      </div>
+                    </div>
+
+                    <div className="relative group">
+                      <label className="text-[0.55rem] uppercase tracking-[0.4em] text-black/40 mb-2 block font-bold group-focus-within:text-[#A4717A] transition-colors">Địa chỉ Email</label>
+                      <input name="email" type="email" required className="w-full bg-transparent border-b border-black/10 py-3 outline-none focus:border-[#A4717A] transition-all text-sm font-medium text-black" placeholder="email@serana.vn" />
+                    </div>
+
+                    <div className="relative group">
+                      <label className="text-[0.55rem] uppercase tracking-[0.4em] text-black/40 mb-2 block font-bold group-focus-within:text-[#A4717A] transition-colors">Lời nhắn tâm tình</label>
+                      <textarea name="message" rows={4} required className="w-full bg-transparent border-b border-black/10 py-3 outline-none focus:border-[#A4717A] transition-all text-sm italic font-medium resize-none text-black" placeholder="Hãy chia sẻ mong muốn của bạn..." />
+                    </div>
+
+                    <button 
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-black text-white py-6 text-[0.7rem] tracking-[0.5em] uppercase font-bold hover:bg-[#A4717A] transition-all duration-700 flex items-center justify-center gap-4 disabled:bg-gray-200 shadow-xl overflow-hidden group/btn"
+                    >
+                      <span className="relative z-10">{isSubmitting ? "Đang gửi đi..." : "Gửi lời nhắn"}</span>
+                      <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform" />
+                    </button>
+                  </form>
+                ) : (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-20 space-y-8"
+                  >
+                    <CheckCircle2 size={60} className="mx-auto text-[#A4717A] stroke-[1px]" />
+                    <div className="space-y-4">
+                      <h2 className="font-playfair text-4xl italic text-black">Gửi thành công</h2>
+                      <p className="text-[0.6rem] uppercase tracking-[0.3em] text-black/40 max-w-xs mx-auto leading-loose">
+                        Chúng tôi đã nhận được tâm ý của bạn và sẽ sớm phản hồi.
+                      </p>
+                    </div>
+                    <button onClick={() => setIsSuccess(false)} className="text-[0.6rem] border-b border-black uppercase tracking-[0.4em] pb-1 text-black hover:text-[#A4717A] hover:border-[#A4717A] transition-all font-bold">Quay lại</button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* SECTION 3: BẢN ĐỒ */}
+        <section className="py-24 border-t border-black/5">
+          <div className="grid lg:grid-cols-12 gap-16 items-center">
+            <div className="lg:col-span-4 space-y-6 text-center lg:text-left">
+              <h2 className="font-playfair text-4xl italic text-black">Tìm đường đến <br/> Atelier</h2>
+              <p className="text-[0.7rem] leading-relaxed text-black/40 font-medium italic">
+                Tọa lạc tại trung tâm, chúng tôi luôn sẵn sàng đón tiếp quý cô đến trải nghiệm trực tiếp.
+              </p>
+              <div className="h-px w-20 bg-[#A4717A]/40 mx-auto lg:mx-0" />
+            </div>
+            
+            <div className="lg:col-span-8">
+              <div className="relative aspect-[16/7] md:aspect-[21/9] rounded-[3rem] overflow-hidden border border-black/5 shadow-luxury transition-all duration-500 hover:shadow-2xl">
+                <iframe
+                  title="Vị trí SERANA"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.925114705307!2d106.678000!3d10.816000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ4JzU3LjYiTiAxMDbCsDQwJzQwLjgiRQ!5e0!3m2!1svi!2svn!4v1700000000000!5m2!1svi!2svn"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={true}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
   );
 }
