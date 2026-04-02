@@ -1,28 +1,16 @@
 "use client";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation"; 
 import { products } from "@/data/products";
 import ProductModal from "@/components/sections/ProductModal";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ChevronDown, ArrowUpDown, SlidersHorizontal, X } from "lucide-react";
+import { ArrowUpDown } from "lucide-react";
 
-// Cấu trúc danh mục 2 cấp
 const navigation = [
-  {
-    id: "all",
-    label: "Tất cả",
-    children: []
-  },
-  {
-    id: "fashion",
-    label: "Thời trang",
-    children: ["Áo", "Quần", "Set", "Váy"]
-  },
-  {
-    id: "accessories",
-    label: "Phụ kiện",
-    children: ["Đồng hồ", "Túi xách", "Dây chuyền"]
-  }
+  { id: "all", label: "Tất cả", children: [] },
+  { id: "fashion", label: "Thời trang", children: ["Áo", "Quần", "Set", "Váy"] },
+  { id: "accessories", label: "Phụ kiện", children: ["Đồng hồ", "Túi xách", "Dây chuyền"] }
 ];
 
 const sortOptions = [
@@ -31,12 +19,27 @@ const sortOptions = [
   { label: "Giá: Cao đến Thấp", value: "price-desc" },
 ];
 
-export default function ShopPage() {
+function ShopContent() {
+  const searchParams = useSearchParams();
+  
   const [activeParent, setActiveParent] = useState("all");
   const [activeChild, setActiveChild] = useState("all");
-  const [maxPrice, setMaxPrice] = useState(200000000); 
+  
+  // 1. CẬP NHẬT GIÁ TRỊ KHỞI TẠO THÀNH 50 TRIỆU
+  const [maxPrice, setMaxPrice] = useState(50000000); 
   const [sortBy, setSortBy] = useState("default");
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
+
+  useEffect(() => {
+    const cat = searchParams.get("cat");
+    const sub = searchParams.get("sub");
+
+    if (cat) setActiveParent(cat);
+    else setActiveParent("all");
+
+    if (sub) setActiveChild(sub);
+    else setActiveChild("all");
+  }, [searchParams]);
 
   const parsePrice = (priceStr: string) => {
     if (!priceStr) return 0;
@@ -45,17 +48,14 @@ export default function ShopPage() {
 
   const filteredAndSortedProducts = useMemo(() => {
     let result = products.filter((p) => {
-      // Logic lọc theo 2 cấp
       let matchCategory = false;
       if (activeParent === "all") {
         matchCategory = true;
       } else {
         const parentObj = navigation.find(n => n.id === activeParent);
         if (activeChild === "all") {
-          // Nếu chọn cấp cha nhưng chưa chọn con cụ thể -> Hiện tất cả thuộc cha
           matchCategory = parentObj?.children.includes(p.category) || false;
         } else {
-          // Lọc chính xác theo cấp con
           matchCategory = p.category === activeChild;
         }
       }
@@ -72,11 +72,8 @@ export default function ShopPage() {
   }, [activeParent, activeChild, maxPrice, sortBy]);
 
   return (
-    <main className="min-h-screen bg-noir pt-32 pb-20 px-6 md:px-12 relative">
-      <div className="max-w-[1600px] mx-auto">
-        
-        {/* TIÊU ĐỀ SHOP */}
-        <header className="mb-20 text-center relative">
+    <div className="max-w-[1600px] mx-auto">
+        <header className="mb-8 text-center relative">
           <motion.p 
             initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
             className="text-rose-accent text-[0.6rem] tracking-[0.6em] uppercase mb-4 font-bold"
@@ -85,19 +82,15 @@ export default function ShopPage() {
           </motion.p>
           <motion.h1 
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="font-playfair text-7xl md:text-9xl text-ivory italic tracking-tighter"
+            className="font-playfair text-6xl md:text-8xl text-ivory italic tracking-tighter"
           >
-            Bộ Sưu Tập
+            {navigation.find(n => n.id === activeParent)?.label || "Bộ Sưu Tập"}
           </motion.h1>
         </header>
 
-        {/* THANH LỌC SẢN PHẨM - PHÂN CẤP TINH TẾ */}
         <div className="sticky top-20 z-40 bg-noir/90 backdrop-blur-xl border-y border-white/5 py-8 mb-16">
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-12">
-            
-            {/* DANH MỤC 2 CẤP */}
             <div className="flex flex-col gap-6 w-full lg:w-auto">
-              {/* Cấp 1: Parent */}
               <div className="flex items-center gap-8 border-b border-white/5 pb-4">
                 {navigation.map((nav) => (
                   <button 
@@ -116,20 +109,17 @@ export default function ShopPage() {
                 ))}
               </div>
 
-              {/* Cấp 2: Children (Chỉ hiện khi có con) */}
               <AnimatePresence mode="wait">
                 {activeParent !== "all" && (
                   <motion.div 
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
+                    initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
                     className="flex flex-wrap items-center gap-6"
                   >
                     <button 
                       onClick={() => setActiveChild("all")}
                       className={`text-[0.6rem] tracking-[0.2em] uppercase px-3 py-1 rounded-full border transition-all ${activeChild === "all" ? 'bg-white/10 border-white/20 text-white' : 'border-transparent text-white/40'}`}
                     >
-                      Xem tất cả {navigation.find(n => n.id === activeParent)?.label}
+                      Tất cả {navigation.find(n => n.id === activeParent)?.label}
                     </button>
                     {navigation.find(n => n.id === activeParent)?.children.map((child) => (
                       <button 
@@ -145,24 +135,22 @@ export default function ShopPage() {
               </AnimatePresence>
             </div>
 
-            {/* BỘ LỌC GIÁ & SẮP XẾP */}
             <div className="flex items-center gap-12 w-full lg:w-auto">
-              {/* Thanh trượt giá 200tr */}
               <div className="flex flex-col gap-3 min-w-[280px]">
                 <div className="flex justify-between items-center text-[0.55rem] uppercase tracking-widest text-white/30">
                   <span>Mức giá tối đa</span>
                   <span className="text-rose-accent font-bold">{maxPrice.toLocaleString()} VNĐ</span>
                 </div>
+                {/* 2. CẬP NHẬT THUỘC TÍNH MAX VÀ STYLE GRADIENT */}
                 <input 
-                  type="range" min="500000" max="200000000" step="1000000"
+                  type="range" min="500000" max="50000000" step="500000"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(parseInt(e.target.value))}
                   className="w-full h-[2px] bg-white/10 appearance-none cursor-pointer accent-rose-accent"
-                  style={{ background: `linear-gradient(to right, #A4717A 0%, #A4717A ${(maxPrice/200000000)*100}%, #1a1a1a ${(maxPrice/200000000)*100}%, #1a1a1a 100%)` }}
+                  style={{ background: `linear-gradient(to right, #A4717A 0%, #A4717A ${(maxPrice/50000000)*100}%, #1a1a1a ${(maxPrice/50000000)*100}%, #1a1a1a 100%)` }}
                 />
               </div>
 
-              {/* SẮP XẾP */}
               <div className="relative group">
                 <button className="flex items-center gap-4 bg-white text-black px-8 py-3 text-[0.65rem] tracking-[0.4em] uppercase font-bold hover:bg-rose-accent hover:text-white transition-all">
                   <span>{sortOptions.find(o => o.value === sortBy)?.label || "Sắp xếp"}</span>
@@ -179,11 +167,9 @@ export default function ShopPage() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
-        {/* LƯỚI SẢN PHẨM */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
           <AnimatePresence mode="popLayout">
             {filteredAndSortedProducts.map((product) => (
@@ -214,11 +200,20 @@ export default function ShopPage() {
             ))}
           </AnimatePresence>
         </div>
-      </div>
 
       <AnimatePresence>
         {selectedProduct && <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />}
       </AnimatePresence>
+    </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <main className="min-h-screen bg-noir pt-32 pb-20 px-6 md:px-12 relative">
+      <Suspense fallback={<div className="text-white text-center pt-20">Đang tải...</div>}>
+        <ShopContent />
+      </Suspense>
     </main>
   );
 }

@@ -158,7 +158,7 @@ export default function ProductModal({ product, onClose }: any) {
                 disabled={isFlying}
                 className="w-full border border-white text-white py-5 text-[0.7rem] tracking-[0.4em] uppercase hover:bg-white hover:text-black transition-all font-medium"
               >
-                {isFlying ? "ĐANG THÊM..." : "Thêm vào túi đồ"}
+                {isFlying ? "ĐANG THÊM..." : "Thêm vào giỏ hàng"}
               </button>
 
               <button 
@@ -205,7 +205,7 @@ export default function ProductModal({ product, onClose }: any) {
                 Đóng <X size={18} />
               </button>
               <div className="relative aspect-video w-full">
-                <Image src="https://i.postimg.cc/5jczwXY6/huongdanchonsize.png" alt="Size Guide" fill className="object-contain p-4" />
+                <Image src="https://i.postimg.cc/K8bZrcq2/huongdanchonsize.jpg" alt="Size Guide" fill className="object-contain p-4" />
               </div>
             </motion.div>
           </motion.div>
