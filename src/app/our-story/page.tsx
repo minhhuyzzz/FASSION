@@ -36,7 +36,7 @@ const journalData = [
   {
     id: 4,
     category: "Sự kiện",
-    title: "SERANA tại Tuần lễ Thời trang Xuân Hè 2026",
+    title: "SERENA tại Tuần lễ Thời trang Xuân Hè 2026",
     excerpt: "Nhìn lại những khoảnh khắc rực rỡ nhất của bộ sưu tập 'Lửa & Lụa' trên sàn diễn quốc tế.",
     image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1887&auto=format&fit=crop",
     date: "10.03.2026",
@@ -67,7 +67,7 @@ export default function JournalPage() {
                 Ấn bản số 01 / 2026
               </span>
               <h1 className="font-playfair text-6xl md:text-8xl italic leading-none text-black">
-                SERANA <span className="text-black/10 not-italic">Journal</span>
+                SERENA <span className="text-black/10 not-italic">Journal</span>
               </h1>
             </motion.div>
             
@@ -173,7 +173,7 @@ export default function JournalPage() {
               initial={{ opacity: 0, y: 20 }}
             >
               <h2 className="font-playfair text-4xl italic text-white mb-6">Theo dấu những câu chuyện mới nhất</h2>
-              <p className="text-[0.7rem] uppercase tracking-[0.4em] text-white/40 mb-10">Đăng ký để không bỏ lỡ cảm hứng từ SERANA Atelier</p>
+              <p className="text-[0.7rem] uppercase tracking-[0.4em] text-white/40 mb-10">Đăng ký để không bỏ lỡ cảm hứng từ SERENA Atelier</p>
               <form className="max-w-md mx-auto flex border-b border-white/20 pb-2 focus-within:border-[#A4717A] transition-all">
                   <input 
                     type="email" 

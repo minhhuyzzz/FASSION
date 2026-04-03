@@ -10,7 +10,7 @@ const pressReleases = [
     id: 1,
     source: "VOGUE VIETNAM",
     date: "01.2026",
-    title: "SERANA: Định nghĩa lại sự xa xỉ thầm lặng tại Sài Gòn",
+    title: "SEREsNA: Định nghĩa lại sự xa xỉ thầm lặng tại Sài Gòn",
     size: "large"
   },
   {
@@ -49,7 +49,7 @@ export default function PressPage() {
         >
           {[...Array(10)].map((_, i) => (
             <span key={i} className="text-white text-[10px] uppercase tracking-[0.5em] mx-10 font-bold">
-              SERANA MEDIA CENTER — LATEST UPDATES — 2026 COLLECTION OUT NOW — 
+              SERENA MEDIA CENTER — LATEST UPDATES — 2026 COLLECTION OUT NOW — 
             </span>
           ))}
         </motion.div>
@@ -70,13 +70,13 @@ export default function PressPage() {
                 Tin tức & <br /> Truyền thông
               </h1>
               <p className="text-[0.7rem] uppercase tracking-[0.3em] text-black/50 leading-relaxed max-w-xs">
-                Kho lưu trữ các ấn bản báo chí, thông cáo và tư liệu hình ảnh chính thức từ thương hiệu SERANA.
+                Kho lưu trữ các ấn bản báo chí, thông cáo và tư liệu hình ảnh chính thức từ thương hiệu SERENA.
               </p>
             </motion.div>
 
             <div className="space-y-6 pt-12 border-t border-black/10">
               <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-black">Liên hệ báo chí</h3>
-              <p className="text-sm italic font-light">press@serana.vn</p>
+              <p className="text-sm italic font-light">press@serena.vn</p>
               <p className="text-sm italic font-light">+84 905 111 222</p>
             </div>
 

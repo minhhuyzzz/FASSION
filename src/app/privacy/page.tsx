@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
             Quyền riêng tư <br /> & Bảo mật
           </h1>
           <p className="font-inter text-[0.8rem] leading-[2.2] text-black/60 uppercase tracking-[0.3em] font-medium italic">
-            Tại SERANA, sự riêng tư của quý cô được trân trọng như cách chúng tôi nâng niu từng thớ vải. Đây là cam kết bảo mật tuyệt đối về dữ liệu cá nhân của quý cô.
+            Tại SERENA, sự riêng tư của quý cô được trân trọng như cách chúng tôi nâng niu từng thớ vải. Đây là cam kết bảo mật tuyệt đối về dữ liệu cá nhân của quý cô.
           </p>
         </motion.div>
       </section>
@@ -93,7 +93,7 @@ export default function PrivacyPolicyPage() {
               <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-3xl italic text-black">01. Lời mở đầu</h2>
               <div className="font-inter text-[0.9rem] leading-[2.5] text-black/70 font-light text-justify">
                 <p>
-                  Chính sách bảo mật này mô tả cách SERANA Atelier thu thập, sử dụng và chia sẻ thông tin cá nhân của Quý khách khi Quý khách truy cập hoặc mua hàng từ serana.vn. Chúng tôi hiểu rằng thông tin cá nhân là tài sản quý giá và cam kết bảo vệ thông tin đó bằng những công nghệ tiên tiến nhất.
+                  Chính sách bảo mật này mô tả cách SERENA Atelier thu thập, sử dụng và chia sẻ thông tin cá nhân của Quý khách khi Quý khách truy cập hoặc mua hàng từ serena.vn. Chúng tôi hiểu rằng thông tin cá nhân là tài sản quý giá và cam kết bảo vệ thông tin đó bằng những công nghệ tiên tiến nhất.
                 </p>
               </div>
             </article>
@@ -142,7 +142,7 @@ export default function PrivacyPolicyPage() {
             <div className="pt-20 border-t border-black/10 text-center space-y-6">
                 <FileText size={24} strokeWidth={1} className="mx-auto text-black/20" />
                 <p className="text-[10px] uppercase tracking-[0.5em] text-black/40">Mọi thắc mắc về quyền riêng tư, vui lòng gửi về:</p>
-                <p className="text-sm italic font-medium text-black">legal@serana.vn</p>
+                <p className="text-sm italic font-medium text-black">legal@serena.vn</p>
             </div>
 
           </div>

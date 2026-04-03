@@ -34,7 +34,7 @@ export default function ReturnsPage() {
     {
       icon: <AlertCircle size={24} strokeWidth={1} />,
       title: "Hàng may đo riêng",
-      detail: "Đối với dòng sản phẩm Couture hoặc thiết kế theo yêu cầu cá nhân (Custom-made), SERANA không áp dụng chính sách hoàn trả. Chúng tôi hỗ trợ chỉnh sửa miễn phí."
+      detail: "Đối với dòng sản phẩm Couture hoặc thiết kế theo yêu cầu cá nhân (Custom-made), SERENA không áp dụng chính sách hoàn trả. Chúng tôi hỗ trợ chỉnh sửa miễn phí."
     }
   ];
 
@@ -49,7 +49,7 @@ export default function ReturnsPage() {
             Chính sách <br /> Đổi trả & Bảo hành
           </h1>
           <p className="font-inter text-[0.85rem] leading-relaxed text-black/70 uppercase tracking-[0.3em] max-w-2xl mx-auto font-medium italic">
-            Sự hài lòng của Quý cô là thước đo cao nhất cho giá trị của SERANA. Chúng tôi cam kết đồng hành cùng Quý cô trong mọi trải nghiệm mua sắm.
+            Sự hài lòng của Quý cô là thước đo cao nhất cho giá trị của SERENA. Chúng tôi cam kết đồng hành cùng Quý cô trong mọi trải nghiệm mua sắm.
           </p>
         </motion.div>
       </section>
@@ -86,9 +86,9 @@ export default function ReturnsPage() {
         <div className="space-y-12">
           {[
             { step: "01", title: "Liên hệ Concierge", desc: "Quý khách vui lòng nhắn tin qua Fanpage hoặc gọi Hotline đặc quyền để thông báo tình trạng sản phẩm." },
-            { step: "02", title: "Kiểm định trực tuyến", desc: "SERANA sẽ tiếp nhận hình ảnh và phản hồi xác nhận trong vòng 24 giờ làm việc." },
+            { step: "02", title: "Kiểm định trực tuyến", desc: "SERENA sẽ tiếp nhận hình ảnh và phản hồi xác nhận trong vòng 24 giờ làm việc." },
             { step: "03", title: "Đóng gói & Gửi hàng", desc: "Quý khách đóng gói sản phẩm cẩn thận (bao gồm đầy đủ quà tặng đi kèm) và gửi về Atelier Gò Vấp." },
-            { step: "04", title: "Nhận sản phẩm mới", desc: "Sau khi kiểm tra trực tiếp, SERANA sẽ gửi sản phẩm thay thế hoặc hoàn tất bảo hành cho Quý khách." }
+            { step: "04", title: "Nhận sản phẩm mới", desc: "Sau khi kiểm tra trực tiếp, SERENA sẽ gửi sản phẩm thay thế hoặc hoàn tất bảo hành cho Quý khách." }
           ].map((item, i) => (
             <motion.div 
               key={i} 

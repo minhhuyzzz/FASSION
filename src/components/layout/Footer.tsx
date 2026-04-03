@@ -7,10 +7,11 @@ import Link from "next/link";
 // Cấu trúc dữ liệu có gắn link cụ thể cho từng trang
 const footerLinks = {
   "Thông tin": [
-    { label: "Bộ sưu tập", href: "/shop" },
+    { label: "Thời trang", href: "/shop" },
+    { label: "Phụ Kiện", href: "/shop" },
     { label: "Chính sách bảo mật", href: "/privacy" },
     { label: "Thông tin thanh toán", href: "/payment" },
-    { label: "Phụ Kiện", href: "/shop" },
+    
   ],
   "Khám Phá": [
     { label: "Câu Chuyện Thương Hiệu", href: "/our-story" },
@@ -20,7 +21,7 @@ const footerLinks = {
   ],
   "Dịch Vụ": [
     { label: "Liên Hệ", href: "/contact" },
-    { label: "Đặt Lịch Tư Vấn", href: "/booking" }, // Liên kết đến trang bạn vừa tạo
+    { label: "Đặt Lịch Tư Vấn", href: "/booking" }, 
     { label: "Hướng Dẫn Chọn Size", href: "/size-guide" },
     { label: "Chính Sách Đổi Trả", href: "/returns" },
   ],
@@ -47,7 +48,7 @@ export default function Footer() {
                 style={{ fontFamily: 'var(--font-playfair)' }} 
                 className="text-4xl tracking-[0.5em] text-white transition-colors group-hover:text-[var(--color-rose-primary)] uppercase"
               >
-                SERANA
+                SERENA
               </h2>
             </Link>
             <p className="font-inter text-[0.7rem] leading-[2.2] text-white/50 max-w-sm uppercase tracking-[0.2em] font-light">
@@ -98,7 +99,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="font-inter text-[0.6rem] tracking-[0.3em] uppercase text-white/20">
-            © 2026 SERANA ATELIER. BẢN QUYỀN THUỘC VỀ THƯƠNG HIỆU.
+            © 2026 SERENA ATELIER. BẢN QUYỀN THUỘC VỀ THƯƠNG HIỆU.
           </p>
           
           <div className="flex items-center gap-10">

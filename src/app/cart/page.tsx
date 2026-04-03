@@ -63,7 +63,7 @@ export default function CartPage() {
                     </div>
                     
                     <p className="text-white/20 text-[0.55rem] uppercase tracking-[0.2em] pt-2 italic">
-                      Chế tác thủ công bởi SERANA
+                      Phân phối độc quyền bởi SERENA
                     </p>
                   </div>
 

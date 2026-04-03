@@ -51,7 +51,7 @@ export default function Hero() {
           playsInline
           className="h-full w-full object-cover"
         >
-          <source src="videos/banner.mp4" type="video/mp4" />
+          <source src="videos/banner1.mp4" type="video/mp4" />
         </video>
         {/* Overlay mờ dần ở phía dưới để chữ và nút rõ hơn */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />

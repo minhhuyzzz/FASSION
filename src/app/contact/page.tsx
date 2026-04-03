@@ -66,7 +66,7 @@ export default function ContactPage() {
               </span>
               <h1 className="font-playfair text-6xl md:text-8xl italic leading-[0.9] tracking-tighter text-black">
                 Tâm tình cùng <br /> 
-                <span className="text-[#A4717A] not-italic drop-shadow-sm">SERANA</span>
+                <span className="text-[#A4717A] not-italic drop-shadow-sm">SERENA</span>
               </h1>
             </motion.div>
             <motion.div 
@@ -181,7 +181,7 @@ export default function ContactPage() {
 
                     <div className="relative group">
                       <label className="text-[0.55rem] uppercase tracking-[0.4em] text-black/40 mb-2 block font-bold group-focus-within:text-[#A4717A] transition-colors">Địa chỉ Email</label>
-                      <input name="email" type="email" required className="w-full bg-transparent border-b border-black/10 py-3 outline-none focus:border-[#A4717A] transition-all text-sm font-medium text-black" placeholder="email@serana.vn" />
+                      <input name="email" type="email" required className="w-full bg-transparent border-b border-black/10 py-3 outline-none focus:border-[#A4717A] transition-all text-sm font-medium text-black" placeholder="email@serena.vn" />
                     </div>
 
                     <div className="relative group">
@@ -233,7 +233,7 @@ export default function ContactPage() {
             <div className="lg:col-span-8">
               <div className="relative aspect-[16/7] md:aspect-[21/9] rounded-[3rem] overflow-hidden border border-black/5 shadow-luxury transition-all duration-500 hover:shadow-2xl">
                 <iframe
-                  title="Vị trí SERANA"
+                  title="Vị trí SERENA"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.925114705307!2d106.678000!3d10.816000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ4JzU3LjYiTiAxMDbCsDQwJzQwLjgiRQ!5e0!3m2!1svi!2svn!4v1700000000000!5m2!1svi!2svn"
                   width="100%"
                   height="100%"

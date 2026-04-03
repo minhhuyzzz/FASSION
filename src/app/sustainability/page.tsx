@@ -29,7 +29,7 @@ export default function SustainabilityPage() {
             Thời gian <br /> Xanh
           </h1>
           <p className="font-inter text-[0.8rem] uppercase tracking-[0.4em] text-black/60 max-w-xl mx-auto leading-loose italic font-medium">
-            Tại SERANA, chúng tôi không đo lường sự thành công bằng doanh số, mà bằng những dấu chân nhẹ nhàng chúng tôi để lại trên hành tinh này.
+            Tại SERENA, chúng tôi không đo lường sự thành công bằng doanh số, mà bằng những dấu chân nhẹ nhàng chúng tôi để lại trên hành tinh này.
           </p>
           <motion.div 
             animate={{ y: [0, 10, 0] }} 
@@ -69,7 +69,7 @@ export default function SustainabilityPage() {
             <Leaf size={28} strokeWidth={1} className="text-[var(--color-rose-accent)]" />
             <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-4xl italic text-black">Thời trang "Chậm"</h2>
             <p className="font-inter text-sm text-black/70 leading-[2.2] font-medium text-justify uppercase tracking-widest italic">
-              Chúng tôi từ chối sản xuất đại trà. Mỗi thiết kế của SERANA được ra đời để tồn tại qua nhiều thập kỷ, không bị cuốn trôi bởi những vòng lặp xu hướng ngắn hạn. Mua ít hơn, chọn lọc kỹ hơn và giữ gìn lâu hơn.
+              Chúng tôi từ chối sản xuất đại trà. Mỗi thiết kế của SERENA được ra đời để tồn tại qua nhiều thập kỷ, không bị cuốn trôi bởi những vòng lặp xu hướng ngắn hạn. Mua ít hơn, chọn lọc kỹ hơn và giữ gìn lâu hơn.
             </p>
           </motion.div>
         </div>
@@ -123,7 +123,7 @@ export default function SustainabilityPage() {
             </h2>
             <div className="pt-10 max-w-lg mx-auto">
                 <p className="text-[0.75rem] leading-[2.5] text-white/40 uppercase tracking-widest font-light italic">
-                    Hộp đựng và túi bọc của SERANA được làm từ giấy tái chế và vải vụn, được thiết kế để Quý cô có thể tái sử dụng trong cuộc sống hàng ngày.
+                    Hộp đựng và túi bọc của SERENA được làm từ giấy tái chế và vải vụn, được thiết kế để Quý cô có thể tái sử dụng trong cuộc sống hàng ngày.
                 </p>
             </div>
           </motion.div>
@@ -135,7 +135,7 @@ export default function SustainabilityPage() {
         <motion.div {...scrollReveal} className="space-y-10">
           <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-5xl italic text-black">Hành trình này là mãi mãi</h2>
           <p className="font-inter text-sm text-black/60 uppercase tracking-[0.3em] max-w-xl mx-auto leading-loose font-medium">
-            Chúng tôi vẫn đang học hỏi và cải thiện mỗi ngày để SERANA trở nên xanh hơn, tử tế hơn.
+            Chúng tôi vẫn đang học hỏi và cải thiện mỗi ngày để SERENA trở nên xanh hơn, tử tế hơn.
           </p>
           <div className="pt-10 flex justify-center gap-12">
              <Link href="/about" className="text-[10px] uppercase tracking-widest border-b border-black pb-1 hover:text-[var(--color-rose-accent)] transition-all font-bold">Về chúng tôi</Link>

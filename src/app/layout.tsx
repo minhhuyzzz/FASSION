@@ -28,7 +28,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SERANA — Haute Couture",
+  title: "SERENA — Haute Couture",
   description: "Nơi nghệ thuật tôn vinh vóc dáng và bản sắc riêng biệt.",
 };
 

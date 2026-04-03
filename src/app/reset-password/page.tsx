@@ -32,7 +32,7 @@ export default function ResetPasswordPage() {
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-[400px]">
         <h1 className="font-playfair text-4xl text-center mb-4">Mật khẩu mới</h1>
         <p className="font-cormorant italic text-center text-ivory/50 mb-10">
-          Vui lòng thiết lập mật khẩu mới cho tài khoản SERANA của bạn.
+          Vui lòng thiết lập mật khẩu mới cho tài khoản SERENA của bạn.
         </p>
 
         <form onSubmit={handleUpdate} className="space-y-6">

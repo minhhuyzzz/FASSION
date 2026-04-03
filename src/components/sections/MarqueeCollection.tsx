@@ -4,9 +4,10 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { products } from "@/data/products";
 import ProductModal from "@/components/sections/ProductModal";
+import type { Product } from "@/types/product";
 
 export default function MarqueeCollection() {
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   // Nhân đôi mảng để tạo vòng lặp vô tận mượt mà
   const row1 = [...products, ...products, ...products];
@@ -21,11 +22,11 @@ export default function MarqueeCollection() {
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#3d1f24] opacity-25 blur-[120px] rounded-full" />
       </div>
 
-      {/* CHỮ SERANA HIỆU ỨNG GƯƠNG TỐI ƯU */}
+      {/* CHỮ SERENA HIỆU ỨNG GƯƠNG TỐI ƯU */}
       <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
         <div className="relative px-16 py-10 rounded-[3rem] border border-white/5 bg-black/20 backdrop-blur-xl shadow-2xl flex flex-col items-center justify-center">
           <h2 className="font-playfair text-7xl md:text-9xl text-white/90 italic tracking-tighter">
-            SERANA
+            SERENA
           </h2>
           <div className="w-20 h-px bg-rose-accent/40 mt-4 mb-4" />
           <span className="text-[0.6rem] md:text-[0.7rem] tracking-[1.2em] uppercase text-rose-accent font-bold">

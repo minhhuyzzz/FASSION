@@ -80,7 +80,7 @@ export default function BookingPage() {
                 Trải nghiệm <br /> Tư vấn Cá nhân
               </h1>
               <p className="font-inter text-[0.8rem] tracking-widest leading-relaxed text-gray-600 uppercase">
-                Chào mừng bạn đến với không gian riêng tư của SERANA. Mỗi cuộc hẹn là một hành trình tìm kiếm vẻ đẹp độc bản.
+                Chào mừng bạn đến với không gian riêng tư của SERENA. Mỗi cuộc hẹn là một hành trình tìm kiếm vẻ đẹp độc bản.
               </p>
             </div>
           </motion.div>
@@ -100,7 +100,6 @@ export default function BookingPage() {
                   transition={{ duration: 0.5 }}
                 >
                   <div className="mb-12">
-                    <span className="line-decorator uppercase tracking-[0.4em] text-[10px] opacity-60">Private Appointment</span>
                     <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-3xl mt-4 italic">Thông tin cuộc hẹn</h2>
                   </div>
 
@@ -184,7 +183,7 @@ export default function BookingPage() {
                     </div>
 
                     <div className="relative border-b border-gray-200 py-3 focus-within:border-[var(--color-rose-accent)] transition-all">
-                      <label className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-2 block font-inter">Ghi chú cho SERANA</label>
+                      <label className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-2 block font-inter">Ghi chú cho SERENA</label>
                       <div className="flex items-start gap-4">
                         <MessageSquare size={14} className="text-gray-300 mt-1" />
                         <textarea 
@@ -220,7 +219,7 @@ export default function BookingPage() {
                   <CheckCircle2 size={60} className="text-[var(--color-rose-accent)] stroke-[1px]" />
                   <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-4xl italic">Cảm ơn Quý cô</h2>
                   <p className="text-[0.7rem] tracking-[0.2em] uppercase text-gray-500 max-w-xs leading-relaxed">
-                    Yêu cầu của bạn đã được SERANA tiếp nhận. Chúng tôi sẽ liên hệ lại trong vòng 24 giờ tới.
+                    Yêu cầu của bạn đã được SERENA tiếp nhận. Chúng tôi sẽ liên hệ lại trong vòng 24 giờ tới.
                   </p>
                   <button 
                     onClick={() => setIsSuccess(false)}

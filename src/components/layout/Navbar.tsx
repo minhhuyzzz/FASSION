@@ -16,20 +16,21 @@ const navLinks = [
     columns: [
       {
         title: "THỜI TRANG",
-        href: "/shop?cat=thoi-trang",
+        href: "/shop?cat=fashion",
         items: [
-          { label: "ÁO", href: "/shop?cat=thoi-trang&sub=ao" },
-          { label: "QUẦN", href: "/shop?cat=thoi-trang&sub=quan" },
-          { label: "VÁY", href: "/shop?cat=thoi-trang&sub=vay" },
-          { label: "SÉT BỘ", href: "/shop?cat=thoi-trang&sub=set" },
+          { label: "ÁO", href: "/shop?cat=fashion&sub=Áo" },
+          { label: "QUẦN", href: "/shop?cat=fashion&sub=Quần" },
+          { label: "VÁY", href: "/shop?cat=fashion&sub=Váy" },
+          { label: "SET", href: "/shop?cat=fashion&sub=Set" },
         ]
       },
       {
         title: "PHỤ KIỆN",
-        href: "/shop?cat=phu-kien",
+        href: "/shop?cat=accessories",
         items: [
-          { label: "DÂY CHUYỀN", href: "/shop?cat=phu-kien&sub=day-chuyen" },
-          { label: "ĐỒNG HỒ", href: "/shop?cat=phu-kien&sub=dong-ho" }
+          { label: "DÂY CHUYỀN", href: "/shop?cat=accessories&sub=Dây chuyền" },
+          { label: "TÚI XÁCH", href: "/shop?cat=accessories&sub=Túi xách" },
+          { label: "VÒNG TAY", href: "/shop?cat=accessories&sub=Vòng tay" }
         ]
       }
     ],
@@ -39,71 +40,26 @@ const navLinks = [
       href: "/shop"
     } 
   },
+  { label: "Chăm sóc sản phẩm", href: "/product-care", columns: [] },
+  
   { 
-    label: "THỜI TRANG", 
-    href: "/shop?cat=thoi-trang",
+    label: "CẨM NANG THỜI TRANG", 
+    href: "/blog",
     columns: [
-      {
-        title: "ÁO",
-        href: "/shop?cat=Thời trang&sub=Áo",
-        items: [
-          { label: "ÁO SƠ MI COUTURE", href: "/shop?cat=thoi-trang&sub=ao-so-mi" },
-          { label: "ÁO KIỂU SILK", href: "/shop?cat=thoi-trang&sub=ao-kieu" },
-          { label: "ÁO KHOÁC DẠ", href: "/shop?cat=thoi-trang&sub=ao-khoac" }
-        ]
-      },
-      {
-        title: "QUẦN",
-        href: "/shop?cat=thoi-trang&sub=quan",
-        items: [
-          { label: "QUẦN TÂY ỐNG RỘNG", href: "/shop?cat=thoi-trang&sub=quan-tay" },
-          { label: "QUẦN SHORT CAO CẤP", href: "/shop?cat=thoi-trang&sub=quan-short" }
-        ]
-      },
-      {
-        title: "SET",
-        href: "/shop?cat=thoi-trang&sub=set",
-        items: [
-          { label: "SET DẠ PHỐ", href: "/shop?cat=thoi-trang&sub=set-da-pho" },
-          { label: "SET CÔNG SỞ LUXE", href: "/shop?cat=thoi-trang&sub=set-cong-so" }
-        ]
-      },
-      {
-        title: "VÁY",
-        href: "/shop?cat=thoi-trang&sub=vay",
-        items: [
-          { label: "ĐẦM DẠ HỘI", href: "/shop?cat=thoi-trang&sub=dam-da-hoi" },
-          { label: "CHÂN VÁY MIDI", href: "/shop?cat=thoi-trang&sub=chan-vay" },
-          { label: "VÁY LỤA MINI", href: "/shop?cat=thoi-trang&sub=vay-lua" }
-        ]
-      }
+      
     ]
   },
+  { label: "THẾ GIỚI SERENA", href: "/about", columns: [
+
+  ] },
   { 
-    label: "PHỤ KIỆN", 
-    href: "/shop?cat=phu-kien",
+    label: "LIÊN HỆ", 
+    href: "/contact",
     columns: [
-      {
-        title: "DÂY CHUYỀN",
-        href: "/shop?cat=phu-kien&sub=day-chuyen",
-        items: [
-          { label: "VÒNG CỔ NGỌC TRAI", href: "/shop?cat=phu-kien&sub=vong-co" },
-          { label: "DÂY CHUYỀN BẠC TRẮNG", href: "/shop?cat=phu-kien&sub=day-chuyen-bac" }
-        ]
-      },
-      {
-        title: "ĐỒNG HỒ",
-        href: "/shop?cat=phu-kien&sub=dong-ho",
-        items: [
-          { label: "CLASSIC EDITION", href: "/shop?cat=phu-kien&sub=classic" },
-          { label: "JEWELRY WATCH", href: "/shop?cat=phu-kien&sub=watch" }
-        ]
-      }
+      
     ]
   },
-  { label: "CẨM NANG THỜI TRANG", href: "/blog", columns: [] },
-  { label: "THẾ GIỚI SERANA", href: "/about", columns: [] },
-  { label: "LIÊN HỆ", href: "/contact", columns: [] },
+  
 ];
 
 export default function Navbar() {
@@ -114,7 +70,7 @@ export default function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false); // Đã thêm lại biến này
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleSearch = (query: string) => {
     if (!query.trim()) return;
@@ -152,7 +108,7 @@ export default function Navbar() {
           "w-full py-2 bg-black flex justify-center items-center transition-all duration-500 border-b border-white/5",
           isSolid ? "opacity-100" : "md:bg-transparent md:border-none"
         )}>
-          <p className="text-[10px] tracking-[0.3em] text-white uppercase font-bold text-center">
+          <p className="text-[9px] tracking-[0.2em] text-white uppercase font-bold text-center">
             MIỄN PHÍ VẬN CHUYỂN TOÀN QUỐC CHO ĐƠN HÀNG CAO CẤP
           </p>
         </div>
@@ -166,7 +122,7 @@ export default function Navbar() {
           )}
         >
           <Link href="/" className="flex-shrink-0 relative w-32 h-20 md:w-40 md:h-22">
-            <Image src="https://i.postimg.cc/R0zdqBYk/SERENA2.png" alt="SERANA" fill priority className="object-contain brightness-0 invert" />
+            <Image src="https://i.postimg.cc/R0zdqBYk/SERENA2.png" alt="SERENA" fill priority className="object-contain brightness-0 invert" />
           </Link>
 
           <div className="hidden lg:flex items-center gap-10 h-full">
@@ -200,11 +156,9 @@ export default function Navbar() {
               className="cursor-pointer hover:text-rose-accent transition" 
               onClick={() => setIsSearchOpen(true)}
             />
-            {/* ĐÃ THÊM LẠI BIỂU TƯỢNG USER TẠI ĐÂY */}
             <Link href="/login">
               <User size={18} className="cursor-pointer hover:text-rose-accent transition" />
             </Link>
-            
             <Link href="/cart" className="relative p-1">
               <ShoppingBag size={18} />
               {cartCount > 0 && (
@@ -229,7 +183,7 @@ export default function Navbar() {
             >
               <div className="max-w-[1600px] mx-auto grid grid-cols-12 gap-16 font-inter text-white">
                 
-                {/* PHẦN DANH MỤC: Tự động co giãn dựa trên việc có ảnh hay không */}
+                {/* PHẦN DANH MỤC */}
                 <div className={cn("grid gap-12", activeMenu.featured ? "col-span-6 grid-cols-2" : "col-span-12 grid-cols-4")}>
                   {activeMenu.columns.map((col: any, idx: number) => (
                     <div key={idx} className="space-y-10">
@@ -243,7 +197,7 @@ export default function Navbar() {
                           <li key={item.label}>
                             <Link 
                               href={item.href}
-                              className="text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-all uppercase font-medium hover:translate-x-1 inline-block"
+                              className="text-[12px] tracking-[0.15em] text-white/60 hover:text-white transition-all uppercase font-normal hover:translate-x-1 inline-block"
                             >
                               {item.label}
                             </Link>
@@ -254,9 +208,9 @@ export default function Navbar() {
                   ))}
                 </div>
 
-                {/* PHẦN ẢNH FEATURED (CHỈ HIỆN KHI CÓ TRONG DATA) */}
+                {/* PHẦN ẢNH FEATURED - ĐÃ LÀM NGẮN LẠI (380px) */}
                 {activeMenu.featured && (
-                  <div className="col-span-6 relative group overflow-hidden h-[450px]">
+                  <div className="col-span-6 relative group overflow-hidden h-[380px] self-start">
                     <Link href={activeMenu.featured.href} className="block w-full h-full relative">
                       <Image 
                         src={activeMenu.featured.image} 
@@ -278,45 +232,21 @@ export default function Navbar() {
         </AnimatePresence>
       </header>
 
-      {/* SEARCH OVERLAY - Đã đưa vào trong Fragment */}
+      {/* SEARCH OVERLAY */}
       <AnimatePresence>
         {isSearchOpen && (
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
-            className="fixed inset-0 z-[100] bg-black text-white p-6 md:p-12 flex flex-col"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] bg-black text-white p-6 md:p-12 flex flex-col">
             <div className="flex justify-between items-center mb-20">
               <span className="text-[0.6rem] uppercase tracking-[0.5em] text-white/40 italic">Tìm kiếm sản phẩm</span>
-              <button 
-                onClick={() => setIsSearchOpen(false)} 
-                className="group flex items-center gap-4 text-[0.6rem] uppercase tracking-[0.4em] opacity-60 hover:opacity-100 transition-all"
-              >
+              <button onClick={() => setIsSearchOpen(false)} className="group flex items-center gap-4 text-[0.6rem] uppercase tracking-[0.4em] opacity-60 hover:opacity-100 transition-all">
                 Đóng <X size={20} strokeWidth={1} />
               </button>
             </div>
             <div className="max-w-6xl mx-auto w-full">
               <div className="relative border-b border-white/10 py-6 focus-within:border-rose-accent transition-all duration-700">
-                <input 
-                  autoFocus 
-                  type="text" 
-                  value={searchQuery} 
-                  onChange={(e) => setSearchQuery(e.target.value)} 
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch(searchQuery)} 
-                  placeholder="Quý cô đang tìm kiếm điều gì?..." 
-                  className="w-full bg-transparent text-4xl md:text-7xl font-light italic outline-none placeholder:text-white/5" 
-                  style={{ fontFamily: 'var(--font-playfair)' }} 
-                />
+                <input autoFocus type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch(searchQuery)} placeholder="Quý cô đang tìm kiếm điều gì?..." className="w-full bg-transparent text-4xl md:text-7xl font-light italic outline-none placeholder:text-white/5" style={{ fontFamily: 'var(--font-playfair)' }} />
                 <div className="absolute right-0 top-1/2 -translate-y-1/2">
-                  {searchQuery && (
-                    <ArrowRight 
-                      className="text-rose-accent cursor-pointer" 
-                      size={40} 
-                      strokeWidth={1} 
-                      onClick={() => handleSearch(searchQuery)} 
-                    />
-                  )}
+                  {searchQuery && <ArrowRight className="text-rose-accent cursor-pointer" size={40} strokeWidth={1} onClick={() => handleSearch(searchQuery)} />}
                 </div>
               </div>
             </div>

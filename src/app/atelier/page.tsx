@@ -25,7 +25,7 @@ export default function CraftsmanshipPage() {
           </h1>
           <div className="max-w-3xl mx-auto border-t border-black/10 pt-12">
             <p className="font-inter text-[0.85rem] leading-[2.5] text-black/80 uppercase tracking-[0.3em] font-medium italic">
-              Tại SERANA, mỗi bản vẽ không dừng lại ở mặt giấy. Nó là khởi đầu của một hành trình chinh phục những giới hạn của vải vóc và kỹ nghệ may đo tinh xảo nhất.
+              Tại SERENA, mỗi bản vẽ không dừng lại ở mặt giấy. Nó là khởi đầu của một hành trình chinh phục những giới hạn của vải vóc và kỹ nghệ may đo tinh xảo nhất.
             </p>
           </div>
         </motion.div>
@@ -44,7 +44,7 @@ export default function CraftsmanshipPage() {
               <Layers size={30} strokeWidth={1} className="text-[var(--color-rose-accent)]" />
               <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-4xl italic text-black uppercase tracking-tight">Kén chọn lụa là</h2>
               <p className="text-sm font-medium text-black/70 leading-[2.2] text-justify uppercase tracking-widest italic">
-                Chúng tôi du hành qua những làng nghề lụa tơ tằm danh tiếng, chọn ra những thước vải có độ rủ hoàn hảo và cảm giác êm ái tuyệt đối trên làn da quý cô. Chỉ 10% số vải được tuyển chọn đáp ứng được tiêu chuẩn khắt khe của SERANA.
+                Chúng tôi du hành qua những làng nghề lụa tơ tằm danh tiếng, chọn ra những thước vải có độ rủ hoàn hảo và cảm giác êm ái tuyệt đối trên làn da quý cô. Chỉ 10% số vải được tuyển chọn đáp ứng được tiêu chuẩn khắt khe của SERENA.
               </p>
             </div>
             
@@ -121,7 +121,7 @@ export default function CraftsmanshipPage() {
             <span className="text-[10px] uppercase tracking-[0.5em] text-black/30">Cận cảnh</span>
             <h3 style={{ fontFamily: 'var(--font-playfair)' }} className="text-3xl italic text-black leading-tight">Đỉnh cao của <br /> sự kiên nhẫn</h3>
             <p className="text-xs text-black/60 leading-[2.2] uppercase tracking-widest font-medium italic">
-              Một bộ váy cưới tại SERANA có thể cần tới 300 giờ làm việc liên tục của 5 nghệ nhân lành nghề nhất. Chúng tôi không đếm thời gian bằng giờ, chúng tôi đếm bằng sự hoàn hảo.
+              Một bộ váy cưới tại SERENA có thể cần tới 300 giờ làm việc liên tục của 5 nghệ nhân lành nghề nhất. Chúng tôi không đếm thời gian bằng giờ, chúng tôi đếm bằng sự hoàn hảo.
             </p>
           </div>
           <motion.div className="lg:col-span-1 aspect-[2/3] shadow-luxury overflow-hidden" {...fadeIn} transition={{ delay: 0.2 }}>

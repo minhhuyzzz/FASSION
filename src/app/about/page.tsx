@@ -18,13 +18,13 @@ export default function AboutPage() {
       {/* PHẦN 1: HERO - TUYÊN NGÔN THƯƠNG HIỆU */}
       <section className="relative pt-60 pb-32 px-6 md:px-12 text-center overflow-hidden">
         <motion.div {...fadeIn}>
-          <span className="line-decorator uppercase tracking-[0.5em] text-[10px] text-black/60 mb-8 block font-medium">Di sản SERANA</span>
+          <span className="line-decorator uppercase tracking-[0.5em] text-[10px] text-black/60 mb-8 block font-medium">Di sản SERENA</span>
           <h1 style={{ fontFamily: 'var(--font-playfair)' }} className="text-6xl md:text-8xl italic leading-tight text-black mb-12">
             Nơi nghệ thuật <br /> kể chuyện qua <br /> lụa là
           </h1>
           <div className="max-w-2xl mx-auto border-t border-black/10 pt-12">
             <p className="font-inter text-[0.9rem] leading-[2.5] text-black/70 uppercase tracking-widest font-light">
-              SERANA ra đời từ khát khao định nghĩa lại vẻ đẹp của người phụ nữ hiện đại: 
+              SERENA ra đời từ khát khao định nghĩa lại vẻ đẹp của người phụ nữ hiện đại: 
               Không phô trương, nhưng đầy quyền uy. Thanh lịch, nhưng vẫn đậm nét riêng tư.
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function AboutPage() {
               Mỗi tạo tác là một <br /> bản thể độc nhất
             </h2>
             <p className="font-inter text-[0.85rem] text-black/70 leading-[2.2] font-medium text-justify uppercase tracking-wider">
-              Tại SERANA, chúng tôi không chỉ may đo quần áo. Chúng tôi kiến tạo sự tự tin. 
+              Tại SERENA, chúng tôi không chỉ may đo quần áo. Chúng tôi kiến tạo sự tự tin. 
               Mỗi thiết kế từ dòng Couture đến Ready-to-wear đều được chăm chút tỉ mỉ từ khâu chọn vải đến những đường chiết eo tinh tế nhất. 
               Chúng tôi tin rằng, trang phục đẹp nhất là trang phục khiến người mặc cảm thấy mình đang là phiên bản rạng rỡ nhất của chính mình.
             </p>
@@ -106,7 +106,7 @@ export default function AboutPage() {
       <section className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto text-center">
         <motion.div {...fadeIn} className="space-y-10">
           <MapPin size={28} strokeWidth={1} className="mx-auto text-black/20" />
-          <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-5xl italic text-black leading-tight">Ghé thăm Serana</h2>
+          <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-5xl italic text-black leading-tight">Ghé thăm Serena</h2>
           <p className="font-inter text-[0.8rem] text-black/60 uppercase tracking-[0.3em] max-w-xl mx-auto leading-loose font-medium italic">
             Tọa lạc tại Gò Vấp – Không gian của chúng tôi là nơi những ý tưởng hình thành và những giấc mơ lụa là trở thành hiện thực.
           </p>

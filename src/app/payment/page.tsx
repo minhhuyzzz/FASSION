@@ -86,7 +86,7 @@ export default function PaymentPage() {
             </div>
             <div className="pt-10 border-t border-black/5">
                 <p className="text-[10px] text-black/40 uppercase tracking-[0.3em] leading-loose">
-                  * SERANA không lưu giữ thông tin thẻ của quý cô. Mọi giao dịch được mã hóa bởi Stripe.
+                  * SERENA không lưu giữ thông tin thẻ của quý cô. Mọi giao dịch được mã hóa bởi Stripe.
                 </p>
             </div>
           </motion.div>
@@ -146,7 +146,7 @@ export default function PaymentPage() {
             <ShieldCheck size={40} strokeWidth={1} className="text-[var(--color-rose-accent)] relative z-10" />
             <h3 style={{ fontFamily: 'var(--font-playfair)' }} className="text-3xl italic relative z-10">Giao dịch Bảo mật</h3>
             <p className="text-[0.8rem] leading-[2.5] text-white/40 uppercase tracking-[0.3em] font-light italic relative z-10">
-              Mọi thông tin tài chính của quý cô được xử lý qua hệ thống bảo mật SSL đạt tiêu chuẩn quốc tế. SERANA cam kết không bao giờ can thiệp vào quyền truy cập cá nhân của quý cô.
+              Mọi thông tin tài chính của quý cô được xử lý qua hệ thống bảo mật SSL đạt tiêu chuẩn quốc tế. SERENA cam kết không bao giờ can thiệp vào quyền truy cập cá nhân của quý cô.
             </p>
             <div className="pt-6 relative z-10">
                 <button className="flex items-center gap-4 text-[10px] uppercase tracking-[0.4em] font-bold border-b border-white/20 pb-2 hover:text-[var(--color-rose-accent)] hover:border-[var(--color-rose-accent)] transition-all">

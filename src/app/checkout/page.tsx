@@ -81,7 +81,7 @@ export default function CheckoutPage() {
     <main className="min-h-screen bg-[#FDFDFD] pt-24 pb-20 px-6 md:px-12 text-noir font-inter">
       <div className="max-w-[1200px] mx-auto">
         
-        <Link href="/cart" className="inline-flex items-center gap-2 text-[0.6rem] uppercase tracking-widest text-gray-400 hover:text-rose-accent mb-8 transition-colors">
+        <Link href="/cart" className="inline-flex items-center gap-2 text-[0.6rem] uppercase tracking-widest text-gray-500 hover:text-rose-accent mt-6 mb-8 transition-colors">
           <ChevronLeft size={14} /> Quay lại giỏ hàng
         </Link>
 
@@ -102,7 +102,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-[0.6rem] uppercase tracking-[0.2em] text-gray-500">Email</label>
-                  <input type="email" name="email" onChange={handleInputChange} className="w-full border-b border-gray-200 py-3 bg-transparent outline-none focus:border-rose-accent transition-all text-sm" placeholder="customer@serana.vn" />
+                  <input type="email" name="email" onChange={handleInputChange} className="w-full border-b border-gray-200 py-3 bg-transparent outline-none focus:border-rose-accent transition-all text-sm" placeholder="customer@serena.vn" />
                 </div>
                 <div className="md:col-span-2 space-y-2">
                   <label className="text-[0.6rem] uppercase tracking-[0.2em] text-gray-500">Địa chỉ chi tiết</label>
