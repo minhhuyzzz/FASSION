@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer"; 
 import { CartProvider } from "@/context/CartContext"; 
 
+
 // Cấu hình font chữ chuyên nghiệp cho thương hiệu Haute Couture
 const playfair = Playfair_Display({
   subsets: ["latin", "vietnamese"],

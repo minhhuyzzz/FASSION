@@ -8,12 +8,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 1. Các trang tĩnh (Static Routes)
   const staticRoutes = [
-    '/shop',
-    '/blog',
-    '/booking',
-    '/contact',
-    '/cart',
-    '/checkout',
+    '',                   // Trang chủ
+    '/about',             // Về chúng tôi
+    '/atelier',           // Xưởng may
+    '/blog',              // Nhật ký thời trang
+    '/booking',           // Đặt lịch tư vấn
+    '/cart',              // Giỏ hàng
+    '/checkout',          // Thanh toán
+    '/contact',           // Liên hệ
+    '/cookies',           // Chính sách Cookies
+    '/forgot-password',   // Quên mật khẩu
+    '/login',             // Đăng nhập
+    '/our-story',         // Câu chuyện của SERENA
+    '/payment',           // Phương thức thanh toán
+    '/press',             // Báo chí
+    '/privacy',           // Chính sách bảo mật
+    '/product-care',      // Hướng dẫn bảo quản
+    '/reset-password',    // Đặt lại mật khẩu
+    '/returns',           // Chính sách đổi trả
+    '/search',            // Tìm kiếm
+    '/shop',              // Cửa hàng
+    '/signup',            // Đăng ký
+    '/sustainability',    // Thời trang bền vững
+    '/terms',             // Điều khoản dịch vụ
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
