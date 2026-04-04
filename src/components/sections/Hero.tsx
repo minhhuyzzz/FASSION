@@ -80,7 +80,7 @@ export default function Hero() {
       </div>
 
       {/* 2. Bộ điều khiển Video (Góc phải dưới - Giống ảnh mẫu) */}
-      <div className="absolute bottom-12 right-6 md:right-12 z-20 flex items-center gap-4">
+      <div className="absolute bottom-6 right-6 md:right-24 z-20 flex items-center gap-4">
         <div className="flex items-center gap-2 bg-black/20 backdrop-blur-md p-2 rounded-full border border-white/10">
           {/* Nút Play */}
           <button 

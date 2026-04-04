@@ -104,6 +104,7 @@ export default function Footer() {
           
           <div className="flex items-center gap-10">
             {[
+                { label: "Sitemap", href: "https://serena-pink.vercel.app/sitemap.xml" },
                 { label: "Bảo mật", href: "/privacy" },
                 { label: "Điều khoản", href: "/terms" },
                 { label: "Cookies", href: "/cookies" }
