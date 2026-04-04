@@ -84,7 +84,7 @@ export default function BookingPage() {
           >
             <div className="relative aspect-[3/4] overflow-hidden shadow-luxury group">
               <img 
-                src="https://images.unsplash.com/photo-1594552072238-b8a33785b261?q=80&w=1887&auto=format&fit=crop" 
+                src="/images/h2.2.jpg" 
                 alt="Consultation Room"
                 className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
               />

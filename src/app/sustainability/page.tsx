@@ -55,7 +55,7 @@ export default function SustainabilityPage() {
           >
             <div className="aspect-video overflow-hidden shadow-luxury">
                 <img 
-                    src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=1972&auto=format&fit=crop" 
+                    src="/images/v5.1.jpg" 
                     alt="Natural Fabric" 
                     className="w-full h-full object-cover"
                 />

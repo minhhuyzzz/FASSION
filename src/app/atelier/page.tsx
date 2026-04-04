@@ -67,7 +67,7 @@ export default function CraftsmanshipPage() {
             transition={{ duration: 1.5 }}
           >
             <img 
-              src="https://images.unsplash.com/photo-1520004434532-668416a08753?q=80&w=2070&auto=format&fit=crop" 
+              src="/images/sp26.3.jpg" 
               className="w-full h-full object-cover transition-transform duration-[3s] hover:scale-110" 
               alt="Silk Texture" 
             />
@@ -115,7 +115,7 @@ export default function CraftsmanshipPage() {
       <section className="py-40 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="grid lg:grid-cols-3 gap-8">
           <motion.div className="lg:col-span-1 aspect-[2/3] shadow-luxury overflow-hidden" {...fadeIn}>
-            <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=1887&auto=format&fit=crop" className="w-full h-full object-cover" alt="Needlework" />
+            <img src="/images/sp17.1.jpg" className="w-full h-full object-cover" alt="Needlework" />
           </motion.div>
           <div className="lg:col-span-1 space-y-8 flex flex-col justify-center text-center px-10">
             <span className="text-[10px] uppercase tracking-[0.5em] text-black/30">Cận cảnh</span>

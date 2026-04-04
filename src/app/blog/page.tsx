@@ -48,7 +48,7 @@ const journalData: JournalPost[] = [
     title: "XU HƯỚNG THỜI TRANG – TẤM GƯƠNG PHẢN CHIẾU NHỊP SỐNG HIỆN ĐẠI",
     excerpt: "Cách lựa chọn trang sức và túi xách để tôn vinh bộ trang phục thiết kế của bạn.",
     image:
-      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1935&auto=format&fit=crop",
+      "/images/t10.jpg",
     date: "15.03.2026",
     featured: false,
     readMin: 6,

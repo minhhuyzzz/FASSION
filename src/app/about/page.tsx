@@ -41,7 +41,7 @@ export default function AboutPage() {
             transition={{ duration: 1.5 }}
           >
             <img 
-              src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop" 
+              src="/images/sp21.3.jpg" 
               alt="Art of Tailoring" 
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"
             />
