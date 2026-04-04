@@ -8,7 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 1. Các trang tĩnh (Static Routes)
   const staticRoutes = [
-    '',
+    '/shop',
     '/blog',
     '/booking',
     '/contact',
