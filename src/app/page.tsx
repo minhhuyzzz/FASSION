@@ -8,6 +8,7 @@ import Marquee from "@/components/sections/Marquee";
 import Newsletter from "@/components/sections/Newsletter";
 import MarqueeCollection from "@/components/sections/MarqueeCollection";
 import SocialContact from "@/components/ui/SocialContact";
+import AIChat from "@/components/ui/AIChat";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "http://localhost:3000";
@@ -74,6 +75,7 @@ export default function Home() {
         <Benefits />
         <Testimonials />
         <Newsletter />
+        <AIChat />
         <SocialContact />
       </div>
     </>
