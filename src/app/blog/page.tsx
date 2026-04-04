@@ -22,11 +22,11 @@ const journalData: JournalPost[] = [
   {
     id: 1,
     category: "Nghệ thuật",
-    title: "Kỹ thuật xếp nếp (Draping): Linh hồn của Haute Couture",
+    title: "THỜI TRANG NỮ – HÀNH TRÌNH KHẲNG ĐỊNH BẢN THÂN TRONG XÃ HỘI HIỆN ĐẠI",
     excerpt:
       "Khám phá hành trình từ những thước vải lụa thô sơ đến những đường cong hoàn mỹ trên cơ thể người phụ nữ...",
     image:
-      "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1974&auto=format&fit=crop",
+      "/images/b1.jpg",
     date: "25.03.2026",
     featured: true,
     readMin: 8,
@@ -34,7 +34,7 @@ const journalData: JournalPost[] = [
   {
     id: 2,
     category: "Xu hướng",
-    title: "Sắc trắng Blanc: Sự lên ngôi của tối giản thượng lưu",
+    title: "VẺ ĐẸP CỦA NGƯỜI PHỤ NỮ HIỆN ĐẠI – SỰ KẾT HỢP HÀI HÒA GIỮA TRÍ TUỆ, BẢN LĨNH VÀ TÂM HỒN",
     excerpt: "Tại sao sắc trắng luôn là lựa chọn vĩnh cửu của những quý cô định hình phong cách riêng?",
     image:
       "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop",
@@ -45,7 +45,7 @@ const journalData: JournalPost[] = [
   {
     id: 3,
     category: "Phong cách",
-    title: "Phụ kiện Di sản: Điểm nhấn từ những điều nhỏ bé",
+    title: "XU HƯỚNG THỜI TRANG – TẤM GƯƠNG PHẢN CHIẾU NHỊP SỐNG HIỆN ĐẠI",
     excerpt: "Cách lựa chọn trang sức và túi xách để tôn vinh bộ trang phục thiết kế của bạn.",
     image:
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1935&auto=format&fit=crop",
@@ -56,7 +56,7 @@ const journalData: JournalPost[] = [
   {
     id: 4,
     category: "Sự kiện",
-    title: "SERENA tại Tuần lễ Thời trang Xuân Hè 2026",
+    title: "SERENA tại Tuần lễ Thời trang Xuân Hè 2026. GÓC TƯ VẤN MẶC ĐẸP – BÍ QUYẾT XÂY DỰNG PHONG CÁCH TỰ TIN VÀ TINH TẾ",
     excerpt:
       "Nhìn lại những khoảnh khắc rực rỡ nhất của bộ sưu tập 'Lửa & Lụa' trên sàn diễn quốc tế.",
     image:

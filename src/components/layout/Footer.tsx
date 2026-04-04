@@ -7,8 +7,8 @@ import Link from "next/link";
 // Cấu trúc dữ liệu có gắn link cụ thể cho từng trang
 const footerLinks = {
   "Thông tin": [
-    { label: "Thời trang", href: "/shop" },
-    { label: "Phụ Kiện", href: "/shop" },
+    { label: "Thời trang", href: "/shop?cat=fashion" },
+    { label: "Phụ Kiện", href: "/shop?cat=accessories" },
     { label: "Chính sách bảo mật", href: "/privacy" },
     { label: "Thông tin thanh toán", href: "/payment" },
     

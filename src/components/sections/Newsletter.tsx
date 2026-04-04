@@ -2,9 +2,8 @@
 
 import { useState, useId } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react"; // Đã bỏ Video icon ở đây
 import { subscribeNewsletter } from "@/lib/subscribe-newsletter";
 
 export default function Newsletter() {
@@ -33,14 +32,18 @@ export default function Newsletter() {
       className="relative min-h-[520px] md:min-h-[560px] flex items-center overflow-hidden bg-noir"
       aria-labelledby={headingId}
     >
+      {/* THAY THẾ VIDEO ICON BẰNG THẺ VIDEO THẬT */}
       <div className="absolute inset-0" aria-hidden>
-        <Image
-          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=85"
-          alt="banner"
-          fill
-          className="object-cover opacity-35"
-          sizes="100vw"
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-35"
+        >
+          <source src="/videos/banner.mp4" type="video/mp4" />
+          Trình duyệt của bạn không hỗ trợ tag video.
+        </video>
         <div className="absolute inset-0 bg-gradient-to-r from-noir via-noir/88 to-noir/40" />
       </div>
 
@@ -50,7 +53,7 @@ export default function Newsletter() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-inter text-[0.62rem] tracking-[0.42em] text-rose-accent uppercase mb-5"
+            className="font-inter text-[0.62rem] tracking-[0.42em] text-rose-accent uppercase mb-5 font-bold"
           >
             Inner Circle
           </motion.p>
@@ -75,7 +78,7 @@ export default function Newsletter() {
             className="font-inter text-sm md:text-[0.95rem] text-ivory/55 leading-relaxed mb-3 max-w-lg"
           >
             Đăng ký nhận bản tin SERENA: bộ sưu tập giới hạn, lịch hẹn ưu tiên và câu chuyện độc quyền từ
-            atelier — tối ưu cho tìm kiếm &quot;Haute Couture Việt Nam&quot; và dịch vụ may đo cao cấp.
+            atelier — tối ưu cho dịch vụ may đo cao cấp.
           </motion.p>
 
           <motion.p
@@ -99,7 +102,7 @@ export default function Newsletter() {
               <div>
                 <p className="font-playfair text-lg">Chào mừng đến với SERENA.</p>
                 <p className="font-inter text-[0.72rem] text-ivory/45 leading-relaxed mt-1">
-                  Thư xác nhận đã được gửi — vui lòng kiểm tra hộp thư (kể cả mục spam).
+                  Thư xác nhận đã được gửi — vui lòng kiểm tra hộp thư.
                 </p>
               </div>
             </motion.div>
@@ -149,7 +152,7 @@ export default function Newsletter() {
             <Link href="/privacy" className="underline underline-offset-4 hover:text-rose-primary transition-colors">
               Chính sách bảo mật
             </Link>{" "}
-            và xử lý dữ liệu theo mục đích gửi thư chào mừng & bản tin.
+            của SERENA.
           </p>
         </div>
       </div>

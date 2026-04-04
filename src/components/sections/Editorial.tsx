@@ -27,7 +27,7 @@ export default function Editorial() {
           >
             <div className="relative aspect-[4/5] overflow-hidden bg-white rounded-sm ring-1 ring-black/[0.06] shadow-[0_24px_60px_-28px_rgba(0,0,0,0.18)]">
               <Image
-                src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=90"
+                src="/images/bb3.jpg"
                 alt="Trang phục Haute Couture SERENA — chiến dịch Lumière de Paris 2026"
                 fill
                 className="object-cover object-center transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
@@ -104,7 +104,7 @@ function EditorialRow2() {
       >
         <div className="relative aspect-[3/4] overflow-hidden bg-white rounded-sm ring-1 ring-black/[0.06]">
           <Image
-            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=85"
+            src="/images/bb1.jpg"
             alt="Chi tiết thêu và phom dáng trang phục SERENA trên sàn diễn"
             fill
             className="object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.03]"
@@ -137,7 +137,7 @@ function EditorialRow2() {
       >
         <div className="relative aspect-[3/4.5] overflow-hidden bg-white rounded-sm ring-1 ring-black/[0.06]">
           <Image
-            src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=900&q=85"
+            src="/images/bb2.jpg"
             alt="Váy cưới và trang phục dạ hội thiết kế riêng tại atelier SERENA"
             fill
             className="object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.03]"

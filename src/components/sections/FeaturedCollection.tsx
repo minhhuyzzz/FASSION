@@ -2,21 +2,37 @@
 
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Heart } from "lucide-react";
 import ProductModal from "@/components/sections/ProductModal";
 import { products } from "@/data/products";
 import type { Product } from "@/types/product";
 
-/** Bốn sản phẩm đầu từ catalog — đồng bộ với cửa hàng và SEO. */
-const featuredProducts = products.slice(0, 4) as Product[];
+const catalog = products as Product[];
+const DISPLAY_COUNT = 4;
+/** Mỗi lần luân phiên dịch một bước trong catalog (vòng lặp). */
+const ROTATE_MS = 3500;
 
 export default function FeaturedCollection() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const inView = useInView(titleRef, { once: true, margin: "-80px" });
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    if (catalog.length < DISPLAY_COUNT || selectedProduct) return;
+    const id = window.setInterval(() => {
+      setOffset((o) => (o + 1) % catalog.length);
+    }, ROTATE_MS);
+    return () => window.clearInterval(id);
+  }, [catalog.length, selectedProduct]);
+
+  const featuredProducts =
+    catalog.length >= DISPLAY_COUNT
+      ? Array.from({ length: DISPLAY_COUNT }, (_, i) => catalog[(offset + i) % catalog.length])
+      : [];
 
   const headingId = "featured-collection-heading";
 
@@ -85,10 +101,15 @@ export default function FeaturedCollection() {
           </motion.div>
         </div>
 
-        {featuredProducts.length >= 4 ? (
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6">
+        {featuredProducts.length >= DISPLAY_COUNT ? (
+          <div
+            className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6"
+            aria-live="polite"
+            aria-atomic="false"
+          >
             <div className="md:col-span-5">
               <ProductCard
+                key={featuredProducts[0].id}
                 product={featuredProducts[0]}
                 index={0}
                 aspect="aspect-[3/4.4]"
@@ -100,6 +121,7 @@ export default function FeaturedCollection() {
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 md:gap-6">
                 <div className="sm:col-span-7">
                   <ProductCard
+                    key={featuredProducts[1].id}
                     product={featuredProducts[1]}
                     index={1}
                     aspect="aspect-[4/3.2]"
@@ -109,6 +131,7 @@ export default function FeaturedCollection() {
                 </div>
                 <div className="sm:col-span-5">
                   <ProductCard
+                    key={featuredProducts[2].id}
                     product={featuredProducts[2]}
                     index={2}
                     aspect="aspect-[4/3.2]"
@@ -118,6 +141,7 @@ export default function FeaturedCollection() {
                 </div>
               </div>
               <ProductCard
+                key={featuredProducts[3].id}
                 product={featuredProducts[3]}
                 index={3}
                 aspect="aspect-[16/6.5]"
@@ -159,9 +183,9 @@ function ProductCard({ product, index, aspect, wide = false, inView, onOpen }: P
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.75, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
       className="group relative h-full w-full"
     >
       <div className={`relative ${aspect} overflow-hidden bg-neutral-200 h-full w-full rounded-sm`}>

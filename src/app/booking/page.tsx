@@ -2,33 +2,50 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, Clock, User, Phone, MessageSquare, ChevronRight, CheckCircle2 } from "lucide-react";
+import { Calendar, Clock, User, Phone, Mail, MessageSquare, ChevronRight, CheckCircle2 } from "lucide-react"; // Đã thêm icon Mail
 import Navbar from "@/components/layout/Navbar";
-import { supabase } from "@/lib/supabase"; // Đảm bảo bạn đã có file này trong src/lib
+import { supabase } from "@/lib/supabase";
 
 export default function BookingPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Animation variants
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
   };
 
-  // Logic gửi form lên Supabase
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setError(null);
 
     const formData = new FormData(e.currentTarget);
-    
+    const phone = formData.get("phone") as string;
+    const email = formData.get("email") as string; // Lấy dữ liệu email
+
+    // --- LOGIC KIỂM TRA SỐ ĐIỆN THOẠI (GIỮ NGUYÊN) ---
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+      setError("Số điện thoại không hợp lệ. Vui lòng nhập đúng 10 chữ số.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    // --- CHỖ SỬA: LOGIC KIỂM TRA EMAIL (MỚI) ---
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Địa chỉ email không đúng định dạng. Quý cô vui lòng kiểm tra lại.");
+      setIsSubmitting(false);
+      return;
+    }
+
     const bookingData = {
       full_name: formData.get("full_name"),
-      phone: formData.get("phone"),
+      phone: phone,
+      email: email, // Đưa email vào dữ liệu gửi đi
       service: formData.get("service"),
       booking_date: formData.get("booking_date"),
       booking_time: formData.get("booking_time"),
@@ -37,7 +54,7 @@ export default function BookingPage() {
 
     try {
       const { error: supabaseError } = await supabase
-        .from("bookings") // Tên bảng bạn đã tạo trên Supabase
+        .from("bookings")
         .insert([bookingData]);
 
       if (supabaseError) throw supabaseError;
@@ -58,7 +75,6 @@ export default function BookingPage() {
       <section className="pt-32 pb-20 px-6 md:px-12 max-w-[1400px] mx-auto">
         <div className="grid lg:grid-cols-12 gap-16 items-start">
           
-          {/* CỘT TRÁI: HÌNH ẢNH & THÔNG TIN */}
           <motion.div 
             className="lg:col-span-5 space-y-10"
             initial="initial"
@@ -76,7 +92,7 @@ export default function BookingPage() {
             </div>
 
             <div className="space-y-6">
-              <h1 style={{ fontFamily: 'var(--font-playfair)' }} className="text-5xl italic leading-tight">
+              <h1 style={{ fontFamily: 'var(--font-playfair)' }} className="text-5xl italic leading-tight text-noir">
                 Trải nghiệm <br /> Tư vấn Cá nhân
               </h1>
               <p className="font-inter text-[0.8rem] tracking-widest leading-relaxed text-gray-600 uppercase">
@@ -85,7 +101,6 @@ export default function BookingPage() {
             </div>
           </motion.div>
 
-          {/* CỘT PHẢI: FORM ĐẶT LỊCH */}
           <motion.div 
             className="lg:col-span-7 bg-white p-8 md:p-16 shadow-luxury border border-[var(--color-rose-blush)] relative overflow-hidden"
             initial={{ opacity: 0, x: 30 }}
@@ -94,13 +109,9 @@ export default function BookingPage() {
           >
             <AnimatePresence mode="wait">
               {!isSuccess ? (
-                <motion.div
-                  key="form"
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <motion.div key="form" exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5 }}>
                   <div className="mb-12">
-                    <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-3xl mt-4 italic">Thông tin cuộc hẹn</h2>
+                    <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-3xl mt-4 italic text-noir">Thông tin cuộc hẹn</h2>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-10">
@@ -113,7 +124,7 @@ export default function BookingPage() {
                           type="text" 
                           required 
                           placeholder="Nhập họ và tên..."
-                          className="w-full bg-transparent outline-none font-light italic text-sm placeholder:text-gray-300"
+                          className="w-full bg-transparent outline-none font-light italic text-sm placeholder:text-gray-300 text-noir"
                         />
                       </div>
                     </div>
@@ -127,34 +138,52 @@ export default function BookingPage() {
                             name="phone"
                             type="tel" 
                             required 
-                            className="w-full bg-transparent outline-none font-light italic text-sm"
+                            maxLength={10}
+                            onInput={(e) => {
+                              e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
+                            }}
+                            placeholder="0901234567"
+                            className="w-full bg-transparent outline-none font-light italic text-sm text-noir"
                           />
                         </div>
                       </div>
 
+                      {/* TRƯỜNG EMAIL ĐÃ ĐƯỢC THÊM VÀO ĐỂ ÁP DỤNG LOGIC */}
                       <div className="relative border-b border-gray-200 py-3 focus-within:border-[var(--color-rose-accent)] transition-all">
-  <label className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-2 block font-inter">Dịch vụ quan tâm</label>
-  <div className="relative">
-    <select 
-      name="service" 
-      required
-      className="w-full bg-transparent outline-none font-light italic text-sm appearance-none cursor-pointer pr-8"
-    >
-      <option value="" disabled selected>Chọn dịch vụ...</option>
-      <option value="Couture">Couture Độc Bản</option>
-      <option value="Evening Wear">Trang Phục Cao Cấp</option>
-      <option value="Personal Styling">Phong Cách Cá Nhân</option>
-      <option value="Other">Khác</option>
-    </select>
-    {/* Icon mũi tên nhỏ cho select vì chúng ta dùng appearance-none */}
-    <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none opacity-30">
-      <ChevronRight size={12} className="rotate-90" />
-    </div>
-  </div>
-</div>
+                        <label className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-2 block font-inter">Địa chỉ Email</label>
+                        <div className="flex items-center gap-4">
+                          <Mail size={14} className="text-gray-300" />
+                          <input 
+                            name="email"
+                            type="email" 
+                            required 
+                            placeholder="vi-du@gmail.com"
+                            className="w-full bg-transparent outline-none font-light italic text-sm text-noir"
+                          />
+                        </div>
+                      </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-10">
+                      <div className="relative border-b border-gray-200 py-3 focus-within:border-[var(--color-rose-accent)] transition-all md:col-span-2">
+                        <label className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-2 block font-inter">Dịch vụ quan tâm</label>
+                        <div className="relative">
+                          <select 
+                            name="service" 
+                            required
+                            className="w-full bg-transparent outline-none font-light italic text-sm appearance-none cursor-pointer pr-8 text-noir"
+                          >
+                            <option value="" disabled selected>Chọn dịch vụ...</option>
+                            <option value="Couture">Couture Độc Bản</option>
+                            <option value="Evening Wear">Trang Phục Cao Cấp</option>
+                            <option value="Personal Styling">Phong Cách Cá Nhân</option>
+                            <option value="Other">Khác</option>
+                          </select>
+                          <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none opacity-30">
+                            <ChevronRight size={12} className="rotate-90" />
+                          </div>
+                        </div>
+                      </div>
                       <div className="relative border-b border-gray-200 py-3 focus-within:border-[var(--color-rose-accent)] transition-all">
                         <label className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-2 block font-inter">Ngày mong muốn</label>
                         <div className="flex items-center gap-4">
@@ -163,7 +192,7 @@ export default function BookingPage() {
                             name="booking_date"
                             type="date" 
                             required
-                            className="w-full bg-transparent outline-none font-light text-sm cursor-pointer"
+                            className="w-full bg-transparent outline-none font-light text-sm cursor-pointer text-noir"
                           />
                         </div>
                       </div>
@@ -176,7 +205,7 @@ export default function BookingPage() {
                             name="booking_time"
                             type="time" 
                             required
-                            className="w-full bg-transparent outline-none font-light text-sm cursor-pointer"
+                            className="w-full bg-transparent outline-none font-light text-sm cursor-pointer text-noir"
                           />
                         </div>
                       </div>
@@ -190,12 +219,20 @@ export default function BookingPage() {
                           name="notes"
                           rows={2}
                           placeholder="Hãy chia sẻ thêm về mong muốn của bạn..."
-                          className="w-full bg-transparent outline-none font-light italic text-sm resize-none"
+                          className="w-full bg-transparent outline-none font-light italic text-sm resize-none text-noir"
                         />
                       </div>
                     </div>
 
-                    {error && <p className="text-xs text-red-500 italic tracking-wide">{error}</p>}
+                    {error && (
+                      <motion.p 
+                        initial={{ opacity: 0, x: -10 }} 
+                        animate={{ opacity: 1, x: 0 }} 
+                        className="text-[10px] text-red-500 italic tracking-widest font-inter"
+                      >
+                        * {error}
+                      </motion.p>
+                    )}
 
                     <button 
                       type="submit"
@@ -217,7 +254,7 @@ export default function BookingPage() {
                   className="h-[500px] flex flex-col items-center justify-center text-center space-y-6"
                 >
                   <CheckCircle2 size={60} className="text-[var(--color-rose-accent)] stroke-[1px]" />
-                  <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-4xl italic">Cảm ơn Quý cô</h2>
+                  <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-4xl italic text-noir">Cảm ơn Quý cô</h2>
                   <p className="text-[0.7rem] tracking-[0.2em] uppercase text-gray-500 max-w-xs leading-relaxed">
                     Yêu cầu của bạn đã được SERENA tiếp nhận. Chúng tôi sẽ liên hệ lại trong vòng 24 giờ tới.
                   </p>

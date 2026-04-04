@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ShoppingBag, Menu, X, Calendar, User, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -8,6 +8,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/context/CartContext";
+import { products } from "@/data/products";
+import type { Product } from "@/types/product";
+import { searchProducts } from "@/lib/productSearch";
+import ProductModal from "@/components/sections/ProductModal";
 
 const navLinks = [
   { 
@@ -30,12 +34,13 @@ const navLinks = [
         items: [
           { label: "DÂY CHUYỀN", href: "/shop?cat=accessories&sub=Dây chuyền" },
           { label: "TÚI XÁCH", href: "/shop?cat=accessories&sub=Túi xách" },
-          { label: "VÒNG TAY", href: "/shop?cat=accessories&sub=Vòng tay" }
+          { label: "VÒNG TAY", href: "/shop?cat=accessories&sub=Vòng tay" },
+          { label: "Giày", href: "/shop?cat=accessories&sub=Giày" }
         ]
       }
     ],
     featured: {
-      image: "https://images.unsplash.com/photo-1594552072238-b8a33785b261?q=80&w=1887&auto=format&fit=crop",
+      image: "/images/bosuutap.jpg",
       title: "Bộ Sưu Tập Mới 2026",
       href: "/shop"
     } 
@@ -69,14 +74,26 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState<any>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [previewProduct, setPreviewProduct] = useState<Product | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  const quickResults = useMemo(
+    () => searchProducts(products as Product[], searchQuery).slice(0, 6),
+    [searchQuery]
+  );
 
   const handleSearch = (query: string) => {
     if (!query.trim()) return;
     setIsSearchOpen(false);
     setSearchQuery("");
-    router.push(`/search?q=${encodeURIComponent(query.toLowerCase())}`);
+    router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+  };
+
+  const openProductFromSearch = (p: Product) => {
+    setPreviewProduct(p);
+    setIsSearchOpen(false);
+    setSearchQuery("");
   };
 
   useEffect(() => {
@@ -242,15 +259,86 @@ export default function Navbar() {
                 Đóng <X size={20} strokeWidth={1} />
               </button>
             </div>
-            <div className="max-w-6xl mx-auto w-full">
-              <div className="relative border-b border-white/10 py-6 focus-within:border-rose-accent transition-all duration-700">
-                <input autoFocus type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} onKeyDown={(e) => e.key === "Enter" && handleSearch(searchQuery)} placeholder="Quý cô đang tìm kiếm điều gì?..." className="w-full bg-transparent text-4xl md:text-7xl font-light italic outline-none placeholder:text-white/5" style={{ fontFamily: 'var(--font-playfair)' }} />
+            <div className="max-w-6xl mx-auto w-full flex-1 flex flex-col min-h-0">
+              <div className="relative border-b border-white/10 py-6 focus-within:border-rose-accent transition-all duration-700 shrink-0">
+                <input
+                  autoFocus
+                  type="search"
+                  enterKeyHint="search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch(searchQuery)}
+                  placeholder="Quý cô đang tìm kiếm điều gì?..."
+                  className="w-full bg-transparent text-4xl md:text-7xl font-light italic outline-none placeholder:text-white/5"
+                  style={{ fontFamily: "var(--font-playfair)" }}
+                  aria-label="Tìm sản phẩm"
+                  aria-autocomplete="list"
+                  aria-controls="navbar-search-suggestions"
+                />
                 <div className="absolute right-0 top-1/2 -translate-y-1/2">
-                  {searchQuery && <ArrowRight className="text-rose-accent cursor-pointer" size={40} strokeWidth={1} onClick={() => handleSearch(searchQuery)} />}
+                  {searchQuery.trim() ? (
+                    <button
+                      type="button"
+                      onClick={() => handleSearch(searchQuery)}
+                      className="text-rose-accent hover:opacity-80 transition-opacity p-2"
+                      aria-label="Tìm kiếm"
+                    >
+                      <ArrowRight size={40} strokeWidth={1} />
+                    </button>
+                  ) : null}
                 </div>
               </div>
+
+              {searchQuery.trim().length > 0 && (
+                <div
+                  id="navbar-search-suggestions"
+                  className="mt-8 md:mt-12 flex-1 overflow-y-auto min-h-0 border-t border-white/10 pt-8"
+                  role="listbox"
+                  aria-label="Gợi ý sản phẩm"
+                >
+                  {quickResults.length === 0 ? (
+                    <p className="text-white/40 text-sm font-inter tracking-wide">
+                      Không có sản phẩm khớp. Nhấn Enter để xem trang kết quả.
+                    </p>
+                  ) : (
+                    <ul className="space-y-1">
+                      {quickResults.map((p) => (
+                        <li key={p.id} role="option">
+                          <button
+                            type="button"
+                            onClick={() => openProductFromSearch(p)}
+                            className="w-full flex items-center gap-4 p-3 md:p-4 rounded-sm text-left hover:bg-white/[0.06] transition-colors border border-transparent hover:border-white/10"
+                          >
+                            <div className="relative w-16 h-20 md:w-20 md:h-[5.5rem] shrink-0 rounded-sm overflow-hidden bg-white/10">
+                              <Image src={p.images[0]} alt={p.name} fill className="object-cover object-top" sizes="80px" />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-[0.55rem] uppercase tracking-[0.2em] text-rose-accent/90 mb-1">{p.category}</p>
+                              <p className="font-playfair text-lg md:text-xl text-white/95 italic leading-snug line-clamp-2">{p.name}</p>
+                              <p className="text-xs text-white/45 mt-1 tabular-nums">{p.price} VNĐ</p>
+                            </div>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => handleSearch(searchQuery)}
+                    className="mt-8 w-full md:w-auto border border-white/20 text-[0.6rem] uppercase tracking-[0.35em] py-4 px-10 hover:bg-white hover:text-black transition-colors"
+                  >
+                    Xem tất cả kết quả
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {previewProduct && (
+          <ProductModal product={previewProduct} onClose={() => setPreviewProduct(null)} />
         )}
       </AnimatePresence>
     </>

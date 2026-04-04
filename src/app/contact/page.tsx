@@ -17,10 +17,19 @@ export default function ContactPage() {
     
     const formData = new FormData(e.currentTarget);
     const phone = formData.get("phone")?.toString() || "";
+    const email = formData.get("email")?.toString() || "";
 
-    // RÀNG BUỘC LOGIC: Kiểm tra độ dài chuỗi phải đúng 10 ký tự
-    if (phone.length !== 10) {
-      alert("Số điện thoại phải bao gồm đúng 10 chữ số.");
+    // --- LOGIC KIỂM TRA SỐ ĐIỆN THOẠI (10 CHỮ SỐ) ---
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Số điện thoại không hợp lệ. Quý cô vui lòng nhập đúng 10 chữ số.");
+      return;
+    }
+
+    // --- LOGIC KIỂM TRA ĐỊNH DẠNG EMAIL ---
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Địa chỉ email không hợp lệ. Quý cô vui lòng kiểm tra lại.");
       return;
     }
 
@@ -28,7 +37,7 @@ export default function ContactPage() {
 
     const data = {
       name: formData.get("name"),
-      email: formData.get("email"),
+      email: email,
       phone: phone,
       message: formData.get("message"),
     };
@@ -158,18 +167,11 @@ export default function ContactPage() {
                       </div>
                       <div className="relative group">
                         <label className="text-[0.55rem] uppercase tracking-[0.4em] text-black/40 mb-2 block font-bold group-focus-within:text-[#A4717A] transition-colors">Số điện thoại</label>
-                        {/* THÊM RÀNG BUỘC: 
-                            - type="tel": Mở bàn phím số trên mobile.
-                            - maxLength={10}: Chặn nhập quá 10 ký tự.
-                            - pattern: Yêu cầu trình duyệt kiểm tra đúng 10 chữ số.
-                            - onInput: Ngăn chặn nhập các ký tự không phải là số ngay lập tức.
-                        */}
                         <input 
                           name="phone" 
                           type="tel" 
                           required 
                           maxLength={10}
-                          pattern="[0-9]{10}"
                           onInput={(e) => {
                             e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
                           }}
@@ -234,7 +236,7 @@ export default function ContactPage() {
               <div className="relative aspect-[16/7] md:aspect-[21/9] rounded-[3rem] overflow-hidden border border-black/5 shadow-luxury transition-all duration-500 hover:shadow-2xl">
                 <iframe
                   title="Vị trí SERENA"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.925114705307!2d106.678000!3d10.816000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ4JzU3LjYiTiAxMDbCsDQwJzQwLjgiRQ!5e0!3m2!1svi!2svn!4v1700000000000!5m2!1svi!2svn"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.925052733156!2d106.68532457481878!3d10.816666689334468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528e195034537%3A0xc39953ad7d8ee35!2zMTIgTmd1eeG7hW4gVsSDbiBC4bqjbywgUGjGsOG7nW5nIDQsIEfDsiBW4bqlcCwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1710000000000!5m2!1svi!2s"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

@@ -10,7 +10,7 @@ import { ArrowUpDown, ChevronLeft, ChevronRight, Star } from "lucide-react";
 const navigation = [
   { id: "all", label: "Cửa hàng", children: [] },
   { id: "fashion", label: "Thời trang", children: ["Áo", "Quần", "Set", "Váy"] },
-  { id: "accessories", label: "Phụ kiện", children: ["Vòng tay", "Túi xách", "Dây chuyền"] },
+  { id: "accessories", label: "Phụ kiện", children: ["Vòng tay", "Túi xách", "Dây chuyền","Giày"] },
 ];
 
 const sortOptions = [

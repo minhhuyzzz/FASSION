@@ -61,10 +61,10 @@ export default function MarqueeCollection() {
       {/* CSS CUSTOM CHO ANIMATION MƯỢT MÀ */}
       <style jsx>{`
         .animate-scroll-left {
-          animation: scroll-left 40s linear infinite;
+          animation: scroll-left 100s linear infinite;
         }
         .animate-scroll-right {
-          animation: scroll-right 60s linear infinite;
+          animation: scroll-right 120s linear infinite;
         }
         @keyframes scroll-left {
           0% { transform: translateX(0); }
