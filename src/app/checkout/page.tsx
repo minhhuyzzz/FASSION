@@ -119,7 +119,7 @@ export default function CheckoutPage() {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-[0.6rem] uppercase tracking-[0.2em] text-gray-500">Số điện thoại (10 số)</label>
+                  <label className="text-[0.6rem] uppercase tracking-[0.2em] text-gray-500">Số điện thoại</label>
                   <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange} className="w-full border-b border-gray-200 py-3 bg-transparent outline-none focus:border-rose-accent transition-all text-sm" placeholder="09xxxxxxxx" />
                 </div>
 
