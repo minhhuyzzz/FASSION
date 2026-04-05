@@ -10,6 +10,7 @@ import { products } from "@/data/products";
 import type { Product } from "@/types/product";
 import { searchProducts } from "@/lib/productSearch";
 import ProductModal from "@/components/sections/ProductModal";
+import SearchInput from "@/components/ui/SearchInput"; // Import thanh gợi ý mới
 
 const catalog = products as Product[];
 
@@ -64,41 +65,34 @@ function SearchContent() {
           Cửa hàng
         </Link>
 
+        {/* NÂNG CẤP: Thanh tìm kiếm thông minh thay thế cho text gợi ý cũ */}
+        <div className="max-w-2xl mx-auto mb-16">
+           <SearchInput initialValue={query} />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto mb-6 h-px w-16 bg-gradient-to-r from-transparent via-rose-accent/80 to-transparent"
         />
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-rose-accent text-[0.65rem] tracking-[0.45em] uppercase mb-4 font-semibold flex items-center justify-center gap-2"
-        >
-          <Search size={14} strokeWidth={1.5} className="opacity-80" aria-hidden />
-          Kết quả tìm kiếm
-        </motion.p>
+        
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.06 }}
           className="font-playfair text-4xl sm:text-5xl md:text-6xl text-ivory italic tracking-tight leading-tight max-w-3xl mx-auto break-words"
         >
-          {query ? (
-            <>
-              &ldquo;{query}&rdquo;
-            </>
-          ) : (
-            <>Nhập từ khóa để tìm</>
-          )}
+          {query ? <>&ldquo;{query}&rdquo;</> : <>Nhập từ khóa tìm kiếm</>}
         </motion.h1>
+        
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.15 }}
           className="mt-5 text-[0.7rem] md:text-xs tracking-[0.25em] uppercase text-white/40 font-medium"
         >
-          {query ? `${results.length} sản phẩm` : "Gợi ý: tên mẫu, loại (váy, túi), hoặc mã sản phẩm"}
+          {query ? `${results.length} sản phẩm tìm thấy` : "Khám phá các thiết kế độc bản từ SERENA"}
         </motion.p>
       </header>
 
@@ -108,9 +102,9 @@ function SearchContent() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center py-20 rounded-2xl border border-dashed border-white/15 bg-white/[0.02] px-6"
         >
-          <p className="font-playfair text-xl md:text-2xl text-ivory/85 italic mb-2">Chưa có từ khóa</p>
+          <p className="font-playfair text-xl md:text-2xl text-ivory/85 italic mb-2">Quý cô đang tìm kiếm điều gì?</p>
           <p className="text-sm text-white/45 max-w-md mx-auto">
-            Dùng biểu tượng kính lúp trên thanh điều hướng để tìm theo tên hoặc danh mục.
+            Hãy nhập tên mẫu, chất liệu lụa hoặc mã sản phẩm vào thanh tìm kiếm phía trên.
           </p>
         </motion.div>
       ) : results.length === 0 ? (
@@ -119,9 +113,9 @@ function SearchContent() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center py-24 md:py-32 px-6 rounded-2xl border border-dashed border-white/15 bg-white/[0.02]"
         >
-          <p className="font-playfair text-2xl md:text-3xl text-ivory/90 italic mb-3">Không tìm thấy sản phẩm</p>
+          <p className="font-playfair text-2xl md:text-3xl text-ivory/90 italic mb-3">Chưa có kết quả phù hợp</p>
           <p className="text-sm text-white/45 max-w-md mx-auto leading-relaxed mb-8">
-            Thử từ khóa khác hoặc xem toàn bộ bộ sưu tập tại cửa hàng.
+            Thượng khách có thể thử tìm với từ khóa khác hoặc tham khảo bộ sưu tập mới nhất tại cửa hàng.
           </p>
           <Link
             href="/shop"
@@ -153,11 +147,11 @@ function SearchContent() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-[1.8s] ease-out group-hover:scale-[1.06]"
                     />
-                    {product.tag ? (
+                    {product.tag && (
                       <span className="absolute top-3 left-3 text-[0.55rem] tracking-[0.2em] uppercase px-2.5 py-1 bg-noir/85 text-ivory/95 backdrop-blur-sm border border-white/10">
                         {product.tag}
                       </span>
-                    ) : null}
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-noir/50 via-transparent to-transparent opacity-60 md:opacity-40 group-hover:opacity-80 transition-opacity duration-500" />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
                       <span className="bg-ivory text-noir px-8 py-3 text-[0.58rem] tracking-[0.45em] uppercase font-bold translate-y-3 group-hover:translate-y-0 transition-transform duration-500 shadow-xl">

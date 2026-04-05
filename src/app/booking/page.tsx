@@ -171,8 +171,7 @@ export default function BookingPage() {
                           <select 
                             name="service" 
                             required
-                            className="w-full bg-transparent outline-none font-light italic text-sm appearance-none cursor-pointer pr-8 text-noir"
-                          >
+                            className="w-full bg-transparent outline-none font-light italic text-sm appearance-none cursor-pointer pr-8 text-noir">
                             <option value="" disabled selected>Chọn dịch vụ...</option>
                             <option value="Couture">Couture Độc Bản</option>
                             <option value="Evening Wear">Trang Phục Cao Cấp</option>

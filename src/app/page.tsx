@@ -10,6 +10,7 @@ import MarqueeCollection from "@/components/sections/MarqueeCollection";
 import SocialContact from "@/components/ui/SocialContact";
 import AIChat from "@/components/ui/AIChat";
 
+
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "http://localhost:3000";
 
