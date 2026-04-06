@@ -138,16 +138,7 @@ export default function ContactPage() {
               </div>
 
               {/* Mạng xã hội */}
-              <div className="pt-12 border-t border-black/5 space-y-6">
-                <h4 className="text-[0.6rem] uppercase tracking-[0.4em] text-black/20 font-bold">Theo dõi câu chuyện</h4>
-                <div className="flex gap-8">
-                  {[Globe].map((Icon, i) => (
-                    <a key={i} href="#" className="text-black/30 hover:text-[#A4717A] transition-colors">
-                      <Icon size={20} strokeWidth={1.5} />
-                    </a>
-                  ))}
-                </div>
-              </div>
+              
             </motion.div>
 
             {/* CỘT PHẢI: LUXURY FORM */}

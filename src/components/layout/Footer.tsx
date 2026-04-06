@@ -14,7 +14,7 @@ const footerLinks = {
     
   ],
   "Khám Phá": [
-    { label: "Câu Chuyện Thương Hiệu", href: "/our-story" },
+    { label: "Cẩm Nang Thời Trang", href: "/our-story" },
     { label: "Nghệ Thuật Thủ Công", href: "/atelier" },
     { label: "Phát Triển Bền Vững", href: "/sustainability" },
     { label: "Truyền Thông", href: "/press" },

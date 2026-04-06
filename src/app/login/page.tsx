@@ -33,7 +33,8 @@ export default function LoginPage() {
       setError("Email hoặc mật khẩu không đúng.");
       setLoading(false);
     } else {
-      router.push("/");
+      // ĐỔI TẠI ĐÂY: Dẫn khách vào trang quản lý đơn hàng
+      router.push("/profile"); 
       router.refresh();
     }
   };

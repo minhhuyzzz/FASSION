@@ -18,7 +18,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
   const [currentImg, setCurrentImg] = useState(0);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   
-  // CHỖ SỬA: Thêm tab để chọn giữa 2 bảng size
   const [sizeGuideTab, setSizeGuideTab] = useState<"clothing" | "shoes">("clothing");
   
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -37,7 +36,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
   const parsedSizes = product.sizes?.flatMap(s => s.split(/[\s,]+/)).filter(Boolean) || [];
   const hasSizes = parsedSizes.length > 0;
 
-  // Tự động nhận diện loại sản phẩm để mở tab size mặc định cho đúng
   useEffect(() => {
     if (showSizeGuide) {
       const isShoes = product.category.toLowerCase().includes("giày") || product.name.toLowerCase().includes("giày");
@@ -80,14 +78,27 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
     setTimeout(() => setIsFlying(false), 800);
   };
 
+  // --- THAY ĐỔI TÍNH NĂNG TẠI ĐÂY ---
   const handleBuyNow = () => {
     if (hasSizes && !selectedSize && parsedSizes[0] !== "Freesize") {
       setSizeHint("Vui lòng chọn kích cỡ trước khi thanh toán.");
       return;
     }
     setSizeHint(null);
-    addToCart({ ...product, selectedSize: selectedSize || "Freesize" });
-    router.push("/cart");
+
+    // Tạo object sản phẩm duy nhất được chọn để thanh toán nhanh
+    const directItem = { 
+      ...product, 
+      selectedSize: selectedSize || "Freesize",
+      quantity: 1 
+    };
+
+    // Lưu vào sessionStorage để trang Checkout có thể nhận diện đây là "Mua ngay" 
+    // thay vì lấy toàn bộ từ CartContext
+    sessionStorage.setItem("serena_direct_checkout", JSON.stringify([directItem]));
+
+    // Điều hướng thẳng tới checkout kèm theo flag để trang đó biết cần lọc dữ liệu
+    router.push("/checkout?mode=direct");
   };
 
   const mainAlt = `${product.name} — ${product.category} — SERENA`;
@@ -293,7 +304,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
         </div>
       </motion.div>
 
-      {/* CHỖ SỬA: MODAL HƯỚNG DẪN SIZE VỚI TAB CHUYỂN ĐỔI */}
       <AnimatePresence>
         {showSizeGuide && (
           <motion.div
@@ -321,7 +331,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 Đóng <X size={18} />
               </button>
 
-              {/* THANH TAB CHUYỂN ĐỔI */}
               <div className="flex justify-center gap-8 mb-6 border-b border-white/5 pb-4">
                 <button
                   onClick={() => setSizeGuideTab("clothing")}
