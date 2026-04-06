@@ -52,9 +52,7 @@ export default function AboutPage() {
               Mỗi tạo tác là một <br /> bản thể độc nhất
             </h2>
             <p className="font-inter text-[0.85rem] text-black/70 leading-[2.2] font-medium text-justify uppercase tracking-wider">
-              Tại SERENA, chúng tôi không chỉ may đo quần áo. Chúng tôi kiến tạo sự tự tin. 
-              Mỗi thiết kế từ dòng Couture đến Ready-to-wear đều được chăm chút tỉ mỉ từ khâu chọn vải đến những đường chiết eo tinh tế nhất. 
-              Chúng tôi tin rằng, trang phục đẹp nhất là trang phục khiến người mặc cảm thấy mình đang là phiên bản rạng rỡ nhất của chính mình.
+            Tại SERENA, chúng tôi không mang đến những bản vẽ trên giấy. Chúng tôi mang đến sự tự tin hiện hữu. Chúng tôi tin rằng, trang phục đẹp nhất là trang phục giúp Quý cô tỏa sáng ngay lập tức và cảm thấy mình là phiên bản kiêu sa nhất ngay khi khoác lên mình.
             </p>
             <div className="pt-8 grid grid-cols-2 gap-10 border-t border-black/10">
                 <div>

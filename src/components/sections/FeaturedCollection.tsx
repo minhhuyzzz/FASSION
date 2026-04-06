@@ -45,13 +45,13 @@ export default function FeaturedCollection() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(164,113,122,0.06),transparent_55%)]" aria-hidden />
 
       <div className="relative z-10 max-w-[1520px] mx-auto px-6 md:px-12">
-        <div ref={titleRef} className="mb-14 md:mb-20 flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+        <div ref={titleRef} className="mb-14 md:mb-22 flex flex-col lg:flex-row lg:items-end justify-between gap-10">
           <div className="max-w-2xl">
             <motion.div
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.8 }}
-              className="flex items-center gap-4 mb-1"
+              className="flex items-center gap-4 mb-6"
             >
               <span className="font-inter text-[0.62rem] tracking-[0.42em] uppercase text-rose-accent font-medium">
                 Bộ sưu tập nổi bật
@@ -66,8 +66,8 @@ export default function FeaturedCollection() {
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
               className="font-playfair font-normal leading-[1.05] tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-noir"
             >
-              Tinh hoa{" "}
-              <span className="italic text-rose-accent">nghệ nhân</span>
+              Dấu ấn{" "}
+              <span className="italic text-rose-accent">SERENA</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
@@ -75,8 +75,7 @@ export default function FeaturedCollection() {
               transition={{ delay: 0.12, duration: 0.6 }}
               className="mt-5 font-inter text-sm md:text-[0.95rem] text-black/50 leading-relaxed max-w-xl"
             >
-              Thiết kế may đo và phụ kiện từ SERENA — chọn lọc trực tiếp từ cửa hàng để bạn xem nhanh
-              những mẫu đang được yêu thích.
+              Những thiết kế thời trang và phụ kiện đang dẫn đầu xu hướng tại SERENA — điểm đến của sự thanh lịch và phong cách thượng lưu dành riêng cho những Thượng khách tinh tế.
             </motion.p>
           </div>
 

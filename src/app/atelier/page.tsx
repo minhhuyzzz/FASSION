@@ -44,7 +44,7 @@ export default function CraftsmanshipPage() {
               <Layers size={30} strokeWidth={1} className="text-[var(--color-rose-accent)]" />
               <h2 style={{ fontFamily: 'var(--font-playfair)' }} className="text-4xl italic text-black uppercase tracking-tight">Kén chọn lụa là</h2>
               <p className="text-sm font-medium text-black/70 leading-[2.2] text-justify uppercase tracking-widest italic">
-                Chúng tôi du hành qua những làng nghề lụa tơ tằm danh tiếng, chọn ra những thước vải có độ rủ hoàn hảo và cảm giác êm ái tuyệt đối trên làn da quý cô. Chỉ 10% số vải được tuyển chọn đáp ứng được tiêu chuẩn khắt khe của SERENA.
+              Tại SERENA, mỗi bộ váy hay Set đồ lụa đều được tuyển chọn dựa trên tiêu chuẩn khắt khe về sự mềm mại và độ bóng mịn tự nhiên của vải. Chúng tôi khắt khe trong việc sàng lọc để đảm bảo rằng mỗi trang phục Quý cô khoác lên mình đều mang lại sự thư thái và đẳng cấp khác biệt.
               </p>
             </div>
             
@@ -121,8 +121,7 @@ export default function CraftsmanshipPage() {
             <span className="text-[10px] uppercase tracking-[0.5em] text-black/30">Cận cảnh</span>
             <h3 style={{ fontFamily: 'var(--font-playfair)' }} className="text-3xl italic text-black leading-tight">Đỉnh cao của <br /> sự kiên nhẫn</h3>
             <p className="text-xs text-black/60 leading-[2.2] uppercase tracking-widest font-medium italic">
-              Một bộ váy cưới tại SERENA có thể cần tới 300 giờ làm việc liên tục của 5 nghệ nhân lành nghề nhất. Chúng tôi không đếm thời gian bằng giờ, chúng tôi đếm bằng sự hoàn hảo.
-            </p>
+            Mỗi thiết kế tại SERENA là kết quả của quá trình tuyển chọn khắt khe từ hàng trăm mẫu mã để đạt đến độ hoàn mỹ cao nhất về phom dáng và chất liệu. Chúng tôi không đo lường bằng số lượng, chúng tôi đo lường bằng giá trị bản sắc mà Quý cô nhận được trong từng sản phẩm.            </p>
           </div>
           <motion.div className="lg:col-span-1 aspect-[2/3] shadow-luxury overflow-hidden" {...fadeIn} transition={{ delay: 0.2 }}>
             <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover" alt="Detailing" />

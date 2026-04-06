@@ -9,7 +9,7 @@ const testimonials = [
   {
     id: 1,
     quote:
-      "Khoác lên mình chiếc váy của SERENA trong ngày trọng đại giống như bước vào một giấc mơ. Từng chi tiết nhỏ đều là một lời tự sự về bản sắc cá nhân tôi. Chưa bao giờ tôi thấy mình rạng rỡ và là chính mình đến thế.",
+      "Không cần quá phô trương, sự xa xỉ của SERENA đến từ sự tinh tế và tối giản trong những thiết kế may sẵn độc bản. Đây chính là điểm dừng chân hoàn hảo cho những ai theo đuổi phong cách 'Quiet Luxury' thanh lịch.",
     author: "Minh Huy",
     title: "HCM 2024",
     avatar: "/images/dd1.jpg",
@@ -17,7 +17,7 @@ const testimonials = [
   {
     id: 2,
     quote:
-      "Kỹ nghệ thủ công ở đây thực sự thuộc về một thế giới khác. Tôi đã mặc thiết kế Celestine đến sự kiện Met Gala và ba tạp chí lớn đã bình chọn đây là trang phục tinh tế nhất buổi tối hôm đó.",
+      "Tôi hoàn toàn bị chinh phục bởi bộ sưu tập phụ kiện và túi xách tinh xảo tại SERENA. Sự tỉ mỉ trong từng chi tiết của chiếc túi da hay độ bắt sáng của dây chuyền thực sự tạo nên một đẳng cấp khác biệt cho diện mạo của tôi.",
     author: "Thư kí Kim",
     title: "Giám đốc sáng tạo",
     avatar: "/images/dd2.jpg",
@@ -25,10 +25,18 @@ const testimonials = [
   {
     id: 3,
     quote:
-      "Tôi đã từng mặc qua rất nhiều nhà mốt Haute Couture danh tiếng, nhưng chỉ tại SERENA, tôi mới cảm nhận được chiếc váy thực sự sinh ra từ trí tưởng tượng của mình. Một sự xa xỉ độc bản đúng nghĩa.",
+      "Sự sang trọng của SERENA không nằm ở những chi tiết phô trương, mà ẩn mình trong chất liệu vải thượng hạng và phom dáng may sẵn hoàn hảo. Một bộ Set và chiếc túi xách từ cửa hàng đã giúp tôi định hình phong cách một cách đầy kiêu hãnh.",
     author: "Mỹ Duyên",
     title: "Nhà sưu tầm thời trang",
     avatar: "/images/dd3.jpg",
+  },
+  {
+    id: 4,
+    quote:
+      "Sự sang trọng của SERENA không nằm ở những chi tiết phô trương, mà ẩn mình trong chất liệu vải thượng hạng và phom dáng may sẵn hoàn hảo. Một bộ Set và chiếc túi xách từ cửa hàng đã giúp tôi định hình phong cách 'Quiet Luxury' một cách đầy kiêu hãnh.",
+    author: "Anh Thư",
+    title: "Fashionista",
+    avatar: "/images/dd4.png",
   },
 ];
 
