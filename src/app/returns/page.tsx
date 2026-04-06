@@ -122,7 +122,7 @@ export default function ReturnsPage() {
                 <Link href="/contact" className="px-14 py-6 bg-white text-black hover:bg-[var(--color-rose-accent)] hover:text-white transition-all duration-700 text-[0.7rem] uppercase tracking-[0.4em] font-bold shadow-2xl">
                     Trò chuyện trực tiếp
                 </Link>
-                <Link href="tel:+84905123456" className="px-14 py-6 border border-white/20 text-white hover:border-white transition-all duration-700 text-[0.7rem] uppercase tracking-[0.4em] font-bold">
+                <Link href="tel:+84777868762" className="px-14 py-6 border border-white/20 text-white hover:border-white transition-all duration-700 text-[0.7rem] uppercase tracking-[0.4em] font-bold">
                     Hotline đặc quyền
                 </Link>
             </div>

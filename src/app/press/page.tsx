@@ -77,23 +77,11 @@ export default function PressPage() {
             <div className="space-y-6 pt-12 border-t border-black/10">
               <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-black">Liên hệ báo chí</h3>
               <p className="text-sm italic font-light">press@serena.vn</p>
-              <p className="text-sm italic font-light">+84 905 111 222</p>
+              <p className="text-sm italic font-light">+84 777868762</p>
             </div>
 
             {/* DOWNLOAD PRESS KIT (CARD KHÁC BIỆT) */}
-            <motion.div 
-              className="p-8 bg-black text-white rounded-none space-y-6 relative overflow-hidden"
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="absolute top-0 right-0 p-4 opacity-20">
-                <Newspaper size={60} />
-              </div>
-              <h4 className="text-[11px] uppercase tracking-[0.4em] font-bold relative z-10">Press Kit 2026</h4>
-              <p className="text-[0.65rem] text-white/40 uppercase tracking-widest relative z-10">Tải trọn bộ tư liệu hình ảnh và thông tin thương hiệu (PDF/JPG)</p>
-              <button className="flex items-center gap-4 text-[10px] uppercase tracking-[0.3em] font-bold border-b border-white/20 pb-2 hover:border-white transition-all relative z-10">
-                Download <Download size={14} />
-              </button>
-            </motion.div>
+            
           </div>
 
           {/* CỘT PHẢI: MASONRY FEED (LƯỚI KHÔNG ĐỀU) */}
