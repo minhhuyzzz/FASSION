@@ -41,7 +41,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-6 pt-20">
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-[450px]">
-        <h1 className="font-playfair text-5xl text-center mb-10 tracking-tight">Login</h1>
+        <h1 className="font-playfair text-5xl text-center mb-10 tracking-tight">Đăng nhập</h1>
         
         {/* Nút Google sang trọng */}
         <button 
@@ -89,17 +89,17 @@ export default function LoginPage() {
               className="w-full bg-transparent border border-white/20 px-4 py-4 focus:border-white outline-none font-inter text-sm"
             />
             <Link href="/forgot-password" className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] uppercase tracking-widest text-white/50 hover:text-white underline font-inter">
-              Forgot password?
+              Quên mật khẩu?
             </Link>
           </div>
           {error && <p className="text-red-500 text-[10px] text-center uppercase tracking-widest">{error}</p>}
           <button type="submit" disabled={loading} className="w-full bg-white text-black py-4 mt-6 font-inter text-xs uppercase tracking-[0.3em] hover:bg-white/90 transition-colors">
-            {loading ? "Verifying..." : "Login"}
+            {loading ? "Xác thực..." : "Đăng nhập"}
           </button>
         </form>
 
         <p className="text-center mt-10 font-inter text-xs text-white/50 tracking-widest">
-          Don't have an account? <Link href="/signup" className="text-white underline ml-1">Sign up</Link>
+          chưa có tài khoản? <Link href="/signup" className="text-white underline ml-1">Đăng kí</Link>
         </p>
       </motion.div>
     </main>

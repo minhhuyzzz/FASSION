@@ -62,7 +62,7 @@ export async function POST(req: Request) {
           <hr style="border: none; border-top: 1px solid #A4717A; opacity: 0.2; margin: 40px 0;" />
 
           <div style="text-align: center; font-size: 11px; opacity: 0.5; font-style: italic;">
-            PARIS &bull; HA NOI &bull; SAIGON
+            PARIS &bull; SAIGON
           </div>
         </div>
         `,
