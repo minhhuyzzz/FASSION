@@ -10,25 +10,25 @@ const testimonials = [
     id: 1,
     quote:
       "Khoác lên mình chiếc váy của SERENA trong ngày trọng đại giống như bước vào một giấc mơ. Từng chi tiết nhỏ đều là một lời tự sự về bản sắc cá nhân tôi. Chưa bao giờ tôi thấy mình rạng rỡ và là chính mình đến thế.",
-    author: "Khánh Linh",
-    title: "Cô dâu, Hà Nội 2024",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
+    author: "Minh Huy",
+    title: "HCM 2024",
+    avatar: "/images/dd1.jpg",
   },
   {
     id: 2,
     quote:
       "Kỹ nghệ thủ công ở đây thực sự thuộc về một thế giới khác. Tôi đã mặc thiết kế Celestine đến sự kiện Met Gala và ba tạp chí lớn đã bình chọn đây là trang phục tinh tế nhất buổi tối hôm đó.",
-    author: "Minh Tú",
+    author: "Thư kí Kim",
     title: "Giám đốc sáng tạo",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80",
+    avatar: "/images/dd2.jpg",
   },
   {
     id: 3,
     quote:
       "Tôi đã từng mặc qua rất nhiều nhà mốt Haute Couture danh tiếng, nhưng chỉ tại SERENA, tôi mới cảm nhận được chiếc váy thực sự sinh ra từ trí tưởng tượng của mình. Một sự xa xỉ độc bản đúng nghĩa.",
-    author: "Thảo Tiên",
+    author: "Mỹ Duyên",
     title: "Nhà sưu tầm thời trang",
-    avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&q=80",
+    avatar: "/images/dd3.jpg",
   },
 ];
 
