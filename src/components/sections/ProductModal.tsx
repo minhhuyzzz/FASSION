@@ -24,6 +24,9 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
   const [isFlying, setIsFlying] = useState(false);
   const [sizeHint, setSizeHint] = useState<string | null>(null);
 
+  // --- THÊM STATE SỐ LƯỢNG ---
+  const [quantity, setQuantity] = useState(1);
+
   const [isZoomed, setIsZoomed] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,11 +77,11 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
     }
     setSizeHint(null);
     setIsFlying(true);
-    addToCart({ ...product, selectedSize: selectedSize || "Freesize" });
+    // GỬI KÈM SỐ LƯỢNG VÀO CART
+    addToCart({ ...product, selectedSize: selectedSize || "Freesize", quantity });
     setTimeout(() => setIsFlying(false), 800);
   };
 
-  // --- THAY ĐỔI TÍNH NĂNG TẠI ĐÂY ---
   const handleBuyNow = () => {
     if (hasSizes && !selectedSize && parsedSizes[0] !== "Freesize") {
       setSizeHint("Vui lòng chọn kích cỡ trước khi thanh toán.");
@@ -86,18 +89,13 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
     }
     setSizeHint(null);
 
-    // Tạo object sản phẩm duy nhất được chọn để thanh toán nhanh
     const directItem = { 
       ...product, 
       selectedSize: selectedSize || "Freesize",
-      quantity: 1 
+      quantity: quantity // SỬ DỤNG SỐ LƯỢNG ĐÃ CHỌN
     };
 
-    // Lưu vào sessionStorage để trang Checkout có thể nhận diện đây là "Mua ngay" 
-    // thay vì lấy toàn bộ từ CartContext
     sessionStorage.setItem("serena_direct_checkout", JSON.stringify([directItem]));
-
-    // Điều hướng thẳng tới checkout kèm theo flag để trang đó biết cần lọc dữ liệu
     router.push("/checkout?mode=direct");
   };
 
@@ -266,6 +264,26 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 )}
               </div>
             )}
+
+            {/* --- BỘ CHỌN SỐ LƯỢNG --- */}
+            <div className="mb-8">
+              <span className="text-[0.65rem] tracking-[0.2em] text-white/40 uppercase font-inter block mb-4">Số lượng</span>
+              <div className="flex items-center w-fit border border-white/15 rounded-sm">
+                <button 
+                  onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                  className="p-3 text-white/60 hover:text-white transition-colors"
+                >
+                  <Minus size={14} />
+                </button>
+                <span className="w-12 text-center text-sm font-inter tabular-nums">{quantity}</span>
+                <button 
+                  onClick={() => setQuantity(q => q + 1)}
+                  className="p-3 text-white/60 hover:text-white transition-colors"
+                >
+                  <Plus size={14} />
+                </button>
+              </div>
+            </div>
 
             <div className="space-y-3">
               <button

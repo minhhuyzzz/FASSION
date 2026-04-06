@@ -6,26 +6,56 @@ const CartContext = createContext<any>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<any[]>([]);
 
-  // Thêm sản phẩm (kèm size) vào giỏ
+  // 1. Thêm sản phẩm (Thông minh: Nếu trùng ID và Size thì tăng số lượng)
   const addToCart = (product: any) => {
-    setCartItems((prev) => [...prev, product]);
+    setCartItems((prev) => {
+      const existingItemIndex = prev.findIndex(
+        (item) => item.id === product.id && item.selectedSize === product.selectedSize
+      );
+
+      if (existingItemIndex !== -1) {
+        // Nếu đã có món này với cùng size, chỉ tăng số lượng
+        const updatedItems = [...prev];
+        const currentQty = updatedItems[existingItemIndex].quantity || 1;
+        const addQty = product.quantity || 1;
+        updatedItems[existingItemIndex].quantity = currentQty + addQty;
+        return updatedItems;
+      }
+
+      // Nếu là món mới hoặc size mới, thêm vào danh sách kèm quantity mặc định
+      return [...prev, { ...product, quantity: product.quantity || 1 }];
+    });
   };
 
-  // Xóa một món khỏi giỏ theo vị trí (index)
+  // 2. CẬP NHẬT SỐ LƯỢNG (Hàm Quý cô đang thiếu)
+  const updateQuantity = (index: number, newQty: number) => {
+    setCartItems((prev) => {
+      const updated = [...prev];
+      if (updated[index]) {
+        updated[index].quantity = newQty;
+      }
+      return updated;
+    });
+  };
+
+  // 3. Xóa một món khỏi giỏ
   const removeFromCart = (index: number) => {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // Xóa toàn bộ giỏ hàng (Dùng sau khi thanh toán thành công)
+  // 4. Xóa toàn bộ giỏ hàng
   const clearCart = () => {
     setCartItems([]);
   };
 
-  // Tính tổng tiền từ chuỗi giá "1.880.000"
-  const cartTotal = cartItems.reduce((total, item) => {
+  // 5. TÍNH TỔNG TIỀN (Sửa lỗi: Giá x Số lượng)
+  const totalAmount = cartItems.reduce((total, item) => {
     const priceNum = parseInt(item.price.replace(/\./g, ""));
-    return total + priceNum;
-  }, 0).toLocaleString("vi-VN");
+    const qty = item.quantity || 1;
+    return total + (priceNum * qty);
+  }, 0);
+
+  const cartTotal = totalAmount.toLocaleString("vi-VN");
 
   return (
     <CartContext.Provider 
@@ -33,8 +63,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
         cartItems, 
         cartCount: cartItems.length, 
         addToCart, 
+        updateQuantity, // Cung cấp hàm này cho CartPage
         removeFromCart, 
-        clearCart, // Đã thêm hàm này
+        clearCart, 
         cartTotal 
       }}
     >

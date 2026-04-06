@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect, useMemo } from "react"; // Thêm useMemo
+import { useState, useEffect, useMemo } from "react";
 import { useCart } from "@/context/CartContext";
 import { supabase } from "@/lib/supabase";
-import { useRouter, useSearchParams } from "next/navigation"; // Thêm useSearchParams
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Truck, Landmark, ChevronLeft } from "lucide-react";
@@ -12,10 +12,14 @@ export default function CheckoutPage() {
   const { cartItems: globalCartItems, cartTotal: globalCartTotal, clearCart } = useCart();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const mode = searchParams.get("mode"); // Lấy mode từ URL
+  const mode = searchParams.get("mode");
 
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+
+  // --- HÀM HỖ TRỢ TÍNH TOÁN GIÁ ---
+  const parsePrice = (priceStr: string) => parseInt(priceStr.replace(/\./g, ""));
+  const formatPrice = (num: number) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
   // --- LOGIC XỬ LÝ CHẾ ĐỘ THANH TOÁN ---
   const [displayItems, setDisplayItems] = useState<any[]>([]);
@@ -31,18 +35,18 @@ export default function CheckoutPage() {
     };
     getUser();
 
-    // Kiểm tra nếu là chế độ "Mua ngay" (direct)
     if (mode === "direct") {
       const directData = sessionStorage.getItem("serena_direct_checkout");
       if (directData) {
         const items = JSON.parse(directData);
         setDisplayItems(items);
-        setDisplayTotal(items[0].price); // Vì mua ngay chỉ có 1 món
+        // Tính tổng: giá * số lượng
+        const total = parsePrice(items[0].price) * (items[0].quantity || 1);
+        setDisplayTotal(formatPrice(total));
       } else {
-        router.push("/cart"); // Nếu không có dữ liệu mua ngay, quay lại giỏ hàng
+        router.push("/cart");
       }
     } else {
-      // Chế độ thanh toán toàn bộ giỏ hàng như cũ
       setDisplayItems(globalCartItems);
       setDisplayTotal(globalCartTotal);
     }
@@ -57,7 +61,6 @@ export default function CheckoutPage() {
     paymentMethod: "COD", 
   });
 
-  // Cập nhật qrUrl sử dụng displayTotal
   const bankInfo = useMemo(() => ({
     bankName: "BIDV",
     accountNumber: "7302168136",
@@ -102,20 +105,21 @@ export default function CheckoutPage() {
 
       if (orderError) throw orderError;
 
+      // Gửi kèm cột quantity vào order_items
       const itemsToInsert = displayItems.map((item: any) => ({
         order_id: order.id,
         product_name: item.name,
         size: item.selectedSize,
         price: item.price,
-        image_url: item.images[0]
+        image_url: item.images[0],
+        quantity: item.quantity || 1 // Thêm số lượng ở đây
       }));
 
       const { error: itemsError } = await supabase.from("order_items").insert(itemsToInsert);
       if (itemsError) throw itemsError;
 
-      alert("Đặt hàng thành công!");
+      alert("Đặt hàng thành công! SERANA sẽ liên hệ xác nhận đơn hàng của quý khách.");
       
-      // Nếu là mua ngay, xóa dữ liệu tạm. Nếu là cả giỏ, xóa giỏ hàng.
       if (mode === "direct") {
         sessionStorage.removeItem("serena_direct_checkout");
       } else {
@@ -233,9 +237,12 @@ export default function CheckoutPage() {
                       <Image src={item.images[0]} alt="product" fill className="object-cover" />
                     </div>
                     <div className="flex-1 text-[0.7rem] space-y-1">
-                      <p className="font-bold uppercase">{item.name}</p>
+                      <p className="font-bold uppercase line-clamp-1">{item.name}</p>
                       <p className="text-gray-400 uppercase">Kích cỡ: {item.selectedSize}</p>
-                      <p className="font-medium pt-1">{item.price} VNĐ</p>
+                      <div className="flex justify-between items-center pt-1">
+                        <p className="text-gray-400">Số lượng: {item.quantity || 1}</p>
+                        <p className="font-medium">{item.price} VNĐ</p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -255,7 +262,7 @@ export default function CheckoutPage() {
               <button 
                 onClick={handleSubmitOrder}
                 disabled={loading}
-                className="w-full bg-noir text-ivory py-6 text-[0.7rem] tracking-[0.4em] uppercase font-bold hover:bg-rose-accent transition-all duration-500 shadow-xl disabled:bg-gray-300"
+                className="w-full bg-noir text-ivory py-6 text-[0.75rem] tracking-[0.4em] uppercase font-bold hover:bg-rose-accent transition-all duration-500 shadow-xl disabled:bg-gray-300"
               >
                 {loading ? "ĐANG GỬI ĐƠN HÀNG..." : "XÁC NHẬN ĐẶT HÀNG"}
               </button>

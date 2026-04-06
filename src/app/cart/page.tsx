@@ -2,10 +2,11 @@
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
-import { Trash2, ArrowLeft, ShoppingBag } from "lucide-react";
+import { Trash2, ArrowLeft, ShoppingBag, Plus, Minus } from "lucide-react";
 
 export default function CartPage() {
-  const { cartItems, removeFromCart, cartTotal } = useCart();
+  // Thêm updateQuantity từ context
+  const { cartItems, removeFromCart, updateQuantity, cartTotal } = useCart();
 
   return (
     <main className="min-h-screen bg-noir pt-32 pb-20 px-6 md:px-12">
@@ -37,7 +38,7 @@ export default function CartPage() {
             {/* DANH SÁCH SẢN PHẨM */}
             <div className="divide-y divide-white/5 border-b border-white/5">
               {cartItems.map((item: any, idx: number) => (
-                <div key={idx} className="py-8 flex gap-6 items-center group">
+                <div key={idx} className="py-8 flex flex-col sm:flex-row gap-6 items-center group">
                   {/* Ảnh sản phẩm */}
                   <div className="relative w-24 h-32 flex-shrink-0 bg-white/5 overflow-hidden">
                     <Image 
@@ -49,32 +50,51 @@ export default function CartPage() {
                   </div>
 
                   {/* Thông tin chi tiết */}
-                  <div className="flex-1 space-y-2">
+                  <div className="flex-1 space-y-4 w-full">
                     <div className="flex justify-between items-start">
-                      <h3 className="font-playfair text-xl text-ivory tracking-wide">{item.name}</h3>
+                      <div>
+                        <h3 className="font-playfair text-xl text-ivory tracking-wide">{item.name}</h3>
+                        <div className="mt-2 inline-flex items-center bg-white/5 border border-white/10 px-3 py-1 rounded-sm">
+                          <span className="text-rose-accent text-[0.55rem] uppercase tracking-widest font-bold">
+                            Size: <span className="text-white ml-1">{item.selectedSize || "N/A"}</span>
+                          </span>
+                        </div>
+                      </div>
                       <p className="text-ivory font-inter text-sm font-medium">{item.price} VNĐ</p>
                     </div>
                     
-                    {/* HIỂN THỊ SIZE NỔI BẬT */}
-                    <div className="inline-flex items-center bg-white/5 border border-white/10 px-3 py-1 rounded-sm">
-                      <span className="text-rose-accent text-[0.55rem] uppercase tracking-widest font-bold">
-                        Size: <span className="text-white ml-1">{item.selectedSize || "N/A"}</span>
-                      </span>
-                    </div>
-                    
-                    <p className="text-white/20 text-[0.55rem] uppercase tracking-[0.2em] pt-2 italic">
-                      Phân phối độc quyền bởi SERENA
-                    </p>
-                  </div>
+                    <div className="flex justify-between items-center">
+                      {/* BỘ ĐIỀU KHIỂN SỐ LƯỢNG */}
+                      <div className="flex items-center border border-white/10 rounded-sm">
+                        <button 
+                          onClick={() => updateQuantity(idx, Math.max(1, item.quantity - 1))}
+                          className="p-2 text-white/40 hover:text-white transition-colors"
+                          aria-label="Giảm số lượng"
+                        >
+                          <Minus size={12} />
+                        </button>
+                        <span className="w-10 text-center font-inter text-xs text-white tabular-nums">
+                          {item.quantity || 1}
+                        </span>
+                        <button 
+                          onClick={() => updateQuantity(idx, (item.quantity || 1) + 1)}
+                          className="p-2 text-white/40 hover:text-white transition-colors"
+                          aria-label="Tăng số lượng"
+                        >
+                          <Plus size={12} />
+                        </button>
+                      </div>
 
-                  {/* Nút xóa */}
-                  <button 
-                    onClick={() => removeFromCart(idx)}
-                    className="ml-4 p-3 text-white/10 hover:text-rose-accent hover:bg-rose-accent/5 transition-all rounded-full"
-                    title="Xóa sản phẩm"
-                  >
-                    <Trash2 size={20} strokeWidth={1.5} />
-                  </button>
+                      {/* Nút xóa */}
+                      <button 
+                        onClick={() => removeFromCart(idx)}
+                        className="p-2 text-white/10 hover:text-rose-accent hover:bg-rose-accent/5 transition-all rounded-full"
+                        title="Xóa sản phẩm"
+                      >
+                        <Trash2 size={18} strokeWidth={1.5} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -98,7 +118,7 @@ export default function CartPage() {
                 </div>
               </div>
 
-              {/* NÚT THANH TOÁN DẪN SANG TRANG CHECKOUT */}
+              {/* NÚT THANH TOÁN */}
               <Link 
                 href="/checkout" 
                 className="w-full max-w-[350px] bg-ivory text-noir py-6 text-[0.75rem] tracking-[0.4em] uppercase font-bold hover:bg-rose-accent hover:text-white transition-all shadow-2xl text-center"
