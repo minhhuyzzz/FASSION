@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo, Suspense } from "react"; // Thêm Suspense
+import { useState, useEffect, useMemo, Suspense } from "react";
 import { useCart } from "@/context/CartContext";
 import { supabase } from "@/lib/supabase";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Truck, Landmark, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
-// 1. Tách phần nội dung chính ra một Component riêng
 function CheckoutContent() {
   const { cartItems: globalCartItems, cartTotal: globalCartTotal, clearCart } = useCart();
   const router = useRouter();
@@ -16,40 +15,48 @@ function CheckoutContent() {
   const mode = searchParams.get("mode");
 
   const [loading, setLoading] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true); // Trạng thái chờ kiểm tra đăng nhập
   const [userId, setUserId] = useState<string | null>(null);
-
-  // --- HÀM HỖ TRỢ TÍNH TOÁN GIÁ ---
-  const parsePrice = (priceStr: string) => parseInt(priceStr.replace(/\./g, ""));
-  const formatPrice = (num: number) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-  // --- LOGIC XỬ LÝ CHẾ ĐỘ THANH TOÁN ---
   const [displayItems, setDisplayItems] = useState<any[]>([]);
   const [displayTotal, setDisplayTotal] = useState<string>("0");
 
+  const parsePrice = (priceStr: string) => parseInt(priceStr.replace(/\./g, ""));
+  const formatPrice = (num: number) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  // --- LOGIC KIỂM TRA ĐĂNG NHẬP & DỮ LIỆU ---
   useEffect(() => {
-    const getUser = async () => {
+    const checkUserAndData = async () => {
+      // 1. Kiểm tra Thượng khách đã đăng nhập chưa
       const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        setUserId(user.id);
-        setFormData(prev => ({ ...prev, email: user.email || "" }));
+      
+      if (!user) {
+        // Nếu chưa đăng nhập, chuyển ngay về trang login
+        router.push("/login?next=/checkout" + (mode ? `?mode=${mode}` : ""));
+        return;
+      }
+
+      // 2. Nếu đã đăng nhập, tiến hành nạp dữ liệu
+      setUserId(user.id);
+      setFormData(prev => ({ ...prev, email: user.email || "" }));
+      setAuthLoading(false);
+
+      if (mode === "direct") {
+        const directData = sessionStorage.getItem("serena_direct_checkout");
+        if (directData) {
+          const items = JSON.parse(directData);
+          setDisplayItems(items);
+          const total = parsePrice(items[0].price) * (items[0].quantity || 1);
+          setDisplayTotal(formatPrice(total));
+        } else {
+          router.push("/cart");
+        }
+      } else {
+        setDisplayItems(globalCartItems);
+        setDisplayTotal(globalCartTotal);
       }
     };
-    getUser();
 
-    if (mode === "direct") {
-      const directData = sessionStorage.getItem("serena_direct_checkout");
-      if (directData) {
-        const items = JSON.parse(directData);
-        setDisplayItems(items);
-        const total = parsePrice(items[0].price) * (items[0].quantity || 1);
-        setDisplayTotal(formatPrice(total));
-      } else {
-        router.push("/cart");
-      }
-    } else {
-      setDisplayItems(globalCartItems);
-      setDisplayTotal(globalCartTotal);
-    }
+    checkUserAndData();
   }, [mode, globalCartItems, globalCartTotal, router]);
 
   const [formData, setFormData] = useState({
@@ -81,11 +88,6 @@ function CheckoutContent() {
   const handleSubmitOrder = async (e: any) => {
     e.preventDefault();
     if (displayItems.length === 0) return alert("Danh sách thanh toán trống!");
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) return alert("Email không hợp lệ.");
-    if (formData.phone.length !== 10) return alert("Số điện thoại phải đủ 10 số.");
-    if (!formData.name || !formData.address) return alert("Vui lòng điền đủ thông tin.");
     
     setLoading(true);
     try {
@@ -111,27 +113,35 @@ function CheckoutContent() {
         size: item.selectedSize,
         price: item.price,
         image_url: item.images[0],
-        quantity: item.quantity || 1 
+        quantity: item.quantity || 1
       }));
 
       const { error: itemsError } = await supabase.from("order_items").insert(itemsToInsert);
       if (itemsError) throw itemsError;
 
-      alert("Đặt hàng thành công! SERANA sẽ liên hệ xác nhận đơn hàng của quý khách.");
-      
+      alert("Đặt hàng thành công!");
       if (mode === "direct") {
         sessionStorage.removeItem("serena_direct_checkout");
       } else {
         clearCart();
       }
-      
-      router.push(userId ? "/profile" : "/"); 
+      router.push("/profile"); 
     } catch (error: any) {
       alert("Lỗi hệ thống: " + error.message);
     } finally {
       setLoading(false);
     }
   };
+
+  // Màn hình chờ kiểm tra quyền truy cập (Tránh hiện giao diện rồi mới redirect)
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-[#FDFDFD] flex flex-col items-center justify-center">
+        <div className="w-8 h-8 border-2 border-rose-accent border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="font-playfair italic text-sm text-noir/60">Đang xác nhận danh tính Quý cô...</p>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-[#FDFDFD] pt-24 pb-20 px-6 md:px-12 text-noir font-inter">
@@ -142,6 +152,7 @@ function CheckoutContent() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           <div className="lg:col-span-7 space-y-12">
+            {/* ... PHẦN FORM GIỮ NGUYÊN NHƯ CŨ ... */}
             <section>
               <h2 className="font-playfair text-3xl mb-8 italic">Thông tin giao hàng</h2>
               <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -187,7 +198,7 @@ function CheckoutContent() {
                     </div>
                   </div>
                 </label>
-
+                
                 <AnimatePresence>
                   {formData.paymentMethod === "Bank" && (
                     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
@@ -273,7 +284,7 @@ function CheckoutContent() {
   );
 }
 
-// 2. Component chính để export - Nơi xử lý Suspense Boundary
+// CHIẾC GIÁP CUỐI CÙNG: Suspense Boundary
 export default function CheckoutPage() {
   return (
     <Suspense fallback={

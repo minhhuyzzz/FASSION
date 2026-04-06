@@ -2,141 +2,136 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Download, Share2, ExternalLink, Newspaper } from "lucide-react";
-import Link from "next/link";
+import { Bookmark, PenTool, Wind } from "lucide-react";
 
-const pressReleases = [
+const newsArchive = [
   {
-    id: 1,
-    source: "VOGUE VIETNAM",
-    date: "01.2026",
-    title: "SEREsNA: Định nghĩa lại sự xa xỉ thầm lặng tại Sài Gòn",
-    size: "large"
+    date: "06.04.2026",
+    category: "Kiến trúc Atelier",
+    title: "Khai mở không gian sáng tạo mới tại Gò Vấp",
+    description: "Một không gian tĩnh tại được thiết kế để những ý tưởng về lụa và đường cắt được thăng hoa. Nơi ánh sáng và bóng đổ hòa quyện trên từng sớ vải.",
   },
   {
-    id: 2,
-    source: "HARPER'S BAZAAR",
-    date: "12.2025",
-    title: "BST 'Lửa & Lụa' và hành trình chinh phục giới mộ điệu",
-    size: "small"
+    date: "25.03.2026",
+    category: "Chế tác thủ công",
+    title: "Kỹ thuật khâu dấu mũi kim trên dòng lụa tơ tằm thượng hạng",
+    description: "Chúng tôi dành 48 giờ tỉ mỉ cho mỗi thiết kế độc bản, đảm bảo sự hoàn mỹ từ những chi tiết nhỏ nhất bên trong lớp lót.",
   },
   {
-    id: 3,
-    source: "ELLE DECOR",
-    date: "11.2025",
-    title: "Bên trong Atelier Gò Vấp - Nơi những giấc mơ bắt đầu",
-    size: "medium"
+    date: "10.03.2026",
+    category: "Bộ sưu tập",
+    title: "Hành trình tìm về sự xa xỉ thầm lặng (Quiet Luxury)",
+    description: "Sự ra đời của bộ sưu tập Xuân-Hè 2026, nơi những gam màu trung tính định nghĩa lại vẻ đẹp kiêu sa của người phụ nữ hiện đại.",
   },
   {
-    id: 4,
-    source: "LOOFFICIEL",
-    date: "10.2025",
-    title: "Nữ quyền và thời trang thiết kế độc bản",
-    size: "small"
+    date: "01.02.2026",
+    category: "Triết lý thương hiệu",
+    title: "Bền vững trong từng sợi vải",
+    description: "Cam kết sử dụng nguồn nguyên liệu tự nhiên, thân thiện với làn da và tôn trọng môi trường trong mọi công đoạn tạo tác.",
   }
 ];
 
 export default function PressPage() {
   return (
-    <main className="min-h-screen bg-[var(--color-ivory)] pb-32">
+    <main className="min-h-screen bg-[#FDFDFD] pb-40 cursor-default font-inter text-noir">
       
-      {/* 1. TICKER TAPE (DÒNG CHỮ CHẠY - ĐIỂM NHẤT KHÁC BIỆT) */}
-      <div className="pt-32 bg-black overflow-hidden py-4 border-y border-white/10">
+      {/* 1. TICKER TAPE (CHỈ CẬP NHẬT TRẠNG THÁI) */}
+      <div className="pt-32 bg-noir overflow-hidden py-3 border-y border-white/5 select-none">
         <motion.div 
           className="flex whitespace-nowrap"
-          animate={{ x: [0, -1000] }}
-          transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+          animate={{ x: [0, -1200] }}
+          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
         >
-          {[...Array(10)].map((_, i) => (
-            <span key={i} className="text-white text-[10px] uppercase tracking-[0.5em] mx-10 font-bold">
-              SERENA MEDIA CENTER — LATEST UPDATES — 2026 COLLECTION OUT NOW — 
+          {[...Array(8)].map((_, i) => (
+            <span key={i} className="text-white/80 text-[9px] uppercase tracking-[0.6em] mx-12 font-light">
+              SERENA ATELIER — JOURNAL UPDATES — SPRING SUMMER 2026 — CRAFTED IN SAIGON — 
             </span>
           ))}
         </motion.div>
       </div>
 
-      {/* 2. BỐ CỤC CHIA DỌC (VERTICAL SPLIT) */}
-      <section className="max-w-[1600px] mx-auto px-6 md:px-12 mt-20">
-        <div className="grid lg:grid-cols-12 gap-12">
-          
-          {/* CỘT TRÁI CỐ ĐỊNH (STUCK ON SCROLL) */}
-          <div className="lg:col-span-4 lg:sticky lg:top-40 h-fit space-y-12 mb-16 lg:mb-0">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+      {/* 2. HEADER TẬP SAN */}
+      <header className="max-w-[1400px] mx-auto px-6 md:px-12 mt-24 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="space-y-4"
+        >
+          <p className="text-[10px] uppercase tracking-[0.5em] text-gray-400">Archives & Records</p>
+          <h1 className="font-playfair text-8xl md:text-9xl italic font-light leading-tight">Truyền thông</h1>
+          <div className="w-12 h-px bg-rose-accent mx-auto mt-8"></div>
+        </motion.div>
+      </header>
+
+      {/* 3. DANH SÁCH TIN TỨC (MỚI HOÀN TOÀN) */}
+      <section className="max-w-5xl mx-auto px-6 mt-32">
+        <div className="space-y-32">
+          {newsArchive.map((item, index) => (
+            <motion.article
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: index * 0.1 }}
+              className="group"
             >
-              <h1 style={{ fontFamily: 'var(--font-playfair)' }} className="text-7xl italic text-black leading-none mb-8">
-                Tin tức & <br /> Truyền thông
-              </h1>
-              <p className="text-[0.7rem] uppercase tracking-[0.3em] text-black/50 leading-relaxed max-w-xs">
-                Kho lưu trữ các ấn bản báo chí, thông cáo và tư liệu hình ảnh chính thức từ thương hiệu SERENA.
-              </p>
-            </motion.div>
-
-            <div className="space-y-6 pt-12 border-t border-black/10">
-              <h3 className="text-[10px] uppercase tracking-[0.4em] font-bold text-black">Liên hệ báo chí</h3>
-              <p className="text-sm italic font-light">press@serena.vn</p>
-              <p className="text-sm italic font-light">+84 777868762</p>
-            </div>
-
-            {/* DOWNLOAD PRESS KIT (CARD KHÁC BIỆT) */}
-            
-          </div>
-
-          {/* CỘT PHẢI: MASONRY FEED (LƯỚI KHÔNG ĐỀU) */}
-          <div className="lg:col-span-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              {pressReleases.map((item, index) => (
-                <motion.div
-                  key={item.id}
-                  className={`border border-black/10 p-10 flex flex-col justify-between hover:bg-white transition-all duration-500 group ${
-                    item.size === 'large' ? 'md:col-span-2 aspect-[21/9]' : 'aspect-square'
-                  }`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <div className="flex justify-between items-start">
-                    <span className="text-[9px] font-mono tracking-widest text-black/40">{item.date}</span>
-                    <Share2 size={16} strokeWidth={1} className="text-black/20 group-hover:text-black cursor-pointer" />
+              <div className="grid md:grid-cols-12 gap-8 items-start">
+                {/* Cột ngày tháng */}
+                <div className="md:col-span-3 pt-2">
+                  <div className="flex items-center gap-4 text-gray-300">
+                    <span className="text-[11px] font-mono tracking-tighter uppercase">{item.date}</span>
+                    <div className="h-[1px] flex-1 bg-gray-100"></div>
                   </div>
+                  <p className="text-[9px] uppercase tracking-[0.3em] text-rose-accent mt-3 font-bold italic">
+                    {item.category}
+                  </p>
+                </div>
+
+                {/* Cột nội dung chính */}
+                <div className="md:col-span-9 space-y-6">
+                  <h2 className="font-playfair text-4xl md:text-5xl italic leading-tight text-noir/90">
+                    {item.title}
+                  </h2>
+                  <p className="text-gray-500 font-light leading-relaxed text-lg max-w-2xl">
+                    {item.description}
+                  </p>
                   
-                  <div className="space-y-6">
-                    <span className="text-[10px] uppercase tracking-[0.5em] text-[var(--color-rose-accent)] font-bold italic">{item.source}</span>
-                    <h2 style={{ fontFamily: 'var(--font-playfair)' }} className={`italic text-black leading-tight ${
-                      item.size === 'large' ? 'text-5xl' : 'text-3xl'
-                    }`}>
-                      {item.title}
-                    </h2>
+                  {/* Ký hiệu đánh dấu - Chỉ trang trí */}
+                  <div className="flex items-center gap-2 pt-4 opacity-20">
+                    <PenTool size={12} />
+                    <span className="text-[8px] uppercase tracking-widest">Edited by Serena Team</span>
                   </div>
-
-                  <div className="flex justify-end pt-6">
-                    <Link href="#" className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-                      Chi tiết <ExternalLink size={12} />
-                    </Link>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            
-            {/* PHẦN LOAD MORE TRANG TRÍ */}
-            <div className="mt-16 text-center">
-              <button className="text-[10px] uppercase tracking-[0.5em] border-b border-black/10 pb-2 hover:text-[var(--color-rose-accent)] transition-all">
-                Xem kho lưu trữ cũ hơn
-              </button>
-            </div>
-          </div>
+                </div>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </section>
 
-      {/* 3. LOGO WALL (ĐIỂM NHẤT KHÁC BIỆT CUỐI TRANG) */}
-      <section className="mt-40 py-24 bg-white/50 border-y border-black/5 px-6">
-        <div className="max-w-[1400px] mx-auto flex flex-wrap justify-center items-center gap-16 md:gap-32 grayscale opacity-30">
-          <span className="text-2xl font-serif italic tracking-tighter">VOGUE</span>
-          <span className="text-2xl font-serif italic tracking-tighter">BAZAAR</span>
-          <span className="text-2xl font-serif italic tracking-tighter">ELLE</span>
-          <span className="text-2xl font-serif italic tracking-tighter">L'OFFICIEL</span>
+      {/* 4. CHÂN TRANG TRUYỀN THÔNG (TĨNH) */}
+      <section className="mt-60 border-t border-gray-100 pt-20">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-12">
+          <div className="text-left space-y-2">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-gray-400">Liên hệ Lưu trữ</p>
+            <p className="font-playfair italic text-lg text-noir/60">press@serena.vn</p>
+          </div>
+
+          <div className="flex gap-16">
+            <div className="flex flex-col items-center opacity-10">
+               <Wind size={32} strokeWidth={1} />
+               <span className="text-[8px] uppercase tracking-widest mt-2">Silence</span>
+            </div>
+            <div className="flex flex-col items-center opacity-10">
+               <Bookmark size={32} strokeWidth={1} />
+               <span className="text-[8px] uppercase tracking-widest mt-2">Craft</span>
+            </div>
+          </div>
+
+          <div className="text-right space-y-2">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-gray-400">Bản quyền nội bộ</p>
+            <p className="font-inter text-[10px] text-gray-300">© 2026 SERENA ATELIER. ALL RIGHTS RESERVED.</p>
+          </div>
         </div>
       </section>
 
