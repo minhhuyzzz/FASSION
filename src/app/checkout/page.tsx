@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react"; // Thêm Suspense
 import { useCart } from "@/context/CartContext";
 import { supabase } from "@/lib/supabase";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -8,7 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Truck, Landmark, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
-export default function CheckoutPage() {
+// 1. Tách phần nội dung chính ra một Component riêng
+function CheckoutContent() {
   const { cartItems: globalCartItems, cartTotal: globalCartTotal, clearCart } = useCart();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -40,7 +41,6 @@ export default function CheckoutPage() {
       if (directData) {
         const items = JSON.parse(directData);
         setDisplayItems(items);
-        // Tính tổng: giá * số lượng
         const total = parsePrice(items[0].price) * (items[0].quantity || 1);
         setDisplayTotal(formatPrice(total));
       } else {
@@ -105,14 +105,13 @@ export default function CheckoutPage() {
 
       if (orderError) throw orderError;
 
-      // Gửi kèm cột quantity vào order_items
       const itemsToInsert = displayItems.map((item: any) => ({
         order_id: order.id,
         product_name: item.name,
         size: item.selectedSize,
         price: item.price,
         image_url: item.images[0],
-        quantity: item.quantity || 1 // Thêm số lượng ở đây
+        quantity: item.quantity || 1 
       }));
 
       const { error: itemsError } = await supabase.from("order_items").insert(itemsToInsert);
@@ -271,5 +270,18 @@ export default function CheckoutPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+// 2. Component chính để export - Nơi xử lý Suspense Boundary
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-[#FDFDFD] font-playfair italic text-noir">
+        Đang chuẩn bị không gian thanh toán...
+      </div>
+    }>
+      <CheckoutContent />
+    </Suspense>
   );
 }
