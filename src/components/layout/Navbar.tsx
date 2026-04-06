@@ -35,7 +35,7 @@ const navLinks = [
           { label: "DÂY CHUYỀN", href: "/shop?cat=accessories&sub=Dây chuyền" },
           { label: "TÚI XÁCH", href: "/shop?cat=accessories&sub=Túi xách" },
           { label: "VÒNG TAY", href: "/shop?cat=accessories&sub=Vòng tay" },
-          { label: "Giày", href: "/shop?cat=accessories&sub=Giày" }
+          { label: "GIÀY", href: "/shop?cat=accessories&sub=Giày" }
         ]
       }
     ],
@@ -201,29 +201,43 @@ export default function Navbar() {
               <div className="max-w-[1600px] mx-auto grid grid-cols-12 gap-16 font-inter text-white">
                 
                 {/* PHẦN DANH MỤC */}
-                <div className={cn("grid gap-12", activeMenu.featured ? "col-span-6 grid-cols-2" : "col-span-12 grid-cols-4")}>
-                  {activeMenu.columns.map((col: any, idx: number) => (
-                    <div key={idx} className="space-y-10">
-                      <Link href={col.href} className="group block">
-                        <h3 className="font-playfair text-4xl italic leading-none group-hover:text-rose-accent transition-colors uppercase">
-                          {col.title}
-                        </h3>
-                      </Link>
-                      <ul className="space-y-6">
-                        {col.items.map((item: any) => (
-                          <li key={item.label}>
-                            <Link 
-                              href={item.href}
-                              className="text-[12px] tracking-[0.15em] text-white/60 hover:text-white transition-all uppercase font-normal hover:translate-x-1 inline-block"
-                            >
-                              {item.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
+                <div className={cn("grid gap-16", activeMenu.featured ? "col-span-6 grid-cols-2" : "col-span-12 grid-cols-4")}>
+  {activeMenu.columns.map((col: any, idx: number) => (
+    <div key={idx} className="flex flex-col items-center text-center group/col">
+      {/* Tiêu đề danh mục */}
+      <div className="relative mb-12">
+        <Link href={col.href} className="block">
+          <h3 className="font-playfair text-2xl md:text-3xl italic leading-none text-white tracking-wide group-hover/col:text-rose-accent transition-colors duration-500 uppercase">
+            {col.title}
+          </h3>
+        </Link>
+        <motion.div 
+          initial={{ width: 0 }}
+          whileInView={{ width: "60px" }}
+          className="h-[1px] bg-rose-accent/60 mx-auto mt-4 transition-all duration-700 group-hover/col:w-full"
+        />
+      </div>
+
+      {/* Danh sách mục con - Đã tăng size và đồng bộ màu */}
+      <ul className="space-y-7"> {/* Tăng khoảng cách để chữ to không bị dính */}
+        {col.items.map((item: any) => (
+          <li key={item.label}>
+            <Link 
+              href={item.href}
+              className="relative text-[14px] md:text-[15px] tracking-[0.25em] text-white hover:text-rose-accent transition-all duration-500 uppercase font-medium inline-block group/item"
+            >
+              {/* Text nội dung - Màu trắng tinh khôi giống tiêu đề */}
+              <span className="relative z-10">{item.label}</span>
+              
+              {/* Hiệu ứng gạch chân lan tỏa */}
+              <span className="absolute bottom-[-4px] left-0 w-0 h-[1.5px] bg-rose-accent transition-all duration-500 group-hover/item:w-full" />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</div>
 
                 {/* PHẦN ẢNH FEATURED - ĐÃ LÀM NGẮN LẠI (380px) */}
                 {activeMenu.featured && (
